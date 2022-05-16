@@ -1,0 +1,27 @@
+$flex-map: (
+	start: flex-start,
+	end: flex-end,
+	between: space-between,
+	around: space-around,
+	even: space-evenly,
+	center: center,
+);
+
+@function getFlexValue($key) {
+	@return map-get($flex-map, $key);
+}
+
+@mixin flexBox($jc: center, $ai: center) {
+	display: flex;
+	align-items: getFlexValue($ai);
+	justify-content: getFlexValue($jc);
+}
+
+@mixin ellipsis($width: 100%) {
+	max-width: $width;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	word-wrap: normal;
+	vertical-align: middle;
+}
