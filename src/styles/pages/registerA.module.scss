@@ -12,19 +12,6 @@
     display: relative;
 }
 
-.header {
-    @include flexBox(space-between);
-    height: 44px;
-}
-
-.header-back {
-    margin-right: 115px;
-}
-
-.header-title {
-    @include font-style-16-bold();
-}
-
 .content {
     @include mixin.flexBox(getFlexValue(between));
     flex-direction: column;
@@ -63,7 +50,7 @@
     width: 100%;
     height: 100%;
     padding: 15px 0px 14px 16px;
-    background-color: #F3F3F3;
+    background-color: $snow;
     border: none;
     border-radius: 8px;
 }
@@ -72,15 +59,4 @@
     position: relative;
     left: 294px;
     bottom: 47px;
-}
-
-.form-button {
-    @include font-style-16-medium();
-    color: white !important;
-    width: 343px;
-    height: 50px;
-    background-color: $main;
-    box-shadow: 0px 3px 6px 0 $dim-black-20;
-    border: none;
-    border-radius: 8px;
 }

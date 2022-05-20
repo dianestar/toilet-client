@@ -1,7 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import Layout from "../components/common/Layout";
-import Back from "../assets/icons/Back.svg";
+import Header from "../components/common/Header";
+import BlueBtn from "../components/common/BlueBtn";
 import Eye from "../assets/icons/Eye.svg";
 import styles from "../styles/pages/registerA.module.scss";
 
@@ -13,10 +14,7 @@ const RegisterA = () => {
     return (
         <Layout>
             <div className={styles.wrapper}>
-                <section className={styles.header}>
-                    <img className={styles[`header-back`]} src={Back} alt="back"/>
-                    <span className={styles[`header-title`]}>회원가입</span>
-                </section>
+                <Header text="회원가입"/>
                 <section className={styles.content}>
                     <article>
                         <p className={styles[`guide-main`]}>계정 정보</p>
@@ -37,7 +35,7 @@ const RegisterA = () => {
                             <img className={styles[`form-eye`]} src={Eye} alt="eye" />
                             {errors.pwcheck && <span>PWCHECK errror message</span>}
                         </div>
-                        <button className={styles[`form-button`]}>다음</button>
+                        <BlueBtn text="다음" />
                     </form>
                 </section>
             </div>

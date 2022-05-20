@@ -1,0 +1,5 @@
+<svg id="Profile-Image" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
+  <rect id="System_Background_Primary_Light" data-name="System Background Primary Light" width="80" height="80" rx="40" fill="#f3f3f3"/>
+  <circle id="Ellipse_1" data-name="Ellipse 1" cx="10" cy="10" r="10" transform="translate(30 22)" fill="#fff"/>
+  <path id="Intersection_1" data-name="Intersection 1" d="M-430.974,1260.42c2.446-12.505,13.145-21.92,25.974-21.92s23.529,9.415,25.974,21.92A39.84,39.84,0,0,1-405,1270,39.84,39.84,0,0,1-430.974,1260.42Z" transform="translate(445 -1191)" fill="#fff"/>
+</svg>
