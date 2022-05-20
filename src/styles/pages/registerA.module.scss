@@ -1,0 +1,62 @@
+@use '../mixin.module';
+@use '../text-style.module';
+@import '../main.module.scss';
+
+* {
+    box-sizing: border-box;
+}
+
+.wrapper {
+    width: 375px;
+    height: 768px;
+    display: relative;
+}
+
+.content {
+    @include mixin.flexBox(getFlexValue(between));
+    flex-direction: column;
+    width: 343px;
+    height: 61px;
+    margin: 29px auto 0 auto;
+}
+
+.guide-main {
+    @include font-style-24();
+    margin-bottom: 3px;
+}
+
+.guide-sub {
+    @include font-style-16-medium();
+    margin-top: 3px;
+}
+
+.form {
+    @include flexBox(getFlexValue(between));
+    flex-direction: column;
+    width: 343px;
+    height: 248px;
+    margin-top: 20px;
+}
+
+.form-input-div {
+    display: relative;
+    width: 343px;
+    height: 50px;
+    margin-bottom: 16px;
+}
+
+.form-input {
+    @include font-style-16-medium();
+    width: 100%;
+    height: 100%;
+    padding: 15px 0px 14px 16px;
+    background-color: $snow;
+    border: none;
+    border-radius: 8px;
+}
+
+.form-eye {
+    position: relative;
+    left: 294px;
+    bottom: 47px;
+}

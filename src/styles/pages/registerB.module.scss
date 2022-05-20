@@ -1,0 +1,41 @@
+@use '../text-style.module';
+@import '../main.module.scss';
+
+.title {
+    @include font-style-24();
+    margin: 21px 0 24px 16px;
+}
+
+.content {
+    width: 343px;
+    height: 237px;
+    margin: auto;
+    text-align: center;
+}
+
+.photo-div {
+    width: 343px;
+    height: 80px;
+    position: relative;
+}
+
+.profile {
+    margin: 0 132px 0 131px;
+}
+
+.open {
+    position: relative;
+    bottom: 38px;
+    left: 28px;
+}
+
+.input {
+    @include font-style-16-medium();
+    width: 343px;
+    height: 50px;
+    margin: 33px 0 24px 0;
+    padding: 15px 0 14px 16px;
+    background-color: $snow;
+    border: none;
+    border-radius: 8px;
+}
