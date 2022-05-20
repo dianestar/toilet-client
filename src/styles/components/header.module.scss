@@ -1,0 +1,16 @@
+@use "../mixin.module";
+@use "../text-style.module";
+@import '../main.module.scss';
+
+.header {
+    @include flexBox(getFlexValue(between));
+    height: 44px;
+}
+
+.header-back {
+    margin-right: 115px;
+}
+
+.header-title {
+    @include font-style-16-bold();
+}
