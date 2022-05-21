@@ -25,3 +25,13 @@ $flex-map: (
 	word-wrap: normal;
 	vertical-align: middle;
 }
+
+@mixin inputBox($margin-top: 0, $margin-right: 0, $margin-bottom: 0, $margin-left: 0) {
+	width: 343px;
+    height: 50px;
+	padding: 15px 0 14px 16px;
+    background-color: $snow;
+    border: none;
+    border-radius: 8px;
+	margin: $margin-top $margin-right $margin-bottom $margin-left;
+}

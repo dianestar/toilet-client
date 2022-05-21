@@ -1,3 +1,4 @@
+@use "../mixin.module";
 @use '../text-style.module';
 @import '../main.module.scss';
 
@@ -31,11 +32,5 @@
 
 .input {
     @include font-style-16-medium();
-    width: 343px;
-    height: 50px;
-    margin: 33px 0 24px 0;
-    padding: 15px 0 14px 16px;
-    background-color: $snow;
-    border: none;
-    border-radius: 8px;
+    @include inputBox(33px, 0, 24px, 0);
 }
