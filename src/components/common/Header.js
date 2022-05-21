@@ -5,7 +5,7 @@ import styles from "../../styles/components/header.module.scss";
 const Header = ({text}) => {
     return (
         <section className={styles.header}>
-            <img className={styles[`header-back`]} src={Back} alt="back"/>
+            <img src={Back} alt="back"/>
             <span className={styles[`header-title`]}>{text}</span>
         </section>
     );

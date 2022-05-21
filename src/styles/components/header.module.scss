@@ -3,14 +3,13 @@
 @import '../main.module.scss';
 
 .header {
-    @include flexBox(getFlexValue(between));
     height: 44px;
-}
-
-.header-back {
-    margin-right: 115px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;  
 }
 
 .header-title {
     @include font-style-16-bold();
+    text-align: center;
+    margin: 13px 0 10px 0;
 }
