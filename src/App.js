@@ -4,6 +4,9 @@ import Login from './pages/common/Login';
 import TestPage from "./pages/common/TestPage";
 import RegisterA from './pages/RegisterA';
 import RegisterB from "./pages/RegisterB";
+import ResetPwA from "./pages/ResetPwA";
+import ResetPwB from "./pages/ResetPwB";
+import ResetPwC from "./pages/ResetPwC";
 
 function App() {
 	return (
@@ -12,6 +15,9 @@ function App() {
 			<Route path="/testpage" element={<TestPage />} />
 			<Route path="/registeraccount" element={<RegisterA />} />
 			<Route path="/registerprofile" element={<RegisterB />} />
+			<Route path="/resetpwA" element={<ResetPwA />} /> 
+			<Route path="/resetpwB" element={<ResetPwB />} /> 
+			<Route path="/resetpwC" element={<ResetPwC />} /> 
 		</Routes>
 	);
 }

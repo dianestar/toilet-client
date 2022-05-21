@@ -1,0 +1,23 @@
+@use "../text-style.module";
+@use "../mixin.module";
+@import "../main.module.scss";
+
+.wrapper {
+    width: 343px;
+    margin: auto;
+}
+
+.title {
+    @include font-style-24();
+    margin: 23px 0 8px 0;
+}
+
+.desc {
+    @include font-style-16-medium();
+}
+
+.input {
+    @include font-style-16-medium();
+    @include inputBox();
+    margin: 17px 0 16px 0;
+}
