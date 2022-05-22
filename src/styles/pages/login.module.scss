@@ -1,5 +1,21 @@
 @import '../main.module.scss';
 
-.testText {
-	color: $main;
+.logo {
+	width: 343px;
+	height: 280px;
+	margin-top: 104px;
+	margin-bottom: 148px;
+	background: $dim-black-20;
+}
+
+.loginSection {
+	@include flexBox(center, center);
+	flex-direction: column;
+
+	.loginBtn {
+		margin-top: 16px;
+		span {
+			text-decoration: underline;
+		}
+	}
 }
