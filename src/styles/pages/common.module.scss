@@ -1,19 +1,22 @@
 @import '../main.module.scss';
 
-.loginSection {
-	width: 343px;
-	height: 61px;
-	margin: 29px auto 0 auto;
+.wrapper {
+    width: 343px;
+	margin: 25px auto 0 auto;
 
-	.mainText {
+	.title {
 		@include font-style-24();
 	}
+
+    .desc {
+        @include font-style-16-medium();
+        margin-top: 8px;
+    }
 
 	.form {
 		@include flexBox(getFlexValue(between));
 		flex-direction: column;
 		width: 343px;
-		height: 248px;
 		margin-top: 20px;
 
 		.form-input-div {
@@ -41,4 +44,24 @@
 			text-decoration: underline;
 		}
 	}
+
+    .photo-div {
+        width: 343px;
+        height: 80px;
+        position: relative;
+    }
+    
+    .profile {
+        margin: 0 132px 0 131px;
+    }
+    
+    .open {
+        position: relative;
+        bottom: 38px;
+        left: 172px;
+    }
+
+    .email {
+        color: $main;
+    }
 }

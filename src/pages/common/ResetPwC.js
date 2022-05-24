@@ -1,10 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import Layout from "../components/common/Layout";
-import Header from "../components/common/Header";
-import BlueBtn from "../components/common/BlueBtn";
-import styles from "../styles/pages/resetpwC.module.scss";
-import Eye from "../assets/icons/Eye.svg";
+import Layout from "../../components/common/Layout";
+import Header from "../../components/common/Header";
+import BlueBtn from "../../components/common/BlueBtn";
+import styles from "../../styles/pages/common.module.scss";
+import Eye from "../../assets/icons/Eye.svg";
 
 
 const ResetPwC = () => {
@@ -14,8 +14,8 @@ const ResetPwC = () => {
     return (
         <Layout>
             <Header text="비밀번호 재설정" />
-            <p className={styles.title}>비밀번호 재설정</p>
             <section className={styles.wrapper}>
+            <p className={styles.title}>비밀번호 재설정</p>
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles[`form-input-div`]}>
                         <input className={styles[`form-input`]} placeholder="비밀번호" {...register("pw", { required: true })}/>

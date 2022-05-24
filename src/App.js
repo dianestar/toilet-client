@@ -2,11 +2,11 @@ import './styles/main.module.scss';
 import { Route, Routes } from 'react-router-dom';
 import Login from './pages/common/Login';
 import TestPage from './pages/common/TestPage';
-import RegisterA from './pages/RegisterA';
-import RegisterB from './pages/RegisterB';
-import ResetPwA from './pages/ResetPwA';
-import ResetPwB from './pages/ResetPwB';
-import ResetPwC from './pages/ResetPwC';
+import RegisterA from './pages/common/RegisterA';
+import RegisterB from './pages/common/RegisterB';
+import ResetPwA from './pages/common/ResetPwA';
+import ResetPwB from './pages/common/ResetPwB';
+import ResetPwC from './pages/common/ResetPwC';
 import LoginB from './pages/common/LoginB';
 
 function App() {

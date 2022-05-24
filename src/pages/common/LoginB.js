@@ -2,16 +2,16 @@ import React from 'react';
 import BlueBtn from '../../components/common/BlueBtn';
 import Header from '../../components/common/Header';
 import Layout from '../../components/common/Layout';
-import styles from '../../styles/pages/loginB.module.scss';
+import styles from '../../styles/pages/common.module.scss';
 import Eye from '../../assets/icons/Eye.svg';
 
 const LoginB = () => {
 	return (
 		<Layout>
 			<Header text="로그인" />
-			<section className={styles.loginSection}>
+			<section className={styles.wrapper}>
 				<article>
-					<h2 className={styles.mainText}>로그인</h2>
+					<h2 className={styles.title}>로그인</h2>
 
 					<form className={styles.form}>
 						<div className={styles[`form-input-div`]}>

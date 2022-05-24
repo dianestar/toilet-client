@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "../components/common/Layout";
-import Header from "../components/common/Header";
-import styles from "../styles/pages/resetpwB.module.scss";
+import Layout from "../../components/common/Layout";
+import Header from "../../components/common/Header";
+import styles from "../../styles/pages/common.module.scss";
 
 const ResetPwB = () => {
     const email = "toilet@gmail.com";
