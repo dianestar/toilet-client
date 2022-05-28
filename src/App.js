@@ -8,6 +8,7 @@ import ResetPwA from './pages/common/ResetPwA';
 import ResetPwB from './pages/common/ResetPwB';
 import ResetPwC from './pages/common/ResetPwC';
 import LoginB from './pages/common/LoginB';
+import Map from "./pages/Map";
 
 function App() {
 	return (
@@ -20,6 +21,7 @@ function App() {
 			<Route path="/resetpwA" element={<ResetPwA />} />
 			<Route path="/resetpwB" element={<ResetPwB />} />
 			<Route path="/resetpwC" element={<ResetPwC />} />
+			<Route path="/map" element={<Map />} />
 		</Routes>
 	);
 }
