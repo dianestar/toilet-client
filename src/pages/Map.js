@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../components/common/Layout";
+import SearchBox from "../components/SearchBox";
+import ToiletInfoOnMap from "../components/ToiletInfoOnMap";
 import styles from "../styles/pages/map.module.scss";
 
 const { kakao } = window;
@@ -57,6 +59,8 @@ const Map = () => {
         <Layout>
             <section>
                 <article className={styles.map} id="map">
+                    <SearchBox />
+                    <ToiletInfoOnMap />
                 </article>
             </section>
         </Layout>
