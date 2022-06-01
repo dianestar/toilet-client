@@ -1,9 +1,9 @@
 import React from 'react';
+import { IC_Eye } from '../../assets/icons';
 import BlueBtn from '../../components/common/BlueBtn';
 import Header from '../../components/common/Header';
 import Layout from '../../components/common/Layout';
 import styles from '../../styles/pages/common.module.scss';
-import Eye from '../../assets/icons/Eye.svg';
 
 const LoginB = () => {
 	return (
@@ -20,7 +20,8 @@ const LoginB = () => {
 
 						<div className={styles[`form-input-div`]}>
 							<input className={styles[`form-input`]} placeholder="비밀번호" />
-							<img className={styles[`form-eye`]} src={Eye} alt="eye" />
+							<IC_Eye />
+							{/* <img className={styles[`form-eye`]} src={Eye} alt="eye" /> */}
 						</div>
 
 						<BlueBtn text="로그인" />
