@@ -1,0 +1,7 @@
+@import "../main.module.scss";
+
+.message {
+    @include font-style-12();
+    color: $red;
+    padding-bottom: 16px;
+}

@@ -4,7 +4,7 @@ import Layout from "../../components/common/Layout";
 import Header from "../../components/common/Header";
 import BlueBtn from "../../components/common/BlueBtn";
 import styles from "../../styles/pages/common.module.scss";
-import Eye from "../../assets/icons/Eye.svg";
+import { ReactComponent as Eye } from '../../assets/icons/eye.svg';
 
 
 const ResetPwC = () => {
@@ -19,12 +19,12 @@ const ResetPwC = () => {
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles[`form-input-div`]}>
                         <input className={styles[`form-input`]} placeholder="비밀번호" {...register("pw", { required: true })}/>
-                        <img className={styles[`form-eye`]} src={Eye} alt="eye" />
+                        <Eye className={styles[`form-eye`]} />
                         {errors.pw && <span>PW error message</span>}
                     </div>
                     <div className={styles[`form-input-div`]}>
                         <input className={styles[`form-input`]} placeholder="비밀번호 확인" {...register("pwcheck", { required: true })}/>
-                        <img className={styles[`form-eye`]} src={Eye} alt="eye" />
+                        <Eye className={styles[`form-eye`]} />
                         {errors.pwcheck && <span>PWCHECK errror message</span>}
                     </div>
                     <BlueBtn text={"비밀번호 재설정"} />
