@@ -1,53 +1,53 @@
 @mixin font-style-12() {
-    font-family: 'min sans';
-    font-weight: $font-weight-medium;
-    font-size: $font-size-12;
-    line-height: $line-height-16;
-    letter-spacing: $letter-spacing-001;
-    color: $dim-black-60;
+	font-family: 'min sans';
+	font-weight: $font-weight-medium;
+	font-size: $font-size-12;
+	line-height: $line-height-16;
+	letter-spacing: $letter-spacing-001;
+	color: $dim-black-60;
 }
 
 @mixin font-style-14() {
-    font-family: 'min sans';
-    font-weight: $font-weight-medium;
-    font-size: $font-size-14;
-    line-height: $line-height-24;
-    letter-spacing: $letter-spacing-001;
-    color: $dim-black-60;
+	font-family: 'min sans';
+	font-weight: $font-weight-medium;
+	font-size: $font-size-14;
+	line-height: $line-height-24;
+	letter-spacing: $letter-spacing-001;
+	color: $dim-black-60;
 }
 
 @mixin font-style-16-medium() {
-    font-family: 'min sans';
-    font-weight: $font-weight-medium;
-    font-size: $font-size-16;
-    line-height: $line-height-24;
-    letter-spacing: $letter-spacing-001;
-    color: $gray-scale-black;
+	font-family: 'min sans';
+	font-weight: $font-weight-medium;
+	font-size: $font-size-16;
+	line-height: $line-height-24;
+	letter-spacing: $letter-spacing-001;
+	color: $sub;
 }
 
 @mixin font-style-16-bold() {
-    font-family: 'min sans';
-    font-weight: $font-weight-bold;
-    font-size: $font-size-16;
-    line-height: $line-height-21;
-    letter-spacing: $letter-spacing-002;
-    color: $gray-scale-black;
+	font-family: 'min sans';
+	font-weight: $font-weight-bold;
+	font-size: $font-size-16;
+	line-height: $line-height-21;
+	letter-spacing: $letter-spacing-002;
+	color: $sub;
 }
 
 @mixin font-style-20() {
-    font-family: 'min sans';
-    font-weight: $font-weight-bold;
-    font-size: $font-size-20;
-    line-height: $line-height-26;
-    letter-spacing: $letter-spacing-001;
-    color: $gray-scale-black;
+	font-family: 'min sans';
+	font-weight: $font-weight-bold;
+	font-size: $font-size-20;
+	line-height: $line-height-26;
+	letter-spacing: $letter-spacing-001;
+	color: $sub;
 }
 
 @mixin font-style-24() {
-    font-family: 'min sans';
-    font-weight: $font-weight-bold;
-    font-size: $font-size-24;
-    line-height: $line-height-32;
-    letter-spacing: $letter-spacing-001;
-    color: $gray-scale-black;
+	font-family: 'min sans';
+	font-weight: $font-weight-bold;
+	font-size: $font-size-24;
+	line-height: $line-height-32;
+	letter-spacing: $letter-spacing-001;
+	color: $sub;
 }
