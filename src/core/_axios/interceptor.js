@@ -1,7 +1,7 @@
-import axios from './axios';
+import axios from 'axios';
 
 const instance = axios.create({
-	baseURL: '',
+	baseURL: "http://3.35.184.107:5000/api/",
 });
 
 instance.interceptors.request.use(

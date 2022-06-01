@@ -56,17 +56,42 @@
     .photo-div {
         width: 343px;
         height: 80px;
+		margin: 24px 0;
         position: relative;
-    }
+
+		.profile-image {
+			width: 80px;
+			height: 80px;
+			margin: 0 132px 0 131px;
+			border-radius: 50%;
+			object-fit: cover;
+			
+			&:hover {
+				cursor: pointer;
+			}
+		}
     
-    .profile {
-        margin: 0 132px 0 131px;
-    }
-    
-    .open {
-        position: relative;
-        bottom: 38px;
-        left: 172px;
+		.profile {
+			margin: 0 132px 0 131px;
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
+		
+		.open {
+			position: relative;
+			bottom: 38px;
+			left: 172px;
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
+
+		input {
+			display: none;
+		}
     }
 
     .email {

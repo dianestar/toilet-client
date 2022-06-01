@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { plusNum, minusNum } from "../../reducers/test";
+import { plusNum, minusNum } from "../../core/_reducers/test";
 import Layout from "../../components/common/Layout";
 
 const TestPage = () => {

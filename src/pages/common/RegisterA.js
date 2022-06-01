@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveUser } from "../../core/_reducers/register";
 import Layout from "../../components/common/Layout";
 import Header from "../../components/common/Header";
 import BlueBtn from "../../components/common/BlueBtn";
@@ -11,8 +14,16 @@ const RegisterA = () => {
     const { register, handleSubmit, watch, formState: { errors }} = useForm();
     const [pwVisible, setPwVisible] = useState(false);
     const [pwcheckVisible, setPwcheckVisible] = useState(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const onSubmit = () => {
+        dispatch(saveUser({
+            email: watch("email"),
+            password: watch("pw"),
+            checkPassword: watch("pwcheck"),
+        }));
+        navigate("/registerprofile");
     }
 
     return (
