@@ -1,0 +1,25 @@
+@import '../main.module.scss';
+
+.nav {
+	@include flexBox(around, start);
+	position: absolute;
+	width: 375px;
+	height: 80px;
+	background: $white;
+	bottom: 0;
+	z-index: 10;
+	box-shadow: 0px 0px 6px #00000029;
+	.icon {
+		@include flexBox(center, center);
+		flex-direction: column;
+		cursor: pointer;
+		p {
+			color: $dim-Black-80;
+			font-size: 10px;
+		}
+
+		&.active {
+			color: $main;
+		}
+	}
+}

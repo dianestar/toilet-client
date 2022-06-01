@@ -3,8 +3,6 @@ import styles from '../styles/components/searchBox.module.scss';
 import tempProfile from '../assets/images/KakaoTalk_Photo_2022-04-18-22-19-10 003.jpeg';
 import { ReactComponent as Search } from '../assets/icons/search.svg';
 
-// import Search from '../assets/icons/Search.svg';
-
 const SearchBox = () => {
 	return (
 		<div className={styles.wrapper}>
