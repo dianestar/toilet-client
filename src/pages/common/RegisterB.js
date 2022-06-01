@@ -4,8 +4,8 @@ import Layout from '../../components/common/Layout';
 import Header from '../../components/common/Header';
 import BlueBtn from '../../components/common/BlueBtn';
 import styles from '../../styles/pages/common.module.scss';
-// import profileImage from "../../assets/icons/Profile-Image.svg";
-// import openPhoto from "../../assets/icons/Open-Photo.svg";
+import { ReactComponent as ProfileImage } from '../../assets/icons/profileImage.svg';
+import { ReactComponent as OpenPhoto } from '../../assets/icons/openPhoto.svg';
 
 const RegisterB = () => {
 	const {
@@ -21,8 +21,8 @@ const RegisterB = () => {
 			<section className={styles.wrapper}>
 				<p className={styles.title}>프로필 정보</p>
 				<article className={styles[`photo-div`]}>
-					{/* <img className={styles.profile} src={profileImage} alt="profile"/>
-                    <img className={styles.open} src={openPhoto} alt="open"/>  */}
+					<ProfileImage className={styles.profile} />
+					<OpenPhoto className={styles.open} />
 				</article>
 				<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 					<div className={styles[`form-input-div`]}>

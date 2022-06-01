@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../styles/components/toiletInfo.module.scss';
-// import pin from "../assets/icons/Pin.svg";
+import { ReactComponent as Pin } from '../assets/icons/pin.svg';
 import star from '../assets/icons/star.png';
 import ellipsis from '../assets/icons/more.png';
 
@@ -10,7 +10,7 @@ const ToiletInfoOnMap = () => {
 			<article className={styles.text}>
 				<p className={styles.title}>화장실 이름</p>
 				<section className={styles.desc}>
-					{/* <img src={pin} alt={pin} /> */}
+					<Pin />
 					<span>서울시 어쩌구 빌딩 2층</span>
 					<img src={star} alt={star} />
 					<span>4.2</span>
