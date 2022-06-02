@@ -31,8 +31,6 @@ const RegisterB = () => {
             checkPassword: userInfo.checkPassword,
         };
 
-        console.log(form);
-
         try {
             const response = await POST_USERS_REGISTER(form);
             if (response) {

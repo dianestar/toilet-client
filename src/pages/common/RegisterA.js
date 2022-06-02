@@ -8,14 +8,19 @@ import Header from "../../components/common/Header";
 import BlueBtn from "../../components/common/BlueBtn";
 import FormErrorMessage from "../../components/common/FormErrorMessage";
 import { ReactComponent as Eye } from '../../assets/icons/eye.svg';
+import { ReactComponent as EyeUnprotected } from '../../assets/icons/eyeUnprotected.svg';
 import styles from "../../styles/pages/common.module.scss";
 
 const RegisterA = () => {
     const { register, handleSubmit, watch, formState: { errors }} = useForm();
-    const [pwVisible, setPwVisible] = useState(false);
-    const [pwcheckVisible, setPwcheckVisible] = useState(false);
+    const [pwProtected, setPwProtected] = useState(false);
+    const [pwcheckProtected, setPwcheckProtected] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const onToggle = () => {
+
+    }
 
     const onSubmit = () => {
         dispatch(saveUser({
@@ -54,7 +59,7 @@ const RegisterA = () => {
                         <input
                             className={errors.pw ? `${styles[`form-input`]} ${styles.error}`: styles[`form-input`]}
                             placeholder="비밀번호"
-                            type={pwVisible ? "text" : "password"}
+                            type={pwProtected ? "password" : "text"}
                             {...register("pw", {
                                 required: {
                                     value: true,
@@ -66,14 +71,21 @@ const RegisterA = () => {
                                 },
                             })}
                         />
-                        <Eye className={styles[`form-eye`]} onClick={() => setPwVisible(!pwVisible)}/>
+                        {
+                            pwProtected
+                            ?
+                            <Eye className={styles[`form-eye`]} onClick={() => setPwProtected(!pwProtected)}/>
+                            :
+                            <EyeUnprotected className={styles[`form-eye`]} onClick={() => setPwProtected(!pwProtected)}/>
+                        }
+                        
                     </div>
                     {errors.pw && <FormErrorMessage message={errors.pw.message}/>}
                     <div className={styles[`form-input-div`]}>
                         <input
                             className={errors.pwcheck ? `${styles[`form-input`]} ${styles.error}`: styles[`form-input`]}
                             placeholder="비밀번호 확인"
-                            type={pwcheckVisible ? "text" : "password"}
+                            type={pwcheckProtected ? "password" : "text"}
                             {...register("pwcheck", {
                                 required: {
                                     value: true,
@@ -83,7 +95,13 @@ const RegisterA = () => {
                                     (value) => value === watch("pw") || "비밀번호가 일치하지 않습니다"
                             })}
                         />
-                        <Eye className={styles[`form-eye`]} onClick={() => setPwcheckVisible(!pwcheckVisible)}/>
+                        {
+                            pwcheckProtected
+                            ?
+                            <Eye className={styles[`form-eye`]} onClick={() => setPwcheckProtected(!pwcheckProtected)}/>
+                            :
+                            <EyeUnprotected className={styles[`form-eye`]} onClick={() => setPwcheckProtected(!pwcheckProtected)}/>
+                        }
                     </div>
                     {errors.pwcheck && <FormErrorMessage message={errors.pwcheck.message}/>}
                     <BlueBtn text="다음"/>

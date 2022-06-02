@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
+  <g id="Icon_Eye_Unprotected" data-name="Icon / Eye / Unprotected" transform="translate(-1033 -180)">
+    <g id="icon_password-Unshown" data-name="icon/password-Unshown" transform="translate(694 -237)">
+      <rect id="Rectangle_2" data-name="Rectangle 2" width="44" height="44" transform="translate(339 417)" fill="rgba(255,0,0,0)"/>
+      <path id="Path_18" data-name="Path 18" d="M12.086.992c6.156,0,10.484-5.055,10.484-6.625s-4.352-6.625-10.484-6.625C6.008-12.258,1.594-7.2,1.594-5.633S5.977.992,12.086.992Zm0-.977c-5.312,0-9.414-4.5-9.414-5.648,0-1.031,4.1-5.648,9.414-5.648S21.5-6.664,21.5-5.633C21.5-4.484,17.391.016,12.086.016Zm0-1.281a4.4,4.4,0,0,0,4.383-4.367A4.363,4.363,0,0,0,12.086-10,4.35,4.35,0,0,0,7.7-5.633,4.4,4.4,0,0,0,12.086-1.266Zm.008-2.977A1.4,1.4,0,0,1,10.68-5.633a1.4,1.4,0,0,1,1.414-1.391,1.4,1.4,0,0,1,1.4,1.391A1.4,1.4,0,0,1,12.094-4.242Z" transform="translate(349.406 444.258)" fill="#848484"/>
+      <rect id="Rectangle_13" data-name="Rectangle 13" width="25" height="3" transform="translate(353.71 428.725) rotate(45)" fill="#fff"/>
+      <rect id="Rectangle_14" data-name="Rectangle 14" width="25" height="1.5" rx="0.75" transform="translate(353.18 429.256) rotate(45)" fill="#848484"/>
+    </g>
+  </g>
+</svg>
