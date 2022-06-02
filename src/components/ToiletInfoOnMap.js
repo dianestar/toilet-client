@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from '../styles/components/toiletInfo.module.scss';
 import { ReactComponent as Pin } from '../assets/icons/pin.svg';
-import star from '../assets/icons/star.png';
-import ellipsis from '../assets/icons/more.png';
+import { ReactComponent as KebabMenu } from '../assets/icons/kebabMenu.svg';
+import { ReactComponent as StarFill } from '../assets/icons/starFill.svg';
+import { ReactComponent as More } from "../assets/icons/more.svg";
 
 const ToiletInfoOnMap = () => {
 	return (
@@ -12,7 +13,7 @@ const ToiletInfoOnMap = () => {
 				<section className={styles.desc}>
 					<Pin />
 					<span>서울시 어쩌구 빌딩 2층</span>
-					<img src={star} alt={star} />
+					<StarFill />
 					<span>4.2</span>
 				</section>
 				<section className={styles.category}>#카테고리</section>
@@ -28,8 +29,8 @@ const ToiletInfoOnMap = () => {
 				</section>
 			</article>
 			<article className={styles.icon}>
-				<img className={styles.ellipsis} src={ellipsis} alt="ellipsis" />
-				<span className={styles.more}>더보기 &gt;</span>
+				<KebabMenu className={styles.ellipsis} />
+				<span className={styles.more}>더보기 <More /></span>
 			</article>
 		</section>
 	);

@@ -1,3 +1,12 @@
+@mixin font-style-10() {
+	font-family: 'min sans';
+	font-weight: $font-weight-regular;
+	font-size: $font-size-10;
+	line-height: $line-height-13;
+	letter-spacing: $letter-spacing-001;
+	color: $dim-black-60;
+}
+
 @mixin font-style-12() {
 	font-family: 'min sans';
 	font-weight: $font-weight-medium;
@@ -31,6 +40,15 @@
 	font-size: $font-size-16;
 	line-height: $line-height-21;
 	letter-spacing: $letter-spacing-002;
+	color: $sub;
+}
+
+@mixin font-style-18() {
+	font-family: 'min sans';
+	font-weight: $font-weight-bold;
+	font-size: $font-size-18;
+	line-height: $line-height-24;
+	letter-spacing: $letter-spacing-001;
 	color: $sub;
 }
 
