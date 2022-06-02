@@ -56,12 +56,10 @@ const Map = () => {
 
 	return (
 		<Layout>
-			<section>
-				<article className={styles.map} id="map">
-					<SearchBox />
-					<NavBar />
-					<ToiletInfoOnMap />
-				</article>
+			<section className={styles.map} id="map">
+				<SearchBox />
+				<ToiletInfoOnMap />
+				<NavBar />
 			</section>
 		</Layout>
 	);
