@@ -8,8 +8,13 @@ import { ReactComponent as Eye } from '../../assets/icons/eye.svg';
 
 
 const ResetPwC = () => {
-    const { register, handleSubmit, watch, formState: { errors }} = useForm();
-    const onSubmit = () => {}
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm();
+	const onSubmit = () => {};
 
     return (
         <Layout>

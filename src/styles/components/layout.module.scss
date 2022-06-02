@@ -1,17 +1,17 @@
 @import '../main.module.scss';
 
 .wrapper {
-    position: relative;
-    width: 375px;
-    height: 768px;
+	position: relative;
+	width: 375px;
+	height: 768px;
 
-    // temporary code for PC view
-    border: 1px solid gray;
+	// temporary code for PC view
+	border: 1px solid gray;
 }
 
 // temporary code for PC view
 @media screen and (min-width: 376px) {
-    .wrapper {
-        margin: calc((100vh - 768px)/2) auto;
-    }
+	.wrapper {
+		margin: calc((100vh - 768px) / 2) auto;
+	}
 }

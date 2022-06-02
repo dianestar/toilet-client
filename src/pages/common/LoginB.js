@@ -1,9 +1,9 @@
 import React from 'react';
+import { ReactComponent as Eye } from '../../assets/icons/eye.svg';
 import BlueBtn from '../../components/common/BlueBtn';
 import Header from '../../components/common/Header';
 import Layout from '../../components/common/Layout';
 import styles from '../../styles/pages/common.module.scss';
-import { ReactComponent as Eye } from '../../assets/icons/eye.svg';
 
 const LoginB = () => {
 	return (

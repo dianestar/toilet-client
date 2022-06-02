@@ -1,0 +1,27 @@
+@import '../main.module.scss';
+
+.active {
+	color: $main !important;
+}
+
+.nav {
+	@include flexBox(around, center);
+	position: absolute;
+	z-index: 2;
+	bottom: 0;
+	width: 100%;
+	height: 80px;
+	background: $white;
+	overflow: hidden;
+	box-shadow: 0px 3px 6px #00000029;
+
+	.icon {
+		@include flexBox(center, center);
+		flex-direction: column;
+		cursor: pointer;
+		span {
+			color: $dim-Black-80;
+			font-size: 10px;
+		}
+	}
+}
