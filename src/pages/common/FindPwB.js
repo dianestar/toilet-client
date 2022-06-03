@@ -1,10 +1,12 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import Layout from "../../components/common/Layout";
 import Header from "../../components/common/Header";
 import styles from "../../styles/pages/common.module.scss";
 
-const ResetPwB = () => {
-    const email = "toilet@gmail.com";
+const FindPwB = () => {
+    const location = useLocation();
+    const { email } = location.state;
 
     return (
         <Layout>
@@ -23,4 +25,4 @@ const ResetPwB = () => {
     );
 }
 
-export default ResetPwB;
+export default FindPwB;

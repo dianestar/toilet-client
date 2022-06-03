@@ -4,9 +4,9 @@ import Login from './pages/common/Login';
 import TestPage from './pages/common/TestPage';
 import RegisterA from './pages/common/RegisterA';
 import RegisterB from './pages/common/RegisterB';
-import ResetPwA from './pages/common/ResetPwA';
-import ResetPwB from './pages/common/ResetPwB';
-import ResetPwC from './pages/common/ResetPwC';
+import FindPwA from './pages/common/FindPwA';
+import FindPwB from './pages/common/FindPwB';
+import FindPwC from './pages/common/FindPwC';
 import LoginB from './pages/common/LoginB';
 import Map from "./pages/Map";
 
@@ -18,9 +18,9 @@ function App() {
 			<Route path="/testpage" element={<TestPage />} />
 			<Route path="/registeraccount" element={<RegisterA />} />
 			<Route path="/registerprofile" element={<RegisterB />} />
-			<Route path="/resetpwA" element={<ResetPwA />} />
-			<Route path="/resetpwB" element={<ResetPwB />} />
-			<Route path="/resetpwC" element={<ResetPwC />} />
+			<Route path="/findpwA" element={<FindPwA />} />
+			<Route path="/findpwB" element={<FindPwB />} />
+			<Route path="/find_password" element={<FindPwC />} />
 			<Route path="/map" element={<Map />} />
 		</Routes>
 	);
