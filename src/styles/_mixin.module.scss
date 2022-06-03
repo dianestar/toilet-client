@@ -45,3 +45,14 @@ $flex-map: (
 @mixin inputShadow {
 	box-shadow: 0px 3px 6px #00000029;
 }
+
+@mixin animation ($name, $duration) {
+	animation-name: $name;
+	animation-duration: $duration;
+}
+
+@mixin keyframe ($animation_name) {
+	@keyframes #{$animation_name} {
+		@content;
+	}
+}

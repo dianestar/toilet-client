@@ -1,5 +1,25 @@
 @import "../main.module.scss";
 
+@include keyframe (fadeIn) {
+    from {
+        @include font-style-16-medium();
+        top: 15px;
+    }
+    to {
+        @include font-style-12();
+        top: 7px;
+    }
+}
+
+@include keyframe (moveCursor) {
+    from {
+        padding-top: 15px;
+    }
+    to {
+        padding-top: 31px;
+    }
+}
+
 .form-input-div {
     position: relative;
     width: 343px;
@@ -7,8 +27,14 @@
     margin-bottom: 16px;
 
     .form-input {
-        @include font-style-16-medium();
         @include inputBox();
+        @include font-style-16-medium();
+        
+    }
+
+    .writing {
+        @include animation (moveCursor, 0s);
+        padding-top: 31px;
     }
 
     .error {
@@ -23,5 +49,20 @@
         &:hover {
             cursor: pointer;
         }
+    }
+
+    .placeholder {
+        @include font-style-16-medium();
+        position: absolute;
+        top: 15px;
+        left: 16px;
+        z-index: 2;
+        color: $dim-black-60 !important;
+    }
+
+    .moved {
+        @include animation (fadeIn, 0.5s);
+        @include font-style-12();
+        top: 7px !important;
     }
 }
