@@ -5,7 +5,7 @@ import { ReactComponent as KebabMenu } from '../assets/icons/kebabMenu.svg';
 import { ReactComponent as StarFill } from '../assets/icons/starFill.svg';
 import { ReactComponent as More } from "../assets/icons/more.svg";
 
-const ToiletInfoOnMap = () => {
+const ToiletInfo = () => {
 	return (
 		<section className={styles.wrapper}>
 			<article className={styles.text}>
@@ -36,4 +36,4 @@ const ToiletInfoOnMap = () => {
 	);
 };
 
-export default ToiletInfoOnMap;
+export default ToiletInfo;

@@ -1,25 +1,16 @@
 @import '../main.module.scss';
 
 .wrapper {
-	position: fixed;
 	z-index: 2;
 	width: 343px;
 	height: 50px;
-	margin: 46px 16px;
+	margin: 46px 16px 24px 16px;
 	border-radius: 8px;
 	background-color: $white;
 	box-shadow: 0px 3px 6px #00000029;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-
-	.profile {
-		width: 36px;
-		height: 36px;
-		object-fit: cover;
-		margin: 7px 8px;
-		border-radius: 50%;
-	}
+	display: grid;
+	grid-template-columns: 87% 13%;
+	place-items: center;
 
 	.position {
 		@include font-style-16-medium();
