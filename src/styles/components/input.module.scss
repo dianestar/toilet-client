@@ -1,0 +1,27 @@
+@import "../main.module.scss";
+
+.form-input-div {
+    position: relative;
+    width: 343px;
+    height: 50px;
+    margin-bottom: 16px;
+
+    .form-input {
+        @include font-style-16-medium();
+        @include inputBox();
+    }
+
+    .error {
+        outline-color: $red;
+    }
+
+    .form-eye {
+        position: relative;
+        left: 294px;
+        bottom: 47px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

@@ -17,8 +17,8 @@ function App() {
 			<Route path="/" element={<Login />} />
 			<Route path="/login" element={<LoginB />} />
 			<Route path="/testpage" element={<TestPage />} />
-			<Route path="/registeraccount" element={<RegisterA />} />
-			<Route path="/registerprofile" element={<RegisterB />} />
+			<Route path="/register_account" element={<RegisterA />} />
+			<Route path="/register_profile" element={<RegisterB />} />
 			<Route path="/findpwA" element={<FindPwA />} />
 			<Route path="/findpwB" element={<FindPwB />} />
 			<Route path="/find_password" element={<FindPwC />} />

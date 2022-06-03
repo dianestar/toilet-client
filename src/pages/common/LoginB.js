@@ -1,33 +1,36 @@
 import React from 'react';
-import { ReactComponent as Eye } from '../../assets/icons/eye.svg';
+import { useForm, FormProvider } from "react-hook-form";
 import BlueBtn from '../../components/common/BlueBtn';
 import Header from '../../components/common/Header';
 import Layout from '../../components/common/Layout';
+import EmailInput from '../../components/common/EmailInput';
+import PasswordInput from '../../components/common/PasswordInput';
 import styles from '../../styles/pages/common.module.scss';
 
 const LoginB = () => {
+	const methods = useForm();
+
+	const onSubmit = () => {
+		console.log(methods.watch("email"));
+		console.log(methods.watch("pw"));
+	}
+
 	return (
 		<Layout>
 			<Header text="로그인" />
 			<section className={styles.wrapper}>
 				<article>
 					<h2 className={styles.title}>로그인</h2>
-
-					<form className={styles.form}>
-						<div className={styles[`form-input-div`]}>
-							<input className={styles[`form-input`]} placeholder="이메일" />
-						</div>
-
-						<div className={styles[`form-input-div`]}>
-							<input className={styles[`form-input`]} placeholder="비밀번호" />
-							<Eye className={styles[`form-eye`]} />
-						</div>
-
-						<BlueBtn text="로그인" />
-						<p className={styles.loginBtn}>
-							비밀번호를 잊어버렸나요? <span /*onClick={}*/>비밀번호 찾기</span>
-						</p>
-					</form>
+					<FormProvider {...methods}>
+						<form className={styles.form} onSubmit={methods.handleSubmit(onSubmit)}>
+							<EmailInput />
+							<PasswordInput withCheck={false} />
+							<BlueBtn text="로그인" />
+							<p className={styles.loginBtn}>
+								비밀번호를 잊어버렸나요? <span /*onClick={}*/>비밀번호 찾기</span>
+							</p>
+						</form>
+					</FormProvider>
 				</article>
 			</section>
 		</Layout>
