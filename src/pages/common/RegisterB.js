@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { useSelector } from "react-redux";
 import Layout from "../../components/common/Layout";
 import Header from "../../components/common/Header";
 import BlueBtn from "../../components/common/BlueBtn";
+import NicknameInput from "../../components/common/NicknameInput";
 import FormErrorMessage from "../../components/common/FormErrorMessage";
 import styles from "../../styles/pages/common.module.scss";
 import { ReactComponent as ProfileImage } from '../../assets/icons/profileImage.svg';
@@ -11,7 +12,7 @@ import { ReactComponent as OpenPhoto } from '../../assets/icons/openPhoto.svg';
 import { POST_USERS_REGISTER, POST_USERS_UPLOAD } from "../../core/_axios/register";
 
 const RegisterB = () => {
-    const { register, handleSubmit, watch, formState: { errors }} = useForm();
+    const methods = useForm();
     const userInfo = useSelector((state) => state.register);
 
     const [alreadyExists, setAlreadyExists] = useState(false);
@@ -27,7 +28,7 @@ const RegisterB = () => {
         const form = {
             email: userInfo.email,
             password: userInfo.password,
-            nickname: watch("nickname"),
+            nickname: methods.watch("nickname"),
             checkPassword: userInfo.checkPassword,
         };
 
@@ -76,18 +77,13 @@ const RegisterB = () => {
                         onChange={onChangeImage}
                     />
                 </article>
-                <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-                    <div className={styles[`form-input-div`]}>
-                        <input
-                            className={errors.nickname ? `${styles[`form-input`]} ${styles.error}`: styles[`form-input`]}
-                            placeholder="닉네임"
-                            {...register("nickname", { required: true })}
-                        />
-                    </div>
-                    {errors.nickname && <FormErrorMessage message="닉네임을 입력해주세요"/>}
-                    {alreadyExists && <FormErrorMessage message="이미 사용중인 닉네임 입니다"/>}
-                    <BlueBtn text="회원가입"/>
-                </form>
+                <FormProvider {...methods}>
+                    <form className={styles.form} onSubmit={methods.handleSubmit(onSubmit)}>
+                        <NicknameInput />
+                        {alreadyExists && <FormErrorMessage message="이미 사용중인 닉네임 입니다"/>}
+                        <BlueBtn text="회원가입"/>
+                    </form>
+                </FormProvider>
             </section>
         </Layout>
     );
