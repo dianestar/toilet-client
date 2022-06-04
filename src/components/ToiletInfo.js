@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/components/toiletInfo.module.scss';
 import { ReactComponent as Pin } from '../assets/icons/pin.svg';
 import { ReactComponent as KebabMenu } from '../assets/icons/kebabMenu.svg';
 import { ReactComponent as StarFill } from '../assets/icons/starFill.svg';
-import { ReactComponent as More } from "../assets/icons/more.svg";
+import { ReactComponent as More } from '../assets/icons/more.svg';
 
 const ToiletInfo = () => {
+	const [showing, setShowing] = useState(false);
+
 	return (
 		<section className={styles.wrapper}>
 			<article className={styles.text}>
@@ -29,8 +31,22 @@ const ToiletInfo = () => {
 				</section>
 			</article>
 			<article className={styles.icon}>
-				<KebabMenu className={styles.ellipsis} />
-				<span className={styles.more}>더보기 <More /></span>
+				<KebabMenu
+					className={styles.ellipsis}
+					onClick={() => {
+						setShowing(!showing);
+					}}
+				/>
+				<span className={styles.more}>
+					더보기 <More />
+				</span>
+				{showing && (
+					<ul className={styles.popUpList}>
+						<li>리뷰 추가</li>
+						<div className={styles.line} />
+						<li className={styles.deleteBtn}>삭제 요청</li>
+					</ul>
+				)}
 			</article>
 		</section>
 	);
