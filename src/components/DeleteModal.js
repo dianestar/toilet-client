@@ -4,17 +4,24 @@ import { ReactComponent as Close } from '../assets/icons/close.svg';
 
 const DeleteModal = ({ open, setOpen }) => {
     const [selected, setSelected] = useState(false);
+    const [confirmed, setConfirmed] = useState(false);
     const onChange = () => {
         setSelected(true);    
     }
 
     return (
         <>
-            {open &&
+            {open && !confirmed &&
             <>
-                <div className={styles.bg}></div>
-                <section className={styles.wrapper}>
-                    <Close className={styles.close} onClick={() => setOpen(false)}/>
+                <div className={`${styles.bg} ${styles[`open-bg`]}`}></div>
+                <section className={`${styles.wrapper} ${styles[`open-wrapper`]}`}>
+                    <Close
+                        className={styles.close}
+                        onClick={() => {
+                            setSelected(false);
+                            setOpen(false);
+                        }}
+                    />
                     <p className={styles.title}>삭제요청 하시는</p>
                     <p className={styles.title}>이유가 궁금해요!</p>
                     <p className={styles.desc}>3건 이상의 요청이 들어오면 자동 삭제됩니다.</p>
@@ -59,7 +66,31 @@ const DeleteModal = ({ open, setOpen }) => {
                             부적절한 내용이 있어요.
                         </label>
                     </article>
-                    <button className={`${styles.confirm} ${selected ? styles.enabled : styles.disabled}`}>삭제 요청하기</button>
+                    <button
+                        className={`${styles.confirm} ${selected ? styles.enabled : styles.disabled}`}
+                        onClick={() => setConfirmed(true) }
+                    >
+                        삭제 요청하기
+                    </button>
+                </section>
+            </>
+            }
+            {open && confirmed &&
+            <>
+                <div className={styles.bg}></div>
+                <section className={styles.wrapper}>
+                    <Close
+                        className={styles.close}
+                        onClick={() => {
+                            setSelected(false);
+                            setConfirmed(false);
+                            setOpen(false);
+                        }}
+                    />
+                    <article className={styles.confirmed}>
+                        <p className={styles.title}>삭제요청이 성공적으로</p>
+                        <p className={styles.title}>접수됐습니다!</p>
+                    </article>
                 </section>
             </>
             }

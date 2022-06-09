@@ -16,16 +16,16 @@ const List = () => {
             <section className={styles.list}>
                 <SearchBox />
                 <article className={styles.toiletInfoList}>
-                {arr.map(() => {
+                {arr.map((value, index) => {
                     return (
-                        <div className={styles.onList}>
-                            <ToiletInfo />
+                        <div key={index} className={styles.onList}>
+                            <ToiletInfo setOpen={setOpen}/>
                         </div>
                     );
                 })}
                 </article>
                 <DeleteModal open={open} setOpen={setOpen}/>
-                <NavBar />
+                <NavBar num={[1, 0, 1, 1]} />
             </section>
         </Layout>
     );
