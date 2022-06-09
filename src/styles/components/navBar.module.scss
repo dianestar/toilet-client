@@ -13,7 +13,7 @@
 	height: 80px;
 	background: $white;
 	overflow: hidden;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px $shadow;
 
 	.icon {
 		@include flexBox(center, center);
