@@ -1,0 +1,14 @@
+@import "../main.module.scss";
+
+.wrapper {
+    background-color: #fafafa;
+    padding: 6px 0;
+
+    height: 716px;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 0px;
+    }
+}

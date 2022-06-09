@@ -10,6 +10,7 @@ import FindPwC from './pages/common/FindPwC';
 import LoginB from './pages/common/LoginB';
 import Map from "./pages/Map";
 import List from "./pages/List";
+import MyReview from './pages/MyReview';
 
 function App() {
 	return (
@@ -24,6 +25,7 @@ function App() {
 			<Route path="/find_password" element={<FindPwC />} />
 			<Route path="/map" element={<Map />} />
 			<Route path="/list" element={<List />} />
+			<Route path="/my_review" element={<MyReview />} />
 		</Routes>
 	);
 }
