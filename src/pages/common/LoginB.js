@@ -1,19 +1,37 @@
-import React from 'react';
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, FormProvider } from 'react-hook-form';
 import BlueBtn from '../../components/common/BlueBtn';
 import Header from '../../components/common/Header';
 import Layout from '../../components/common/Layout';
 import EmailInput from '../../components/common/EmailInput';
 import PasswordInput from '../../components/common/PasswordInput';
 import styles from '../../styles/pages/common.module.scss';
+import { POST_LOGIN } from '../../core/_axios/login';
+import { useNavigate } from 'react-router-dom';
 
 const LoginB = () => {
 	const methods = useForm();
+	const navigate = useNavigate();
 
-	const onSubmit = () => {
-		console.log(methods.watch("email"));
-		console.log(methods.watch("pw"));
-	}
+	const onSubmit = async () => {
+		const form = {
+			email: methods.watch('email'),
+			password: methods.watch('pw'),
+		};
+		try {
+			const {
+				data: { success, data, message },
+			} = await POST_LOGIN(form);
+
+			if (success) {
+				localStorage.setItem('token', data.token);
+				navigate('/map');
+			} else {
+				alert(message);
+			}
+		} catch (e) {
+			console.log(e);
+		}
+	};
 
 	return (
 		<Layout>
@@ -22,12 +40,16 @@ const LoginB = () => {
 				<article>
 					<h2 className={styles.title}>로그인</h2>
 					<FormProvider {...methods}>
-						<form className={styles.form} onSubmit={methods.handleSubmit(onSubmit)}>
+						<form
+							className={styles.form}
+							onSubmit={methods.handleSubmit(onSubmit)}
+						>
 							<EmailInput />
 							<PasswordInput withCheck={false} />
 							<BlueBtn text="로그인" />
 							<p className={styles.loginBtn}>
-								비밀번호를 잊어버렸나요? <span /*onClick={}*/>비밀번호 찾기</span>
+								비밀번호를 잊어버렸나요?{' '}
+								<span /*onClick={}*/>비밀번호 찾기</span>
 							</p>
 						</form>
 					</FormProvider>

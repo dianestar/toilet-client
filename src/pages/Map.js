@@ -54,6 +54,7 @@ const Map = () => {
 		map.setBounds(bounds);
 	}, [latitude, longitude]);
 
+	const num = [0];
 	return (
 		<Layout>
 			<section className={styles.map} id="map">
@@ -61,7 +62,7 @@ const Map = () => {
 				<article className={styles.onMap}>
 					<ToiletInfo />
 				</article>
-				<NavBar />
+				<NavBar num={[0, 1, 1, 1]} />
 			</section>
 		</Layout>
 	);
