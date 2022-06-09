@@ -1,0 +1,48 @@
+@import "../main.module.scss";
+
+@include keyframe (appear) {
+    from {
+        opacity: 0;
+        bottom: 0px;
+    }
+    to {
+        opacity: 1;
+        bottom: 30px;
+    }
+}
+
+@include keyframe (disappear) {
+    from {
+        opacity: 1;
+        bottom: 30px;
+    }
+    to {
+        opacity: 0;
+        bottom: 0px;
+    }
+}
+
+.snackbar {
+    @include font-style-16-medium();
+    color: $white !important;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    position: absolute;
+    bottom: 30px;
+
+    width: 343px;
+    height: 51px;
+    margin: 0 calc((100% - 343px) / 2);
+    background-color: $dim-black-60;
+    border-radius: 8px;
+
+    animation: appear 0.5s, disappear 0.5s 2.5s;
+
+    .icon {
+        margin-left: 16px;
+        margin-right: 8px;
+    }
+}
