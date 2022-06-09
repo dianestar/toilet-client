@@ -26,7 +26,7 @@ const RegisterB = () => {
 
     const onSubmit = async () => {
         const form = {
-            email: userInfo.email,
+            email: methods.watch("email"),
             password: userInfo.password,
             nickname: methods.watch("nickname"),
             checkPassword: userInfo.checkPassword,
@@ -38,7 +38,11 @@ const RegisterB = () => {
                 console.log(response);
             }
         } catch (error) {
+            /* interceptor 수정 부분 테스트 */
             console.log(error);
+            if (error.response.status === 400) {
+                console.log("400");
+            }
         }
 
         if (imageUrl) {
