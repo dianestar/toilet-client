@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import styles from "../styles/components/deleteModal.module.scss";
+import styles from "../styles/components/deleteRequest.module.scss";
 import { ReactComponent as Close } from '../assets/icons/close.svg';
+import { ReactComponent as CircleCheck } from "../assets/icons/circleCheck.svg";
 
-const DeleteModal = ({ open, setOpen }) => {
+const DeleteRequest = ({ open, setOpen }) => {
     const [selected, setSelected] = useState(false);
     const [confirmed, setConfirmed] = useState(false);
     const onChange = () => {
@@ -88,6 +89,7 @@ const DeleteModal = ({ open, setOpen }) => {
                         }}
                     />
                     <article className={styles.confirmed}>
+                        <CircleCheck className={styles.check}/>
                         <p className={styles.title}>삭제요청이 성공적으로</p>
                         <p className={styles.title}>접수됐습니다!</p>
                     </article>
@@ -98,4 +100,4 @@ const DeleteModal = ({ open, setOpen }) => {
 );
 }
 
-export default DeleteModal;
+export default DeleteRequest;

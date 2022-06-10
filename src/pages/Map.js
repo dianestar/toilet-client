@@ -3,7 +3,7 @@ import Layout from '../components/common/Layout';
 import NavBar from '../components/common/NavBar';
 import SearchBox from '../components/SearchBox';
 import ToiletInfo from '../components/ToiletInfo';
-import DeleteModal from '../components/DeleteModal';
+import DeleteRequest from '../components/DeleteRequest';
 import styles from '../styles/pages/map.module.scss';
 
 const { kakao } = window;
@@ -65,7 +65,7 @@ const Map = () => {
 					<ToiletInfo setOpen={setOpen}/>
 				</article>
 				<NavBar num={[0, 1, 1, 1]} />
-				<DeleteModal open={open} setOpen={setOpen} />
+				<DeleteRequest open={open} setOpen={setOpen} />
 			</section>
 		</Layout>
 	);

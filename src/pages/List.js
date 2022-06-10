@@ -3,7 +3,7 @@ import Layout from "../components/common/Layout";
 import NavBar from '../components/common/NavBar';
 import SearchBox from '../components/SearchBox';
 import ToiletInfo from "../components/ToiletInfo";
-import DeleteModal from "../components/DeleteModal";
+import DeleteRequest from "../components/DeleteRequest";
 import styles from "../styles/pages/list.module.scss";
 
 const arr = Array(5).fill(0);
@@ -24,7 +24,7 @@ const List = () => {
                     );
                 })}
                 </article>
-                <DeleteModal open={open} setOpen={setOpen}/>
+                <DeleteRequest open={open} setOpen={setOpen}/>
                 <NavBar num={[1, 0, 1, 1]} />
             </section>
         </Layout>
