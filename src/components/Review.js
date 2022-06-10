@@ -6,7 +6,7 @@ import { ReactComponent as KebabMenu } from '../assets/icons/kebabMenu.svg';
 import styles from "../styles/components/review.module.scss";
 import TempImg from "../assets/images/KakaoTalk_Photo_2022-04-18-22-19-10 003.jpeg"
 
-const Review = ({ yesImg }) => {
+const Review = ({ yesImg, setOpen }) => {
     const [showing, setShowing] = useState(false);
 
     return (
@@ -40,7 +40,7 @@ const Review = ({ yesImg }) => {
                 <ul className={styles.popUpList}>
                     <li>리뷰 수정</li>
                     <div className={styles.line} />
-                    <li className={styles.deleteBtn}>리뷰 삭제</li>
+                    <li className={styles.deleteBtn} onClick={() => setOpen(true)}>리뷰 삭제</li>
                 </ul>
             )}
         </section>

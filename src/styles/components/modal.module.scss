@@ -11,6 +11,7 @@
 
 .bg {
     position: fixed;
+    
     width: 375px;
     height: 768px;
     z-index: 3;
@@ -45,6 +46,56 @@
 
         &:hover {
             cursor: pointer;
+        }
+    }
+
+    .btn-div {
+        width: 311px;
+        display: flex;
+        justify-content: space-between;
+        
+        .btn {
+            @include font-style-16-medium();
+            width: 146px;
+            height: 44px;
+            box-shadow: 0px 3px 6px $shadow;
+            border: none;
+            border-radius: 8px;
+
+            &.cancel {
+                color: $main !important;
+                background-color: $white;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            &.ok {
+                color: $white !important;
+                background-color: $main;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    
+    .title {
+        @include font-style-20();
+        line-height: $line-height-24 !important;
+    }
+    
+    .confirmed {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 80px;
+
+        .check {
+            margin-bottom: 24px;
         }
     }
 }
