@@ -43,7 +43,7 @@ $flex-map: (
 }
 
 @mixin inputShadow {
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px $shadow;
 }
 
 @mixin animation ($name, $duration, $delay: 0) {

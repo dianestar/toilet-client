@@ -1,0 +1,80 @@
+@import "../main.module.scss";
+@import "./modal.module.scss";
+
+.title {
+    @include font-style-20();
+    line-height: $line-height-24 !important;
+}
+
+.desc {
+    @include font-style-14();
+    margin-top: 4px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 16px 0;
+
+    .radio {
+        display: none;
+
+        &:checked + label {
+            border: 1px solid $main;
+            color: $main !important;
+        }
+    }
+
+    .option {
+        @include font-style-16-medium();
+        text-align: left;
+        line-height: 21px !important;
+
+        width: 311px;
+        height: 45px;
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        background-color: $white;
+        border-radius: 8px;
+        border: 1px solid $dim-black-20;
+        
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.confirm {
+    @include font-style-16-bold();
+
+    width: 311px;
+    height: 50px;
+    border: none;
+    border-radius: 8px;
+
+    &.disabled {
+        background-color: $dim-black-20;
+        color: $dim-black-20 !important;
+    }
+
+    &.enabled {
+        background-color: $main;
+        color: $white !important;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.confirmed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+
+    .check {
+        margin-bottom: 24px;
+    }
+}

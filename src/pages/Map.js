@@ -3,11 +3,13 @@ import Layout from '../components/common/Layout';
 import NavBar from '../components/common/NavBar';
 import SearchBox from '../components/SearchBox';
 import ToiletInfo from '../components/ToiletInfo';
+import DeleteRequest from '../components/DeleteRequest';
 import styles from '../styles/pages/map.module.scss';
 
 const { kakao } = window;
 
 const Map = () => {
+	const [open, setOpen] = useState(false);
 	const [latitude, setLatitude] = useState(null);
 	const [longitude, setLongitude] = useState(null);
 
@@ -60,9 +62,10 @@ const Map = () => {
 			<section className={styles.map} id="map">
 				<SearchBox />
 				<article className={styles.onMap}>
-					<ToiletInfo />
+					<ToiletInfo setOpen={setOpen}/>
 				</article>
 				<NavBar num={[0, 1, 1, 1]} />
+				<DeleteRequest open={open} setOpen={setOpen} />
 			</section>
 		</Layout>
 	);
