@@ -5,7 +5,7 @@ import Layout from "../../components/common/Layout";
 import Header from "../../components/common/Header";
 import BlueBtn from "../../components/common/BlueBtn";
 import NicknameInput from "../../components/common/NicknameInput";
-import FormErrorMessage from "../../components/common/FormErrorMessage";
+import Snackbar from "../../components/common/Snackbar";
 import styles from "../../styles/pages/common.module.scss";
 import { ReactComponent as ProfileImage } from '../../assets/icons/profileImage.svg';
 import { ReactComponent as OpenPhoto } from '../../assets/icons/openPhoto.svg';
@@ -15,8 +15,7 @@ const RegisterB = () => {
     const methods = useForm();
     const userInfo = useSelector((state) => state.register);
 
-    const [alreadyExists, setAlreadyExists] = useState(false);
-
+    const [duplicated, setDuplicated] = useState(false);
     const [imageFile, setImageFile] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
     const onChangeImage = (e) => {
@@ -26,7 +25,7 @@ const RegisterB = () => {
 
     const onSubmit = async () => {
         const form = {
-            email: methods.watch("email"),
+            email: userInfo.email,
             password: userInfo.password,
             nickname: methods.watch("nickname"),
             checkPassword: userInfo.checkPassword,
@@ -38,10 +37,12 @@ const RegisterB = () => {
                 console.log(response);
             }
         } catch (error) {
-            /* interceptor 수정 부분 테스트 */
             console.log(error);
-            if (error.response.status === 400) {
-                console.log("400");
+            if (error.response.status === 409) {
+                setDuplicated(true);
+                setTimeout(() => {
+                    setDuplicated(false);
+                }, 3000);
             }
         }
 
@@ -83,12 +84,12 @@ const RegisterB = () => {
                 </article>
                 <FormProvider {...methods}>
                     <form className={styles.form} onSubmit={methods.handleSubmit(onSubmit)}>
-                        <NicknameInput />
-                        {alreadyExists && <FormErrorMessage message="이미 사용중인 닉네임 입니다"/>}
+                        <NicknameInput duplicated={duplicated} setDuplicated={setDuplicated}/>
                         <BlueBtn text="회원가입"/>
                     </form>
                 </FormProvider>
             </section>
+            {duplicated && <Snackbar key={Date.now()} text="이미 사용중인 닉네임 입니다."/>}
         </Layout>
     );
 }
