@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -8,20 +8,42 @@ import Header from "../../components/common/Header";
 import BlueBtn from "../../components/common/BlueBtn";
 import EmailInput from "../../components/common/EmailInput";
 import PasswordInput from "../../components/common/PasswordInput";
+import Snackbar from "../../components/common/Snackbar";
 import styles from "../../styles/pages/common.module.scss";
+import { POST_USERS_VALIDATION } from "../../core/_axios/register";
 
 const RegisterA = () => {
     const methods = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const onSubmit = () => {
-        dispatch(saveUser({
+    const [duplicated, setDuplicated] = useState(false);
+
+    const onSubmit = async () => {
+        const form = {
             email: methods.watch("email"),
             password: methods.watch("pw"),
             checkPassword: methods.watch("pwcheck"),
-        }));
-        navigate("/register_profile");
+        };
+
+        try {
+            const {
+                data: {
+                    success
+                }
+            } = await POST_USERS_VALIDATION(form);
+            if (success) {
+                dispatch(saveUser(form));
+                navigate("/register_profile");
+            }
+        } catch (error) {
+            if (error.response.status === 409) {
+                setDuplicated(true);
+            }
+            setTimeout(() => {
+                setDuplicated(false);
+            }, 3000);
+        }
     }
 
     return (
@@ -38,6 +60,7 @@ const RegisterA = () => {
                     </form>
                 </FormProvider>
             </section>
+            {duplicated && <Snackbar key={Date.now()} text="이미 가입된 이메일 입니다."/>}
         </Layout>
     );
 }
