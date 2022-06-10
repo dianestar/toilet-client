@@ -5,7 +5,7 @@ import { ReactComponent as KebabMenu } from '../assets/icons/kebabMenu.svg';
 import { ReactComponent as StarFill } from '../assets/icons/starFill.svg';
 import { ReactComponent as More } from '../assets/icons/more.svg';
 
-const ToiletInfo = () => {
+const ToiletInfo = ({ setOpen }) => {
 	const [showing, setShowing] = useState(false);
 
 	return (
@@ -44,7 +44,12 @@ const ToiletInfo = () => {
 					<ul className={styles.popUpList}>
 						<li>리뷰 추가</li>
 						<div className={styles.line} />
-						<li className={styles.deleteBtn}>삭제 요청</li>
+						<li
+							className={styles.deleteBtn}
+							onClick={() => setOpen(true )}
+						>
+							삭제 요청
+						</li>
 					</ul>
 				)}
 			</article>

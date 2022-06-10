@@ -13,5 +13,13 @@ export const POST_USERS_UPLOAD = (form) => {
         method: METHOD.POST,
         url: "users/upload",
         data: form,
-    })
-}
+    });
+};
+
+export const POST_USERS_VALIDATION = (form) => {
+    return Api({
+        method: METHOD.POST,
+        url: "users/validation",
+        data: form,
+    });
+};
