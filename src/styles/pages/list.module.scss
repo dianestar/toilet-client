@@ -9,18 +9,11 @@
     overflow: auto;
     overflow-x: hidden;
 
-    .toiletInfoList {
-        height: 635px;
     
-        overflow-x: hidden;
-        overflow-y: auto;
-    
-        &::-webkit-scrollbar {
-            width: 0px;
-        }
-    }
-}
+    overflow-x: hidden;
+    overflow-y: auto;
 
-.onList {
-    margin-bottom: 8px;
+    &::-webkit-scrollbar {
+        width: 0px;
+    }
 }
