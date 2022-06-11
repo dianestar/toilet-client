@@ -14,6 +14,7 @@ import AccountInfo from './pages/account/AccountInfo';
 import Profile from './pages/account/Profile';
 
 function App() {
+	console.log('test');
 	return (
 		<Routes>
 			<Route path="/" element={<Login />} />
