@@ -1,14 +1,18 @@
 @import "../main.module.scss";
 
-.wrapper {
-    background-color: #fafafa;
-    padding: 6px 0;
-
-    height: 716px;
-    overflow-x: hidden;
-    overflow-y: auto;
-
-    &::-webkit-scrollbar {
-        width: 0px;
+.my-review {
+    height: 100%;
+    
+    .wrapper {
+        background-color: #fafafa;
+        padding: 6px 0;
+    
+        height: 722px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    
+        &::-webkit-scrollbar {
+            width: 0px;
+        }
     }
 }
