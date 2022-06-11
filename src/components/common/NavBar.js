@@ -28,6 +28,10 @@ const NavBar = ({ setShowing, showing, num }) => {
 		}
 	};
 
+	const goToAccount = () => {
+		navigate('/account/profile');
+	};
+
 	const getUsers = async () => {
 		const res = await GET_USERS(token);
 		const data = res.data.data;
@@ -51,7 +55,13 @@ const NavBar = ({ setShowing, showing, num }) => {
 								onClick={() => setShowing(!showing)}
 							/>
 
-							<img src={imageUrl} alt="profile" />
+							<img
+								src={imageUrl}
+								alt="profile"
+								onClick={() => {
+									goToAccount();
+								}}
+							/>
 							<h2>{nickname}</h2>
 							<p>{email}</p>
 						</div>
