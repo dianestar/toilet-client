@@ -11,12 +11,12 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { GET_USERS } from '../../core/_axios/user';
 import { useEffect, useState } from 'react';
 
-const NavBar = ({ setShowing, showing, num }) => {
+const NavBar = ({ setShowing, showing }) => {
 	const [nickname, setNickname] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
 	const [email, setEmail] = useState('');
 
-	const token = localStorage.getItem('token');
+	const token = localStorage.getItem('access_token');
 
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -33,7 +33,7 @@ const NavBar = ({ setShowing, showing, num }) => {
 	};
 
 	const getUsers = async () => {
-		const res = await GET_USERS(token);
+		const res = await GET_USERS();
 		const data = res.data.data;
 		setNickname(data.nickname);
 		setImageUrl(data.imgUrl);

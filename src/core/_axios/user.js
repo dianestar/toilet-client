@@ -1,9 +1,8 @@
 import Api, { METHOD } from './interceptor';
 
-export const GET_USERS = (token) => {
+export const GET_USERS = () => {
 	return Api({
 		method: METHOD.GET,
 		url: 'users',
-		headers: { Authorization: `Bearer ${token}` },
 	});
 };

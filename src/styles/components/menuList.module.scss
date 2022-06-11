@@ -1,0 +1,16 @@
+@import '../main.module.scss';
+
+.menu {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	background: $white;
+	margin: 3px 0;
+	border-top: 5px solid $bg;
+
+	.text {
+		color: $sub;
+		margin-left: 15px;
+		margin-right: auto;
+	}
+}
