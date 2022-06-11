@@ -62,7 +62,6 @@ const Map = () => {
 				<article className={styles.onMap}>
 					<ToiletInfo />
 				</article>
-				<NavBar num={[0, 1, 1, 1]} />
 			</section>
 		</Layout>
 	);

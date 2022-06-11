@@ -7,6 +7,7 @@
 .navOutSide {
 	position: absolute;
 	z-index: 99999;
+	top: 0;
 	left: 0;
 	width: 375px;
 	height: 100%;
@@ -18,6 +19,15 @@
 		height: 100%;
 		background: #fafafa;
 		border-radius: 0px 8px 8px 0px;
+		animation: motion 0.5s ease-in;
+		@keyframes motion {
+			0% {
+				margin-left: -280px;
+			}
+			100% {
+				margin-left: 0;
+			}
+		}
 
 		.profile {
 			position: relative;

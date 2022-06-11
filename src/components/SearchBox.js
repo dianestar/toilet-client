@@ -14,7 +14,7 @@ const SearchBox = () => {
 					setShowing(!showing);
 				}}
 			/>
-			{showing && <NavBar />}
+			{showing && <NavBar setShowing={setShowing} showing={showing} />}
 			<span className={styles.position}>서울시 어쩌구 2-16</span>
 			<Search className={styles.icon} />
 		</div>

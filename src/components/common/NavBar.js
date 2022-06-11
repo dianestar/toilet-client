@@ -7,40 +7,83 @@ import { ReactComponent as ListFill } from '../../assets/icons/listFill.svg';
 import { ReactComponent as AddToiletFill } from '../../assets/icons/addToiletFill.svg';
 import { ReactComponent as Close } from '../../assets/icons/close.svg';
 import BottomTabIcon from './BottomTabIcon';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { GET_USERS } from '../../core/_axios/user';
+import { useEffect, useState } from 'react';
 
-const NavBar = ({ num }) => {
+const NavBar = ({ setShowing, showing, num }) => {
+	const [nickname, setNickname] = useState('');
+	const [imageUrl, setImageUrl] = useState('');
+	const [email, setEmail] = useState('');
+
+	const token = localStorage.getItem('token');
+
+	const navigate = useNavigate();
+	const location = useLocation();
+
+	const logout = () => {
+		if (token) {
+			localStorage.clear();
+			navigate('/');
+		}
+	};
+
+	const getUsers = async () => {
+		const res = await GET_USERS(token);
+		const data = res.data.data;
+		setNickname(data.nickname);
+		setImageUrl(data.imgUrl);
+		setEmail(data.email);
+	};
+
+	useEffect(() => {
+		getUsers();
+	}, [getUsers]);
+
 	return (
-		<section className={styles.navOutSide}>
-			<article className={styles.nav}>
-				<div className={styles.profile}>
-					<Close className={styles.close} />
-					<img src="/images/KakaoTalk_Photo_2022-04-18-22-19-10 003.jpeg" />
-					<h2>jetom</h2>
-					<p>jetom@jetom.com</p>
-				</div>
-				<ul className={styles.iconList}>
-					<BottomTabIcon url={'map'} text={'지도'}>
-						{num[0] === 0 ? <MapFill /> : <Map />}
-					</BottomTabIcon>
+		<>
+			{showing && (
+				<section className={styles.navOutSide}>
+					<article className={styles.nav}>
+						<div className={styles.profile}>
+							<Close
+								className={styles.close}
+								onClick={() => setShowing(!showing)}
+							/>
 
-					<BottomTabIcon url={'list'} text={'목록'}>
-						{num[1] === 0 ? <ListFill /> : <List />}
-					</BottomTabIcon>
+							<img src={imageUrl} alt="profile" />
+							<h2>{nickname}</h2>
+							<p>{email}</p>
+						</div>
+						<ul className={styles.iconList}>
+							<BottomTabIcon url={'map'} text={'지도'}>
+								{location.pathname === '/map' ? <MapFill /> : <Map />}
+							</BottomTabIcon>
 
-					<BottomTabIcon url={'addToilet'} text={'화장실 추가'}>
-						{num[2] === 0 ? <AddToiletFill /> : <AddToilet />}
-					</BottomTabIcon>
-				</ul>
-				<div
-					className={styles.logout}
-					onClick={() => {
-						console.log('test');
-					}}
-				>
-					<p>로그아웃</p>
-				</div>
-			</article>
-		</section>
+							<BottomTabIcon url={'list'} text={'목록'}>
+								{location.pathname === '/list' ? <ListFill /> : <List />}
+							</BottomTabIcon>
+
+							<BottomTabIcon url={'addToilet'} text={'화장실 추가'}>
+								{location.pathname === '/addtoilet' ? (
+									<AddToiletFill />
+								) : (
+									<AddToilet />
+								)}
+							</BottomTabIcon>
+						</ul>
+						<div
+							className={styles.logout}
+							onClick={() => {
+								logout();
+							}}
+						>
+							<p>로그아웃</p>
+						</div>
+					</article>
+				</section>
+			)}
+		</>
 	);
 };
 

@@ -21,7 +21,6 @@ const List = () => {
 						);
 					})}
 				</article>
-				<NavBar num={[1, 0, 1, 1]} />
 			</section>
 		</Layout>
 	);
