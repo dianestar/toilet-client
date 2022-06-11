@@ -8,9 +8,11 @@ import FindPwA from './pages/common/FindPwA';
 import FindPwB from './pages/common/FindPwB';
 import FindPwC from './pages/common/FindPwC';
 import LoginB from './pages/common/LoginB';
-import Map from "./pages/Map";
-import List from "./pages/List";
 import MyReview from './pages/MyReview';
+import Map from './pages/Map';
+import List from './pages/List';
+import AccountInfo from './pages/account/AccountInfo';
+import Profile from './pages/account/Profile';
 
 function App() {
 	return (
@@ -26,6 +28,8 @@ function App() {
 			<Route path="/map" element={<Map />} />
 			<Route path="/list" element={<List />} />
 			<Route path="/my_review" element={<MyReview />} />
+			<Route path="/account/profile" element={<Profile />} />
+			<Route path="/account/account_info" element={<AccountInfo />} />
 		</Routes>
 	);
 }
