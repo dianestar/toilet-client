@@ -15,11 +15,11 @@ const Review = ({ yesImg = false }) => {
         <>
             <section className={styles.review}>
                 <p className={styles.title}>화장실 이름</p>
-                <StarFill className={styles.star}/>
-                <StarFill className={styles.star}/>
-                <StarHalfGray className={styles.star}/>
-                <StarGray className={styles.star}/>
-                <StarGray className={styles.star}/>
+                <StarFill className={styles.star} width="10" height="10"/>
+                <StarFill className={styles.star} width="10" height="10"/>
+                <StarHalfGray className={styles.star} width="10" height="10"/>
+                <StarGray className={styles.star} width="10" height="10"/>
+                <StarGray className={styles.star} width="10" height="10"/>
                 <span className={styles.date}>2022/02/16</span>
                 {yesImg ?
                     <article className={styles[`img-list`]}>

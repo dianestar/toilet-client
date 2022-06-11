@@ -19,7 +19,7 @@ const ToiletInfo = ({ type }) => {
 						<section className={styles.desc}>
 							<Pin />
 							<span>서울시 어쩌구 빌딩 2층</span>
-							<StarFill />
+							<StarFill width="12" height="12"/>
 							<span>4.2</span>
 						</section>
 						<section className={styles.category}>#카테고리</section>

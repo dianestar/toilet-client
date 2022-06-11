@@ -13,6 +13,7 @@ import Map from './pages/Map';
 import List from './pages/List';
 import AccountInfo from './pages/account/AccountInfo';
 import Profile from './pages/account/Profile';
+import ToiletDetails from './pages/ToiletDetails';
 
 function App() {
 	return (
@@ -30,6 +31,7 @@ function App() {
 			<Route path="/my_review" element={<MyReview />} />
 			<Route path="/account/profile" element={<Profile />} />
 			<Route path="/account/account_info" element={<AccountInfo />} />
+			<Route path="/toilet_details" element={<ToiletDetails />} />
 		</Routes>
 	);
 }
