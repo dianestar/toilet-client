@@ -7,17 +7,19 @@ import NavBar from './common/NavBar';
 const SearchBox = () => {
 	const [showing, setShowing] = useState(false);
 	return (
-		<div className={styles.wrapper}>
-			<Hamburger
-				className={styles.icon}
-				onClick={() => {
-					setShowing(!showing);
-				}}
-			/>
+		<>
+			<div className={styles.wrapper}>
+				<Hamburger
+					className={styles.icon}
+					onClick={() => {
+						setShowing(!showing);
+					}}
+				/>
+				<span className={styles.position}>서울시 어쩌구 2-16</span>
+				<Search className={styles.icon} />
+			</div>
 			{showing && <NavBar setShowing={setShowing} showing={showing} />}
-			<span className={styles.position}>서울시 어쩌구 2-16</span>
-			<Search className={styles.icon} />
-		</div>
+		</>
 	);
 };
 
