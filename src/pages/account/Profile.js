@@ -17,7 +17,7 @@ const Profile = () => {
 					<Header />
 					<ProfileInfo />
 					{menuList.map((menu) => {
-						return <MenuList text={menu.text} url={menu.url} />;
+						return <MenuList key={menu.text} text={menu.text} url={menu.url} />;
 					})}
 				</article>
 			</section>

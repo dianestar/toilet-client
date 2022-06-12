@@ -7,7 +7,6 @@ const BottomTabIcon = ({ url, children, text }) => {
 	return (
 		<li>
 			<Link to={`/${url}`} className={styles.icon}>
-				{console.log(location.pathname === `/${url}`)}
 				{children}
 				<span
 					className={location.pathname === `/${url}` ? styles.active : null}

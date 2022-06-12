@@ -17,7 +17,7 @@ const NavBar = ({ setShowing, showing }) => {
 	const [imageUrl, setImageUrl] = useState('');
 	const [email, setEmail] = useState('');
 
-	const token = localStorage.getItem('access_token');
+	const token = localStorage.getItem('token');
 
 	const navigate = useNavigate();
 	const location = useLocation();

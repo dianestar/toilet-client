@@ -7,10 +7,16 @@ import PasswordInput from '../../components/common/PasswordInput';
 import styles from '../../styles/pages/common.module.scss';
 import { POST_LOGIN } from '../../core/_axios/login';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { useEffect, useState } from 'react';
 
 const LoginB = () => {
 	const methods = useForm();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const user = useSelector((state) => state.profileInfo.data);
+	const [nickname, setNickname] = useState('');
 
 	const onSubmit = async () => {
 		const form = {
@@ -25,6 +31,12 @@ const LoginB = () => {
 			if (success) {
 				localStorage.setItem('token', data.token);
 				navigate('/map');
+
+				dispatch({
+					nickname: data.user.nickname,
+					imageUrl: data.user.imageUrl,
+					email: data.user.email,
+				});
 			} else {
 				alert(message);
 			}
