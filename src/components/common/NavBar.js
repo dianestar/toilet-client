@@ -10,6 +10,7 @@ import BottomTabIcon from './BottomTabIcon';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { GET_USERS } from '../../core/_axios/user';
 import { useEffect, useState } from 'react';
+import ProfileInfo from './ProfileInfo';
 
 const NavBar = ({ setShowing, showing }) => {
 	const [nickname, setNickname] = useState('');
@@ -55,15 +56,11 @@ const NavBar = ({ setShowing, showing }) => {
 								onClick={() => setShowing(!showing)}
 							/>
 
-							<img
-								src={imageUrl}
-								alt="profile"
+							<ProfileInfo
 								onClick={() => {
 									goToAccount();
 								}}
 							/>
-							<h2>{nickname}</h2>
-							<p>{email}</p>
 						</div>
 						<ul className={styles.iconList}>
 							<BottomTabIcon url={'map'} text={'지도'}>

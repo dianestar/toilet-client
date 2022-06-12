@@ -1,27 +1,9 @@
-import React, { useEffect, useState } from 'react';
 import Layout from '../../components/common/Layout';
-import styles from '../../styles/pages/profile.module.scss';
 import Header from '../../components/common/Header';
-import { GET_USERS } from '../../core/_axios/user';
 import MenuList from '../../components/common/MenuList';
+import ProfileInfo from '../../components/common/ProfileInfo';
 
 const Profile = () => {
-	const [nickname, setNickname] = useState('');
-	const [imageUrl, setImageUrl] = useState('');
-	const [email, setEmail] = useState('');
-
-	const getUsers = async () => {
-		const res = await GET_USERS();
-		const data = res.data.data;
-		setNickname(data.nickname);
-		setImageUrl(data.imgUrl);
-		setEmail(data.email);
-	};
-
-	useEffect(() => {
-		getUsers();
-	}, [getUsers]);
-
 	const menuList = [
 		{ text: '계정 정보 관리', url: 'account/account_info' },
 		{ text: '리뷰 관리', url: '' },
@@ -33,11 +15,7 @@ const Profile = () => {
 			<section>
 				<article>
 					<Header />
-					<div className={styles.profile}>
-						<img src={imageUrl} alt="profile" />
-						<h2>{nickname}</h2>
-						<p>{email}</p>
-					</div>
+					<ProfileInfo />
 					{menuList.map((menu) => {
 						return <MenuList text={menu.text} url={menu.url} />;
 					})}
