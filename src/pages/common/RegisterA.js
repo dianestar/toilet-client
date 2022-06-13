@@ -60,7 +60,7 @@ const RegisterA = () => {
                     </form>
                 </FormProvider>
             </section>
-            {duplicated && <Snackbar key={Date.now()} text="이미 가입된 이메일 입니다."/>}
+            {duplicated && <Snackbar key={Date.now()} type="error" text="이미 가입된 이메일 입니다."/>}
         </Layout>
     );
 }
