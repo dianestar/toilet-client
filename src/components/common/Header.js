@@ -6,7 +6,7 @@ import styles from '../../styles/components/header.module.scss';
 const Header = ({ type, text }) => {
 	return (
 		<section className={styles.header}>
-			{type == "back" 
+			{type === "back" 
 			?
 			<Back />
 			:
