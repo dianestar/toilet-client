@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DeleteRequest from './DeleteRequest';
+import DeleteRequest from './modal/DeleteRequest';
 import styles from '../styles/components/toiletInfo.module.scss';
 import { ReactComponent as Pin } from '../assets/icons/pin.svg';
 import { ReactComponent as KebabMenu } from '../assets/icons/kebabMenu.svg';

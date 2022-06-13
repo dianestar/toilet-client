@@ -3,7 +3,6 @@ import Layout from "../components/common/Layout";
 import NavBar from '../components/common/NavBar';
 import SearchBox from '../components/SearchBox';
 import ToiletInfo from "../components/ToiletInfo";
-import DeleteRequest from "../components/DeleteRequest";
 import styles from "../styles/pages/list.module.scss";
 
 const arr = Array(5).fill(0);

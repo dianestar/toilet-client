@@ -10,7 +10,7 @@ const MyReview = () => {
     return (
         <Layout>
             <section className={styles[`my-review`]}>
-                <Header text="리뷰 관리" />
+                <Header type="back" text="리뷰 관리" />
                 <article className={styles.wrapper}>
                     {arr.map((value, index) => {
                         return (

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DeleteConfirm from "./DeleteConfirm";
+import DeleteConfirm from "./modal/DeleteConfirm";
 import { ReactComponent as StarFill } from "../assets/icons/starFill.svg";
 import { ReactComponent as StarHalfGray } from "../assets/icons/starHalfGray.svg";
 import { ReactComponent as StarGray } from "../assets/icons/starGray.svg";

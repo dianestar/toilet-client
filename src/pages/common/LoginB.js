@@ -35,7 +35,7 @@ const LoginB = () => {
 
 	return (
 		<Layout>
-			<Header text="로그인" />
+			<Header type="back" text="로그인" />
 			<section className={styles.wrapper}>
 				<article>
 					<h2 className={styles.title}>로그인</h2>
