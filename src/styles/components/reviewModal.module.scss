@@ -11,8 +11,16 @@
     height: 310px !important;
     margin: 0 16px;
 
-    .desc {
-        @include font-style-20();
+    .text-div {
+        .title {
+            @include font-style-20();
+        }
+
+        .desc {
+            @include font-style-14();
+            margin: 24px 0 14px 0;
+            text-align: center;
+        }
     
         display: flex;
         flex-direction: column;

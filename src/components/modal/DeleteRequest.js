@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../../styles/components/deleteRequest.module.scss";
+import styles from "../../styles/components/toiletModal.module.scss";
 import { ReactComponent as Close } from '../../assets/icons/close.svg';
 import { ReactComponent as CircleCheck } from "../../assets/icons/circleCheck.svg";
 

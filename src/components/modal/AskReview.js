@@ -1,7 +1,8 @@
 import React from "react";
-import styles from "../../styles/components/askReview.module.scss";
+import styles from "../../styles/components/reviewModal.module.scss";
+import { ReactComponent as Close } from "../../assets/icons/close.svg";
 
-const AskReview = () => {
+const AskReview = ({ open, setOpen }) => {
     return (
         <>
             {open &&
@@ -9,19 +10,21 @@ const AskReview = () => {
                 <div className={`${styles.bg} ${styles[`open-bg`]}`}></div>
                 <section className={`${styles.wrapper} ${styles[`open-wrapper`]}`}>
                     <Close
-                        classNAme={styles.close}
+                        className={styles.close}
                         onClick={() => {
-
+                            setOpen(false);
                         }}
                     />
-                    <p>리뷰를 작성해주세요!</p>
-                    <p>
-                        화장실이 성공적으로 등록됐습니다!
-                        <br/>
-                        리뷰를 작성하면 다른 사용자들에게 더 많은 정보를
-                        <br/>
-                        제공할 수 있습니다!
-                    </p>
+                    <article className={styles[`text-div`]}>
+                        <p className={styles.title}>리뷰를 작성해주세요!</p>
+                        <p className={styles.desc}>
+                            화장실이 성공적으로 등록됐습니다!
+                            <br/>
+                            리뷰를 작성하면 다른 사용자들에게 더 많은 정보를
+                            <br/>
+                            제공할 수 있습니다!
+                        </p>
+                    </article>
                     <article className={styles[`btn-div`]}>
                         <button
                             className={`${styles.cancel} ${styles.btn}`}
@@ -31,9 +34,9 @@ const AskReview = () => {
                         </button>
                         <button
                             className={`${styles.ok} ${styles.btn}`}
-                            onClick={() => setConfirmed(true)}
+                            onClick={() => setOpen(false)}
                         >
-                            확인
+                            리뷰 작성
                         </button>
                     </article>
                 </section>

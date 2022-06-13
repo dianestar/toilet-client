@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../../styles/components/deleteConfirm.module.scss";
+import styles from "../../styles/components/reviewModal.module.scss";
 import { ReactComponent as Close } from '../../assets/icons/close.svg';
 import { ReactComponent as CircleQuestion } from "../../assets/icons/circleQuestion.svg";
 import { ReactComponent as CircleCheck } from "../../assets/icons/circleCheck.svg";
@@ -19,9 +19,9 @@ const DeleteConfirm = ({ open, setOpen }) => {
                             setOpen(false);
                         }}
                     />
-                    <article className={styles.desc}>
+                    <article className={styles[`text-div`]}>
                         <CircleQuestion className={styles.question}/>
-                        <p>정말 삭제하시겠습니까?</p>
+                        <p className={styles.title}>정말 삭제하시겠습니까?</p>
                     </article>
                     <article className={styles[`btn-div`]}>
                         <button

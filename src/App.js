@@ -14,6 +14,7 @@ import List from './pages/List';
 import AccountInfo from './pages/account/AccountInfo';
 import Profile from './pages/account/Profile';
 import ToiletDetails from './pages/ToiletDetails';
+import AddToilet from './pages/AddToilet';
 
 function App() {
 	return (
@@ -32,6 +33,7 @@ function App() {
 			<Route path="/account/profile" element={<Profile />} />
 			<Route path="/account/account_info" element={<AccountInfo />} />
 			<Route path="/toilet_details" element={<ToiletDetails />} />
+			<Route path="/add_toilet" element={<AddToilet /> } />
 		</Routes>
 	);
 }
