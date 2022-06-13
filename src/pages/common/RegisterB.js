@@ -16,6 +16,8 @@ const RegisterB = () => {
     const userInfo = useSelector((state) => state.register);
 
     const [duplicated, setDuplicated] = useState(false);
+    const [registered, setRegistered] = useState(false);
+
     const [imageFile, setImageFile] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
     const onChangeImage = (e) => {
@@ -32,9 +34,14 @@ const RegisterB = () => {
         };
 
         try {
-            const response = await POST_USERS_REGISTER(form);
-            if (response) {
-                console.log(response);
+            const {
+                data: { success }
+            } = await POST_USERS_REGISTER(form);
+            if (success) {
+                setRegistered(true);
+                setTimeout(() => {
+                    setRegistered(false);
+                }, 3000);
             }
         } catch (error) {
             console.log(error);
@@ -89,7 +96,8 @@ const RegisterB = () => {
                     </form>
                 </FormProvider>
             </section>
-            {duplicated && <Snackbar key={Date.now()} text="이미 사용중인 닉네임 입니다."/>}
+            {duplicated && <Snackbar key={Date.now()} type="error" text="이미 사용중인 닉네임 입니다."/>}
+            {registered && <Snackbar key={Date.now()} type="success" text="회원가입이 완료되었습니다."/>}
         </Layout>
     );
 }
