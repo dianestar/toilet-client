@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import styles from "../styles/components/deleteRequest.module.scss";
-import { ReactComponent as Close } from '../assets/icons/close.svg';
-import { ReactComponent as CircleCheck } from "../assets/icons/circleCheck.svg";
+import styles from "../../styles/components/deleteRequest.module.scss";
+import { ReactComponent as Close } from '../../assets/icons/close.svg';
+import { ReactComponent as CircleCheck } from "../../assets/icons/circleCheck.svg";
 
 const DeleteRequest = ({ open, setOpen }) => {
     const [selected, setSelected] = useState(false);

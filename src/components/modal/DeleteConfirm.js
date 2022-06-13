@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import styles from "../styles/components/deleteConfirm.module.scss";
-import { ReactComponent as Close } from '../assets/icons/close.svg';
-import { ReactComponent as CircleQuestion } from "../assets/icons/circleQuestion.svg";
-import { ReactComponent as CircleCheck } from "../assets/icons/circleCheck.svg";
+import styles from "../../styles/components/deleteConfirm.module.scss";
+import { ReactComponent as Close } from '../../assets/icons/close.svg';
+import { ReactComponent as CircleQuestion } from "../../assets/icons/circleQuestion.svg";
+import { ReactComponent as CircleCheck } from "../../assets/icons/circleCheck.svg";
 
 const DeleteConfirm = ({ open, setOpen }) => {
     const [confirmed, setConfirmed] = useState(false);
