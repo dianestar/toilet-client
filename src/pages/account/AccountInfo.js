@@ -34,7 +34,7 @@ const AccountInfo = () => {
 			title: '닉네임',
 			contents: nickname,
 			isIcon: true,
-			path: '/account/EditNickname',
+			path: '/account/edit_nickname',
 		},
 		{
 			title: '이메일',
@@ -45,7 +45,7 @@ const AccountInfo = () => {
 			title: '비밀번호',
 			isIcon: true,
 			isPassword: true,
-			path: '/account/EditPassword',
+			path: '/account/edit_password',
 		},
 	];
 

@@ -13,6 +13,8 @@ import Map from './pages/Map';
 import List from './pages/List';
 import AccountInfo from './pages/account/AccountInfo';
 import Profile from './pages/account/Profile';
+import EditNickname from './pages/account/EditNickname';
+import EditPassword from './pages/account/EditPassword';
 
 function App() {
 	return (
@@ -30,7 +32,8 @@ function App() {
 			<Route path="/my_review" element={<MyReview />} />
 			<Route path="/account/profile" element={<Profile />} />
 			<Route path="/account/account_info" element={<AccountInfo />} />
-			<Route path="/account/editNickname" element={<EditNickname />} />
+			<Route path="/account/edit_nickname" element={<EditNickname />} />
+			<Route path="/account/edit_password" element={<EditPassword />} />
 		</Routes>
 	);
 }
