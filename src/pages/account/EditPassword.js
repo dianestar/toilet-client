@@ -1,10 +1,11 @@
 import React from 'react';
+import Header from '../../components/common/Header';
 import Layout from '../../components/common/Layout';
 
 const EditPassword = () => {
 	return (
 		<Layout>
-			<div>test</div>
+			<Header text="비밀번호 재설정" />
 		</Layout>
 	);
 };

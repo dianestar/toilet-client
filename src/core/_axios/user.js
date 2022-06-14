@@ -6,3 +6,11 @@ export const GET_USERS = () => {
 		url: 'users',
 	});
 };
+
+export const PATCH_USERS = (form) => {
+	return Api({
+		method: METHOD.PATCH,
+		url: 'users/modify_nickname',
+		data: form,
+	});
+};
