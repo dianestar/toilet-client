@@ -8,15 +8,9 @@ import { ReactComponent as AddToiletFill } from '../../assets/icons/addToiletFil
 import { ReactComponent as Close } from '../../assets/icons/close.svg';
 import BottomTabIcon from './BottomTabIcon';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { GET_USERS } from '../../core/_axios/user';
-import { useEffect, useState } from 'react';
 import ProfileInfo from './ProfileInfo';
 
 const NavBar = ({ setShowing, showing }) => {
-	const [nickname, setNickname] = useState('');
-	const [imageUrl, setImageUrl] = useState('');
-	const [email, setEmail] = useState('');
-
 	const token = localStorage.getItem('token');
 
 	const navigate = useNavigate();
@@ -32,18 +26,6 @@ const NavBar = ({ setShowing, showing }) => {
 	const goToAccount = () => {
 		navigate('/account/profile');
 	};
-
-	const getUsers = async () => {
-		const res = await GET_USERS();
-		const data = res.data.data;
-		setNickname(data.nickname);
-		setImageUrl(data.imgUrl);
-		setEmail(data.email);
-	};
-
-	useEffect(() => {
-		getUsers();
-	}, [getUsers]);
 
 	return (
 		<>

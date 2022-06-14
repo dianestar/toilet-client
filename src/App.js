@@ -30,6 +30,7 @@ function App() {
 			<Route path="/my_review" element={<MyReview />} />
 			<Route path="/account/profile" element={<Profile />} />
 			<Route path="/account/account_info" element={<AccountInfo />} />
+			<Route path="/account/editNickname" element={<EditNickname />} />
 		</Routes>
 	);
 }

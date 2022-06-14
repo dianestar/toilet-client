@@ -1,6 +1,6 @@
 const info = {
 	nickname: '',
-	imageUrl: '',
+	imgUrl: '',
 	email: '',
 };
 
@@ -21,7 +21,7 @@ const profileInfo = (state = info, action) => {
 			return {
 				...state,
 				nickname: action.data.nickname,
-				imageUrl: action.data.imageUrl,
+				imgUrl: action.data.imgUrl,
 				email: action.data.email,
 			};
 		default:
