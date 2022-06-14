@@ -18,6 +18,7 @@ export const profile = (data) => {
 const profileInfo = (state = info, action) => {
 	switch (action.type) {
 		case PROFILE_INFO:
+			localStorage.removeItem("persist:root");
 			return {
 				...state,
 				nickname: action.data.nickname,
