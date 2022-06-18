@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, Fragment } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
@@ -10,18 +10,16 @@ import { ReactComponent as RadioFalse } from "../assets/icons/radioFalse.svg";
 import { ReactComponent as CheckboxTrue } from "../assets/icons/checkboxTrue.svg";
 import { ReactComponent as CheckboxFalse } from "../assets/icons/checkboxFalse.svg";
 import { ReactComponent as StarCustom } from "../assets/icons/starCustom.svg";
+import { POST_REVIEW } from "../core/_axios/review";
 
-const WriteReview = () => {
+const WriteReview = ({ address = "서울시 강남구 역삼동 2-16", desc = "뫄뫄빌딩 2층 복도 끝" }) => {
     const {register, handleSubmit, watch, formState: {errors}, control } = useForm();
-    const rateInput = useRef();
 
     const [type, setType] = useState(null);
     const [password, setPassword] = useState(null);
     const [toilet, setToilet] = useState([]);
     const [tissue, setTissue] = useState(null);
     const [disabled, setDisabled] = useState(null);
-    const [isActive, setIsActive] = useState(false);
-    const [rate, setRate] = useState("");
     const [starStatus, setStarStatus] = useState([]);
 
     const handleCheckbox = (e) => {
@@ -33,11 +31,33 @@ const WriteReview = () => {
         }
     }
 
-    const onSubmit = () => {
-        
-    }
+    const onSubmit = async () => {
 
-    console.log(watch("rate"));
+        try {
+            const form = {
+                common: watch("type") === "unseparated" ? true : false,
+                lock: watch("password") === "locked" ? true : false,
+                types: 0, // needs to be fixed
+                paper: watch("tissue") === "yes" ? true : false,
+                disabled: watch("disabled") === "provided" ? true : false,
+                address,
+                content: watch("textarea"),
+                rate: parseInt(watch("rate")),
+            };
+
+            console.log(form);
+
+            const {
+                data: { success, data }
+            } = await POST_REVIEW(form);
+
+            if (success) {
+                console.log(data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <Layout>
@@ -47,11 +67,11 @@ const WriteReview = () => {
                     <p className={styles.title}>화장실 위치</p>
                     <article>
                         <p className={styles.subtitle}>주소</p>
-                        <p className={styles.content}>서울시 어쩌구 2-16</p>
+                        <p className={styles.content}>{address}</p>
                     </article>
                     <article>
                         <p className={styles.subtitle}>정확한 위치</p>
-                        <p className={styles.content}>뫄뫄빌딩 2층 복도 끝</p>
+                        <p className={styles.content}>{desc}</p>
                     </article>
                 </section>
                 
@@ -94,7 +114,7 @@ const WriteReview = () => {
 
                     <p className={styles.subtitle}>변기 종류 (중복 선택 가능)</p>
                     <article>
-                        <Controller name="seat" control={control} rules={{required: true}} render={({field: { onChange, value }}) => (
+                        <Controller name="seat" control={control} render={({field: { onChange, value }}) => (
                             <div value={value} onChange={onChange}>
                                 <input type="checkbox" id="seat" onChange={handleCheckbox} />
                                 <label htmlFor="seat">
@@ -103,7 +123,7 @@ const WriteReview = () => {
                                 </label>
                             </div>
                         )}/>
-                        <Controller name="squat" control={control} rules={{required: true}} render={({field: { onChange, value }}) => (
+                        <Controller name="squat" control={control} render={({field: { onChange, value }}) => (
                             <div value={value} onChange={onChange}>
                                 <input type="checkbox" id="squat"onChange={handleCheckbox}/>
                                 <label htmlFor="squat">
@@ -112,7 +132,7 @@ const WriteReview = () => {
                                 </label>
                             </div>
                         )}/>
-                        <Controller name="bidet" control={control} rules={{required: true}} render={({field: { onChange, value }}) => (
+                        <Controller name="bidet" control={control} render={({field: { onChange, value }}) => (
                             <div value={value} onChange={onChange}>
                                 <input type="checkbox" id="bidet" onChange={handleCheckbox}/>
                                 <label htmlFor="bidet">
@@ -122,7 +142,7 @@ const WriteReview = () => {
                             </div>
                         )}/>
                     </article>
-                    {errors.seat && errors.squat && errors.bidet && <FormErrorMessage message="🚨 변기 종류를 선택해주세요" />}
+                    {/*!watch("seat") && !watch("squat") && !watch("bidet") && <FormErrorMessage message="🚨 변기 종류를 선택해주세요" />*/}
 
                     <p className={styles.subtitle}>휴지</p>
                     <Controller name="tissue" control={control} rules={{required: true}} render={({field: { onChange, value }}) => (
@@ -165,7 +185,7 @@ const WriteReview = () => {
                     <Controller name="rate" control={control} rules={{required: true}} render={({field: { onChange, value }}) => (
                         <article value={value} onChange={onChange}>
                         {[1,2,3,4,5].map((v, i) =>
-                            <>
+                            <Fragment key={v}>
                                 <input type="radio" name="rate" id={v} value={v}/>
                                 <label htmlFor={v}>
                                     <StarCustom key={v} width="32" height="30.56" fill={starStatus[i] ? "#589fd2" : "#d6d6d6"} className={styles.star} onClick={() => {
@@ -173,10 +193,9 @@ const WriteReview = () => {
                                         for (let j=0; j<v; j++) { currStatus.push(1); }
                                         for (let j=0; j<v; j++) { currStatus.push(0); }
                                         setStarStatus(currStatus);
-                                        setRate(v);
                                     }} />
                                 </label>
-                            </>
+                            </Fragment>
                         )}
                         </article>
                     )} />
