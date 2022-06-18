@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
@@ -10,6 +10,7 @@ import { ReactComponent as RadioFalse } from "../assets/icons/radioFalse.svg";
 import { ReactComponent as CheckboxTrue } from "../assets/icons/checkboxTrue.svg";
 import { ReactComponent as CheckboxFalse } from "../assets/icons/checkboxFalse.svg";
 import { ReactComponent as StarCustom } from "../assets/icons/starCustom.svg";
+import { ReactComponent as Close } from "../assets/icons/close.svg";
 import { POST_REVIEW, POST_IMAGE } from "../core/_axios/review";
 
 const WriteReview = ({ address = "서울시 강남구 역삼동 2-16", desc = "뫄뫄빌딩 2층 복도 끝" }) => {
@@ -22,8 +23,9 @@ const WriteReview = ({ address = "서울시 강남구 역삼동 2-16", desc = "�
     const [disabled, setDisabled] = useState(null);
     const [starStatus, setStarStatus] = useState([]);
 
-    const [imgFile, setImgFile] = useState("");
+    const [imgFile, setImgFile] = useState(null);
     const [imgUrl, setImgUrl] = useState("");
+    const imgInput = useRef();
 
     const handleCheckbox = (e) => {
         if (toilet.find((v) => v === e.target.id)) {
@@ -37,6 +39,13 @@ const WriteReview = ({ address = "서울시 강남구 역삼동 2-16", desc = "�
     const onChangeImg = (e) => {
         setImgFile(e.target.files[0]);
         setImgUrl(URL.createObjectURL(e.target.files[0]));
+    }
+
+    const onCancelImg = () => {
+        setImgFile(null);
+        setImgUrl("");
+        URL.revokeObjectURL(imgUrl);
+        imgInput.current.value = "";
     }
 
     const onSubmit = async () => {
@@ -229,12 +238,17 @@ const WriteReview = ({ address = "서울시 강남구 역삼동 2-16", desc = "�
                 {errors.textarea && <FormErrorMessage message="🚨 리뷰를 입력해주세요" />}
 
                 <section className={styles.image}>
-                    <input id="image" type="file" multiple accept="image/*" onChange={onChangeImg}/>
+                    <input ref={imgInput} id="image" type="file" multiple accept="image/*" onChange={onChangeImg}/>
                     <article className={styles.inputarea}>
                         <span>{imgFile ? imgFile.name : "화장실 이미지 (선택)"}</span>
                         <div><label htmlFor="image">업로드</label></div>
                     </article>
-                    {imgUrl && <img src={imgUrl} alt="preview"/>}
+                    {imgUrl &&
+                    <article className={styles.imgarea}>
+                        <img src={imgUrl} alt="preview"/>
+                        <Close className={styles.cancel} onClick={onCancelImg}/>
+                    </article>
+                    }
                 </section>
 
                 <section className={styles.button}>
