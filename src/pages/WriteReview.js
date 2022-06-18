@@ -13,7 +13,7 @@ import { ReactComponent as StarCustom } from "../assets/icons/starCustom.svg";
 import { POST_REVIEW, POST_IMAGE } from "../core/_axios/review";
 
 const WriteReview = ({ address = "서울시 강남구 역삼동 2-16", desc = "뫄뫄빌딩 2층 복도 끝" }) => {
-    const {register, handleSubmit, watch, formState: {errors}, control } = useForm();
+    const {register, handleSubmit, watch, formState: {errors, isSubmitted}, control } = useForm();
 
     const [type, setType] = useState(null);
     const [password, setPassword] = useState(null);
@@ -162,7 +162,7 @@ const WriteReview = ({ address = "서울시 강남구 역삼동 2-16", desc = "�
                             </div>
                         )}/>
                     </article>
-                    {/*!watch("seat") && !watch("squat") && !watch("bidet") && <FormErrorMessage message="🚨 변기 종류를 선택해주세요" />*/}
+                    {isSubmitted && !watch("seat") && !watch("squat") && !watch("bidet") && <FormErrorMessage message="🚨 변기 종류를 선택해주세요" />}
 
                     <p className={styles.subtitle}>휴지</p>
                     <Controller name="tissue" control={control} rules={{required: true}} render={({field: { onChange, value }}) => (
