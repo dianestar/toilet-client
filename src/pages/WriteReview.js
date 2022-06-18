@@ -8,7 +8,7 @@ import { ReactComponent as RadioTrue } from "../assets/icons/radioTrue.svg";
 import { ReactComponent as RadioFalse } from "../assets/icons/radioFalse.svg";
 import { ReactComponent as CheckboxTrue } from "../assets/icons/checkboxTrue.svg";
 import { ReactComponent as CheckboxFalse } from "../assets/icons/checkboxFalse.svg";
-import { ReactComponent as StarGray } from "../assets/icons/starGray.svg";
+import { ReactComponent as StarCustom } from "../assets/icons/starCustom.svg";
 
 const WriteReview = () => {
     const [type, setType] = useState(null);
@@ -17,6 +17,8 @@ const WriteReview = () => {
     const [tissue, setTissue] = useState(null);
     const [disabled, setDisabled] = useState(null);
     const [active, setActive] = useState(false);
+    const [rate, setRate] = useState(0);
+    const [starStatus, setStarStatus] = useState([]);
 
     const handleCheckbox = (e) => {
         if (toilet.find((v) => v === e.target.id)) {
@@ -117,11 +119,15 @@ const WriteReview = () => {
                 </section>
                 <section className={styles.stars}>
                     <p className={styles.title}>별점</p>
-                    <StarGray width="32" height="30.56" className={styles.star}/>
-                    <StarGray width="32" height="30.56" className={styles.star}/>
-                    <StarGray width="32" height="30.56" className={styles.star}/>
-                    <StarGray width="32" height="30.56" className={styles.star}/>
-                    <StarGray width="32" height="30.56" className={styles.star}/>
+                    {[1,2,3,4,5].map((v, i) => 
+                        <StarCustom key={v} width="32" height="30.56" fill={starStatus[i] ? "#589fd2" : "#d6d6d6"} className={styles.star} onClick={() => {
+                            let currStatus = [];
+                            for (let j=0; j<v; j++) { currStatus.push(1); }
+                            for (let j=0; j<v; j++) { currStatus.push(0); }
+                            setStarStatus(currStatus);
+                            setRate(v);
+                        }} />
+                    )}
                 </section>
                 <section className={styles.review}>
                     <p className={styles.title}>리뷰</p>

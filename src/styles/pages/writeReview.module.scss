@@ -78,6 +78,10 @@
     .stars {
         .star{
             margin-right: 8px;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 
