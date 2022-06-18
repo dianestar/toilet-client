@@ -7,3 +7,12 @@ export const POST_REVIEW = (form) => {
         data: form,
     });
 };
+
+export const POST_IMAGE = (form) => {
+    return Api({
+        method: METHOD.POST,
+        url: "reviews/upload",
+        data: form,
+        headers: {"Content-Type": "multipart/form-data"},
+    })
+}

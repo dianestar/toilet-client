@@ -10,7 +10,7 @@ import { ReactComponent as RadioFalse } from "../assets/icons/radioFalse.svg";
 import { ReactComponent as CheckboxTrue } from "../assets/icons/checkboxTrue.svg";
 import { ReactComponent as CheckboxFalse } from "../assets/icons/checkboxFalse.svg";
 import { ReactComponent as StarCustom } from "../assets/icons/starCustom.svg";
-import { POST_REVIEW } from "../core/_axios/review";
+import { POST_REVIEW, POST_IMAGE } from "../core/_axios/review";
 
 const WriteReview = ({ address = "서울시 강남구 역삼동 2-16", desc = "뫄뫄빌딩 2층 복도 끝" }) => {
     const {register, handleSubmit, watch, formState: {errors}, control } = useForm();
@@ -22,6 +22,9 @@ const WriteReview = ({ address = "서울시 강남구 역삼동 2-16", desc = "�
     const [disabled, setDisabled] = useState(null);
     const [starStatus, setStarStatus] = useState([]);
 
+    const [imgFile, setImgFile] = useState("");
+    const [imgUrl, setImgUrl] = useState("");
+
     const handleCheckbox = (e) => {
         if (toilet.find((v) => v === e.target.id)) {
             setToilet(toilet.filter((v) => v !== e.target.id));
@@ -31,8 +34,12 @@ const WriteReview = ({ address = "서울시 강남구 역삼동 2-16", desc = "�
         }
     }
 
-    const onSubmit = async () => {
+    const onChangeImg = (e) => {
+        setImgFile(e.target.files[0]);
+        setImgUrl(URL.createObjectURL(e.target.files[0]));
+    }
 
+    const onSubmit = async () => {
         try {
             const form = {
                 common: watch("type") === "unseparated" ? true : false,
@@ -45,14 +52,27 @@ const WriteReview = ({ address = "서울시 강남구 역삼동 2-16", desc = "�
                 rate: parseInt(watch("rate")),
             };
 
-            console.log(form);
-
             const {
                 data: { success, data }
             } = await POST_REVIEW(form);
 
             if (success) {
                 console.log(data);
+
+                if (imgFile) {
+                    const imgForm = new FormData();
+                    imgForm.append("image", imgFile);
+
+                    try {
+                        const {
+                            data: { success }
+                        } = await POST_IMAGE(imgForm);
+
+                        if (success) { console.log(success); }
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
             }
         } catch (error) {
             console.log(error);
@@ -209,11 +229,12 @@ const WriteReview = ({ address = "서울시 강남구 역삼동 2-16", desc = "�
                 {errors.textarea && <FormErrorMessage message="🚨 리뷰를 입력해주세요" />}
 
                 <section className={styles.image}>
-                    <input id="image" type="file" multiple accept="image/*" onChange={(e) => console.log(e)}/>
+                    <input id="image" type="file" multiple accept="image/*" onChange={onChangeImg}/>
                     <article className={styles.inputarea}>
-                        <span >화장실 이미지 (선택)</span>
+                        <span>{imgFile ? imgFile.name : "화장실 이미지 (선택)"}</span>
                         <div><label htmlFor="image">업로드</label></div>
                     </article>
+                    {imgUrl && <img src={imgUrl} alt="preview"/>}
                 </section>
 
                 <section className={styles.button}>
