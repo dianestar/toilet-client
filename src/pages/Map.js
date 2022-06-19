@@ -7,10 +7,19 @@ import styles from '../styles/pages/map.module.scss';
 import { AROUND_TOILET } from '../core/_axios/toilet';
 
 const { kakao } = window;
+let map;
 
 const Map = () => {
-	const [latitude, setLatitude] = useState(null);
-	const [longitude, setLongitude] = useState(null);
+	// 현재 사용자 위치의 위도 경도
+	const [userLat, setUserLat] = useState(null);
+	const [userLng, setUserLng] = useState(null);
+
+	// 현재 지도 중심좌표의 위도 경도
+	const [centerLat, setCenterLat] = useState(null);
+	const [centerLng, setCenterLng] = useState(null);
+
+	// 지도 레벨 및 주변 화장실 조회할 반경
+	const [mapLevel, setMapLevel] = useState(3);
 	const [distance, setDistance] = useState(1);
 
 	const [toiletList, setToiletList] = useState([{lat: 37.307788898019304, lng: 127.07257059314489}]);
@@ -20,8 +29,8 @@ const Map = () => {
 	const [showWarning, setShowWarning] = useState(false);
 
 	const onValid = (position) => {
-		setLatitude(position.coords.latitude);
-		setLongitude(position.coords.longitude);
+		setUserLat(position.coords.latitude);
+		setUserLng(position.coords.longitude);
 	};
 
 	const onInvalid = () => {
@@ -29,9 +38,16 @@ const Map = () => {
 	};
 
 	const getToilet = async () => {
+		console.log(map.getCenter().getLat());
+		console.log(map.getCenter().getLng());
+
+		setCenterLat(map.getCenter().getLat());
+		setCenterLng(map.getCenter().getLng());
+		setShowBtn(false);
+
 		const form = {
-			lat: latitude,
-			lng: longitude,
+			lat: map.getCenter().getLat(),
+			lng: map.getCenter().getLng(),
 			dist: distance,
 		};
 
@@ -42,23 +58,27 @@ const Map = () => {
 			
 			if (success) {
 				console.log(data);
-				setToiletList(data);
+				setToiletList([{lat: 37.307788898019304, lng: 127.07257059314489}, {lat: 37.29782540183662, lng: 127.0692958590957}]);
 			}
 			
 		} catch (error) {
 			console.log(error);
 		}
+		
 	}
 
 	useEffect(() => {
 		let mapContainer = document.getElementById('map'), // 지도를 표시할 div
 			mapOption = {
 				center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-				level: 3, // 지도의 확대 레벨
+				level: mapLevel, // 지도의 확대 레벨
 			};
 
 		// 지도를 표시할 div와 지도 옵션으로 지도를 생성
-		let map = new kakao.maps.Map(mapContainer, mapOption);
+		map = new kakao.maps.Map(mapContainer, mapOption);
+
+		// 지도의 최고 레벨 값 설정
+		map.setMaxLevel(10);
 
 		// 현재 위치 정보 가져오기
 		if (navigator.geolocation) {
@@ -68,23 +88,22 @@ const Map = () => {
 		}
 
 		// 현재 위치로 지도 범위를 재설정
-		let point = new kakao.maps.LatLng(latitude, longitude);
-
-		// 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성
-		let bounds = new kakao.maps.LatLngBounds();
+		let userPosition = new kakao.maps.LatLng(userLat, userLng);
 
 		// 현재 위치 마커를 지도에 추가
-		let currentMarker = new kakao.maps.Marker({ position: point });
-		currentMarker.setMap(map);
+		let userMarker = new kakao.maps.Marker({ position: userPosition });
+		userMarker.setMap(map);
 
-		// LatLngBounds 객체에 좌표를 추가
-		bounds.extend(point);
-
-		// LatLngBounds 객체에 추가된 좌표를 기준으로 지도의 범위를 재설정
-		map.setBounds(bounds);
-
-		// 지도의 최고 레벨 값 설정
-		map.setMaxLevel(10);
+		// 처음에는 지도의 중심좌표를 현재 사용자의 위치로 설정
+		if (centerLat === null && centerLng === null) {
+			setCenterLat(userLat);
+			setCenterLng(userLng);
+			map.setCenter(userPosition);
+		}
+		// 그 외에는 변경된 지도의 중심좌표로 설정
+		else {
+			map.setCenter(new kakao.maps.LatLng(centerLat, centerLng));
+		}
 
 		// 주변 화장실 마커 생성
 		for (let i=0; i<toiletList.length; i++) {
@@ -98,14 +117,28 @@ const Map = () => {
 		// 이동 이벤트 등록
 		kakao.maps.event.addListener(map, "dragend", function() {
 			let latlng = map.getCenter();
-			console.log("변경된 지도 중심좌표는 " + latlng + " 입니다.");
+			console.log("변경된 지도 중심좌표 " + latlng );
 
-			setShowBtn(true);
+			let currentBounds = map.getBounds();
+			console.log("이전 지도 중심좌표 ", centerLat, centerLng);
+			console.log("변경된 영역 ", currentBounds);
+
+			console.log(centerLat < currentBounds.getNorthEast().getLat());
+			console.log(centerLat > currentBounds.getSouthWest().getLat());
+			console.log(centerLng < currentBounds.getNorthEast().getLng());
+			console.log(centerLng > currentBounds.getSouthWest().getLng());
+
+			// 중심좌표가 화면 밖으로 벗어난 경우 재검색 버튼 노출
+			if (centerLat > currentBounds.getNorthEast().getLat() || centerLat < currentBounds.getSouthWest().getLat()
+			|| centerLng > currentBounds.getNorthEast().getLng() || centerLng < currentBounds.getSouthWest().getLng()) {
+				setShowBtn(true);
+			}
 		})
 
 		// 확대/축소 이벤트 등록
 		kakao.maps.event.addListener(map, 'zoom_changed', function() {        			
 			let currentLevel = map.getLevel();
+			setMapLevel(currentLevel);
 			console.log("변경된 지도 확대/축소 레벨은 " + currentLevel + " 입니다.");
 
 			if (currentLevel >= 8) {
@@ -121,7 +154,7 @@ const Map = () => {
 				else { setDistance(5); }
 			}
 		});
-	}, [latitude, longitude, toiletList]);
+	}, [mapLevel, userLat, userLng, centerLat, centerLng, toiletList]);
 	
 	return (
 		<Layout>
