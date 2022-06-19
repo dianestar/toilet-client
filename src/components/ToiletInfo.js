@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DeleteRequest from './modal/DeleteRequest';
 import styles from '../styles/components/toiletInfo.module.scss';
-import { ReactComponent as Pin } from '../assets/icons/pin.svg';
+import { ReactComponent as PinSelected } from '../assets/icons/pinSelected.svg';
 import { ReactComponent as KebabMenu } from '../assets/icons/kebabMenu.svg';
 import { ReactComponent as StarFill } from '../assets/icons/starFill.svg';
 import { ReactComponent as More } from '../assets/icons/more.svg';
@@ -17,7 +17,7 @@ const ToiletInfo = ({ type }) => {
 					<article className={styles.text}>
 						<p className={styles.title}>화장실 이름</p>
 						<section className={styles.desc}>
-							<Pin />
+							<PinSelected />
 							<span>서울시 어쩌구 빌딩 2층</span>
 							<StarFill width="12" height="12"/>
 							<span>4.2</span>
