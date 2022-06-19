@@ -9,7 +9,7 @@ const AddToilet = () => {
     return (
         <>
         <Layout>
-            <Header type="hamburger" text="화장실 추가" />
+            <Header text="화장실 추가" />
             <AskReview open={open} setOpen={setOpen}/>
         </Layout>
         </>

@@ -14,7 +14,7 @@ const Login = () => {
 
 	return (
 		<Layout>
-			<Header type="back" text="로그인" />
+			<Header text="로그인" />
 			<section className={styles.loginSection}>
 				<div className={styles.logo}></div>
 				<Btn text="카카오톡으로 시작하기" />

@@ -1,0 +1,21 @@
+@import '../main.module.scss';
+
+.eidt {
+	@include flexBox(between, center);
+	padding: 2px 13px;
+	border-top: 5px solid $bg;
+
+	.title {
+		@include font-style-12();
+		margin-bottom: 3px;
+	}
+	.contents {
+		@include font-style-16-medium();
+	}
+	.password {
+		color: $sub;
+	}
+	.pointer {
+		cursor: pointer;
+	}
+}

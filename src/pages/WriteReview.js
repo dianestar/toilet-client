@@ -90,7 +90,7 @@ const WriteReview = ({ address = "서울시 강남구 역삼동 2-16", desc = "�
 
     return (
         <Layout>
-            <Header type="hamburger" text="리뷰 추가" />
+            <Header text="리뷰 추가" />
             <form className={styles.wrapper} onSubmit={handleSubmit(onSubmit)}>
                 <section className={styles.location}>
                     <p className={styles.title}>화장실 위치</p>
