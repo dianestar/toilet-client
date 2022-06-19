@@ -56,7 +56,7 @@ const LoginB = () => {
 							onSubmit={methods.handleSubmit(onSubmit)}
 						>
 							<EmailInput />
-							<PasswordInput withCheck={false} />
+							<PasswordInput withCheck={false} text="비밀번호" />
 							<BlueBtn text="로그인" />
 							<p className={styles.loginBtn}>
 								비밀번호를 잊어버렸나요?{' '}

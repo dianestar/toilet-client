@@ -16,6 +16,7 @@ const EditText = ({ title, contents, isIcon, isPassword, path }) => {
 					onClick={() => {
 						navigate(`${path}`);
 					}}
+					className={styles.pointer}
 				/>
 			) : null}
 		</div>
