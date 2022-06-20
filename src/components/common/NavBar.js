@@ -11,7 +11,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { GET_USERS } from '../../core/_axios/user';
 import { useEffect, useState } from 'react';
 
-const NavBar = ({ setShowing, showing, num }) => {
+const NavBar = ({ setShowing, showing }) => {
 	const [nickname, setNickname] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
 	const [email, setEmail] = useState('');
@@ -74,8 +74,8 @@ const NavBar = ({ setShowing, showing, num }) => {
 								{location.pathname === '/list' ? <ListFill /> : <List />}
 							</BottomTabIcon>
 
-							<BottomTabIcon url={'addToilet'} text={'화장실 추가'}>
-								{location.pathname === '/addtoilet' ? (
+							<BottomTabIcon url={'add_Toilet'} text={'화장실 추가'}>
+								{location.pathname === '/add_Toilet' ? (
 									<AddToiletFill />
 								) : (
 									<AddToilet />
