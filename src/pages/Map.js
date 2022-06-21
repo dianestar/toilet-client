@@ -5,6 +5,8 @@ import SearchBox from '../components/SearchBox';
 import ToiletInfo from '../components/ToiletInfo';
 import styles from '../styles/pages/map.module.scss';
 import { AROUND_TOILET } from '../core/_axios/toilet';
+import pinDefaultNoBg from "../assets/icons/pinDefaultNoBg.svg";
+import pinSelectedNoBg from "../assets/icons/pinSelectedNoBg.svg";
 
 const { kakao } = window;
 let map;
@@ -172,13 +174,30 @@ const Map = () => {
 			map.setCenter(new kakao.maps.LatLng(centerLat, centerLng));
 		}
 
+		// 마커이미지생성
+		let markerDefault = new kakao.maps.MarkerImage(pinDefaultNoBg, new kakao.maps.Size(20, 28));
+		let markerSelected = new kakao.maps.MarkerImage(pinSelectedNoBg, new kakao.maps.Size(22, 32));
+
 		// 주변 화장실 마커 생성
 		for (let i=0; i<toiletList.length; i++) {
 			let marker = new kakao.maps.Marker({
 				map: map,
 				position: new kakao.maps.LatLng(toiletList[i].lat, toiletList[i].lng),
 				title: toiletList[i].address,
+				image: markerDefault,
 			});
+
+			// 화장실 마커 클릭 이벤트
+			kakao.maps.event.addListener(marker, "click", function() {
+				if (marker.getImage().Yj.indexOf("pinDefaultNoBg") !== -1) {
+					marker.setImage(markerSelected);
+					setShowInfo(true);
+				}
+				else {
+					marker.setImage(markerDefault);
+					setShowInfo(false);
+				}
+			})
 		}
 
 		// 이동 이벤트 등록
