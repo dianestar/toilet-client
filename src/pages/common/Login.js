@@ -1,4 +1,5 @@
-import { useNavigate } from '../../../node_modules/react-router-dom/index';
+import { useNavigate } from 'react-router-dom';
+import Icons from '../../assets/icons/Icons';
 import BlueBtn from '../../components/common/BlueBtn';
 import Btn from '../../components/common/Btn';
 import Header from '../../components/common/Header';
@@ -14,7 +15,8 @@ const Login = () => {
 
 	return (
 		<Layout>
-			<Header type="back" text="로그인" />
+			<Icons />
+			<Header text="로그인" />
 			<section className={styles.loginSection}>
 				<div className={styles.logo}></div>
 				<Btn text="카카오톡으로 시작하기" />

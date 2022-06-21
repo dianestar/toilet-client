@@ -7,10 +7,13 @@ import PasswordInput from '../../components/common/PasswordInput';
 import styles from '../../styles/pages/common.module.scss';
 import { POST_LOGIN } from '../../core/_axios/login';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { profile } from '../../core/_reducers/profileInfo';
 
 const LoginB = () => {
 	const methods = useForm();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const onSubmit = async () => {
 		const form = {
@@ -25,6 +28,14 @@ const LoginB = () => {
 			if (success) {
 				localStorage.setItem('token', data.token);
 				navigate('/map');
+
+				dispatch(
+					profile({
+						nickname: data.nickname,
+						imgUrl: data.imgUrl,
+						email: data.email,
+					}),
+				);
 			} else {
 				alert(message);
 			}
@@ -35,7 +46,7 @@ const LoginB = () => {
 
 	return (
 		<Layout>
-			<Header type="back" text="로그인" />
+			<Header text="로그인" />
 			<section className={styles.wrapper}>
 				<article>
 					<h2 className={styles.title}>로그인</h2>
@@ -45,7 +56,7 @@ const LoginB = () => {
 							onSubmit={methods.handleSubmit(onSubmit)}
 						>
 							<EmailInput />
-							<PasswordInput withCheck={false} />
+							<PasswordInput withCheck={false} text="비밀번호" />
 							<BlueBtn text="로그인" />
 							<p className={styles.loginBtn}>
 								비밀번호를 잊어버렸나요?{' '}

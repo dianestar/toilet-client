@@ -16,6 +16,8 @@ import Profile from './pages/account/Profile';
 import ToiletDetails from './pages/ToiletDetails';
 import AddToilet from './pages/AddToilet';
 import WriteReview from './pages/WriteReview';
+import EditNickname from './pages/account/EditNickname';
+import EditPassword from './pages/account/EditPassword';
 
 function App() {
 	return (
@@ -36,6 +38,8 @@ function App() {
 			<Route path="/toilet_details" element={<ToiletDetails />} />
 			<Route path="/add_toilet" element={<AddToilet /> } />
 			<Route path="/write_review" element={<WriteReview />} />
+			<Route path="/account/edit_nickname" element={<EditNickname />} />
+			<Route path="/account/edit_password" element={<EditPassword />} />
 		</Routes>
 	);
 }

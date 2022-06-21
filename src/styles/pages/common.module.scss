@@ -1,18 +1,22 @@
-@import "../main.module.scss";
-@import "../components/input.module.scss";
+@import '../main.module.scss';
+@import '../components/input.module.scss';
+
+.mb20 {
+	margin-bottom: 20px;
+}
 
 .wrapper {
-    width: 343px;
+	width: 343px;
 	margin: 25px auto 0 auto;
 
 	.title {
 		@include font-style-24();
 	}
 
-    .desc {
-        @include font-style-16-medium();
-        margin-top: 8px;
-    }
+	.desc {
+		@include font-style-16-medium();
+		margin-top: 8px;
+	}
 
 	.form {
 		@include flexBox(getFlexValue(between));
@@ -28,11 +32,11 @@
 		}
 	}
 
-    .photo-div {
-        width: 343px;
-        height: 80px;
+	.photo-div {
+		width: 343px;
+		height: 80px;
 		margin: 24px 0;
-        position: relative;
+		position: relative;
 
 		.profile-image {
 			width: 80px;
@@ -40,12 +44,12 @@
 			margin: 0 132px 0 131px;
 			border-radius: 50%;
 			object-fit: cover;
-			
+
 			&:hover {
 				cursor: pointer;
 			}
 		}
-    
+
 		.profile {
 			margin: 0 132px 0 131px;
 
@@ -53,7 +57,7 @@
 				cursor: pointer;
 			}
 		}
-		
+
 		.open {
 			position: relative;
 			bottom: 38px;
@@ -67,9 +71,9 @@
 		input {
 			display: none;
 		}
-    }
+	}
 
-    .email {
-        color: $main;
-    }
+	.email {
+		color: $main;
+	}
 }
