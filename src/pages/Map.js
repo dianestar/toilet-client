@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useSelector } from "react-redux";
 import Layout from '../components/common/Layout';
 import NavBar from '../components/common/NavBar';
 import SearchBox from '../components/SearchBox';
@@ -12,6 +13,9 @@ const { kakao } = window;
 let map;
 
 const Map = () => {
+	// 유저 프로필 이미지
+	const user = useSelector((state) => state.profileInfo);
+
 	// 현재 사용자 위치의 위도 경도
 	const [userLat, setUserLat] = useState(null);
 	const [userLng, setUserLng] = useState(null);
@@ -159,9 +163,54 @@ const Map = () => {
 		// 현재 위치로 지도 범위를 재설정
 		let userPosition = new kakao.maps.LatLng(userLat, userLng);
 
+		/*
+		// 유저 이미지로 마커 이미지 재설정
+		let markerUser = new kakao.maps.MarkerImage(user.imgUrl, new kakao.maps.Size(42, 42));
+
 		// 현재 위치 마커를 지도에 추가
-		let userMarker = new kakao.maps.Marker({ position: userPosition });
+		let userMarker = new kakao.maps.Marker({
+			position: userPosition,
+			image: markerUser,
+		});
 		userMarker.setMap(map);
+		*/
+
+		// 현재 위치 커스텀 오버레이
+		let $outerDiv = document.createElement("div");
+		$outerDiv.style.width = "100px";
+		$outerDiv.style.height = "100px";
+		$outerDiv.style.borderRadius = "50%";
+		$outerDiv.style.backgroundColor = "#589FD21A";
+		$outerDiv.style.display = "flex";
+		$outerDiv.style.justifyContent = "center";
+		$outerDiv.style.alignItems = "center";
+
+		let $innerDiv = document.createElement("div");
+		$innerDiv.style.width = "66px";
+		$innerDiv.style.height = "66px";
+		$innerDiv.style.borderRadius = "50%";
+		$innerDiv.style.backgroundColor = "#589FD233";
+		$innerDiv.style.display = "flex";
+		$innerDiv.style.justifyContent = "center";
+		$innerDiv.style.alignItems = "center";
+		$outerDiv.appendChild($innerDiv);
+
+		let $img = document.createElement("img");
+		$img.src = user.imgUrl;
+		$img.alt = "user";
+		$img.style.width = "42px";
+		$img.style.height = "42px";
+		$img.style.borderRadius = "50%";
+		$img.style.objectFit = "cover";
+		$innerDiv.appendChild($img);
+
+		// 커스텀 오버레이를 생성
+		let customOverlay = new kakao.maps.CustomOverlay({
+			map: map,
+			position: userPosition,
+			content: $outerDiv,
+			yAnchor: 1 
+		});
 
 		// 처음에는 지도의 중심좌표를 현재 사용자의 위치로 설정
 		if (centerLat === null && centerLng === null) {
