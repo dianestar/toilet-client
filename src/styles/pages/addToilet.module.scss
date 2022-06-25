@@ -1,21 +1,32 @@
 @import '../main.module.scss';
 @import '../components/input.module.scss';
 
-.checkAddress {
-	position: absolute;
-	bottom: 0;
+.map {
+	display: flex;
+	justify-content: space-around;
+	position: relative;
 	width: 100%;
-	height: 255px;
-	border-radius: 8px 8px 0 0;
-	box-shadow: 0px -3px 6px $shadow;
+	height: 100%;
+	overflow: auto;
 
-	p {
-		@include font-style-20();
-		margin: 20px;
-	}
+	.checkAddress {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		height: 255px;
+		border-radius: 8px 8px 0 0;
+		box-shadow: 0px -3px 6px $shadow;
+		z-index: 2;
+		background: $white;
 
-	.btn {
-		@include flexBox(center, center);
-		flex-direction: column;
+		p {
+			@include font-style-20();
+			margin: 20px;
+		}
+
+		.btn {
+			@include flexBox(center, center);
+			flex-direction: column;
+		}
 	}
 }
