@@ -26,10 +26,10 @@ const Map = () => {
 
 	// 지도 레벨 및 주변 화장실 조회할 반경
 	const [mapLevel, setMapLevel] = useState(3);
-	const [distance, setDistance] = useState(1);
+	const [distance, setDistance] = useState(0.3);
 
 	// 주변에 있는 화장실 리스트
-	const [toiletList, setToiletList] = useState([{lat: 37.307788898019304, lng: 127.07257059314489}]);
+	const [toiletList, setToiletList] = useState([]);
 
 	// 디스플레이 여부 설정하는 변수들
 	const [showInfo, setShowInfo] = useState(false);
@@ -67,18 +67,17 @@ const Map = () => {
 
 		try {
 			const {
-				data: { success, data}
+				data: { success, data }
 			} = await AROUND_TOILET(form);
 			
 			if (success) {
 				console.log(data);
-				setToiletList([{lat: 37.307788898019304, lng: 127.07257059314489}, {lat: 37.29782540183662, lng: 127.0692958590957}]);
+				setToiletList(data);
 			}
 			
 		} catch (error) {
 			console.log(error);
-		}
-		
+		}		
 	}
 
 	const doSearch = (newKeyword) => {
@@ -141,6 +140,47 @@ const Map = () => {
 	}
 
 	useEffect(() => {
+		const initialToilet = async () => {
+			// 사용자 위치 주변 화장실 불러오기
+			const form = {
+				lat: userLat,
+				lng: userLng,
+				dist: distance,
+			};
+	
+			try {
+				const {
+					data: { success, data }
+				} = await AROUND_TOILET(form);
+				
+				if (success) {
+					for (let i=0; i<data.length; i++) {
+						let marker = new kakao.maps.Marker({
+							map: map,
+							position: new kakao.maps.LatLng(data[i].lat, data[i].lng),
+							title: data[i].address,
+							image: markerDefault,
+						});
+			
+						// 화장실 마커 클릭 이벤트
+						kakao.maps.event.addListener(marker, "click", function() {
+							if (marker.getImage().Yj.indexOf("pinDefaultNoBg") !== -1) {
+								marker.setImage(markerSelected);
+								setShowInfo(true);
+							}
+							else {
+								marker.setImage(markerDefault);
+								setShowInfo(false);
+							}
+						})
+					}			
+				}
+				
+			} catch (error) {
+				console.log(error);
+			}					
+		}
+
 		let mapContainer = document.getElementById('map'), // 지도를 표시할 div
 			mapOption = {
 				center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -162,18 +202,6 @@ const Map = () => {
 
 		// 현재 위치로 지도 범위를 재설정
 		let userPosition = new kakao.maps.LatLng(userLat, userLng);
-
-		/*
-		// 유저 이미지로 마커 이미지 재설정
-		let markerUser = new kakao.maps.MarkerImage(user.imgUrl, new kakao.maps.Size(42, 42));
-
-		// 현재 위치 마커를 지도에 추가
-		let userMarker = new kakao.maps.Marker({
-			position: userPosition,
-			image: markerUser,
-		});
-		userMarker.setMap(map);
-		*/
 
 		// 현재 위치 커스텀 오버레이
 		let $outerDiv = document.createElement("div");
@@ -212,20 +240,23 @@ const Map = () => {
 			yAnchor: 1 
 		});
 
+		console.log(centerLat, centerLng);
+
+		// 마커이미지생성
+		let markerDefault = new kakao.maps.MarkerImage(pinDefaultNoBg, new kakao.maps.Size(20, 28));
+		let markerSelected = new kakao.maps.MarkerImage(pinSelectedNoBg, new kakao.maps.Size(22, 32));
+		
 		// 처음에는 지도의 중심좌표를 현재 사용자의 위치로 설정
 		if (centerLat === null && centerLng === null) {
 			setCenterLat(userLat);
 			setCenterLng(userLng);
 			map.setCenter(userPosition);
+			initialToilet();
 		}
 		// 그 외에는 변경된 지도의 중심좌표로 설정
 		else {
 			map.setCenter(new kakao.maps.LatLng(centerLat, centerLng));
 		}
-
-		// 마커이미지생성
-		let markerDefault = new kakao.maps.MarkerImage(pinDefaultNoBg, new kakao.maps.Size(20, 28));
-		let markerSelected = new kakao.maps.MarkerImage(pinSelectedNoBg, new kakao.maps.Size(22, 32));
 
 		// 주변 화장실 마커 생성
 		for (let i=0; i<toiletList.length; i++) {
@@ -283,10 +314,13 @@ const Map = () => {
 			else {
 				setShowWarning(false);
 				setShowBtn(true);
-				if (currentLevel <= 4) { setDistance(1); }
-				else if (currentLevel === 5) { setDistance(2); }
+				if (currentLevel === 1) { setDistance(0.1); }
+				else if (currentLevel === 2) { setDistance(0.2); }
+				else if (currentLevel === 3) { setDistance(0.3); }
+				else if (currentLevel === 4) { setDistance(0.5); }
+				else if (currentLevel === 5) { setDistance(1.5); }
 				else if (currentLevel === 6) { setDistance(3); }
-				else { setDistance(5); }
+				else if (currentLevel === 7) { setDistance(5); }
 			}
 		});
 
@@ -301,9 +335,7 @@ const Map = () => {
 		}
 		// 좌표 값에 해당하는 구 주소와 도로명 주소 정보를 요청
 		geocoder.coord2Address(map.getCenter().getLng(), map.getCenter().getLat(), setDefaultKeyword);
-
-		
-	}, [mapLevel, userLat, userLng, centerLat, centerLng, toiletList]);
+	}, [userLat, userLng, centerLat, centerLng, toiletList]);
 
 	return (
 		<Layout>
