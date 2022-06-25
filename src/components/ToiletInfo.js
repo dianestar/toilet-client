@@ -6,7 +6,7 @@ import { ReactComponent as KebabMenu } from '../assets/icons/kebabMenu.svg';
 import { ReactComponent as StarFill } from '../assets/icons/starFill.svg';
 import { ReactComponent as More } from '../assets/icons/more.svg';
 
-const ToiletInfo = ({ type }) => {
+const ToiletInfo = ({ type, address, detail_address }) => {
 	const [open, setOpen] = useState(false);
 	const [showing, setShowing] = useState(false);
 
@@ -15,10 +15,10 @@ const ToiletInfo = ({ type }) => {
 			<div className={type === "onMap" ? styles.onMap : styles.onList}>
 				<section className={styles.wrapper}>
 					<article className={styles.text}>
-						<p className={styles.title}>화장실 이름</p>
+						<p className={styles.title}>{address}</p>
 						<section className={styles.desc}>
 							<PinSelected />
-							<span>서울시 어쩌구 빌딩 2층</span>
+							<span>{detail_address}</span>
 							<StarFill width="12" height="12"/>
 							<span>4.2</span>
 						</section>

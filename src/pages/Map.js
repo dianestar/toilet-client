@@ -11,6 +11,7 @@ import pinSelectedNoBg from "../assets/icons/pinSelectedNoBg.svg";
 
 const { kakao } = window;
 let map;
+let selectedMarker = null;
 
 const Map = () => {
 	// 유저 프로필 이미지
@@ -41,6 +42,12 @@ const Map = () => {
 	const [searchMode, setSearchMode] = useState(false);
 	const [candidates, setCandidates] = useState([]);
 	const [noResult, setNoResult] = useState(false);
+
+	// ToiletInfo props
+	const [toiletInfo, setToiletInfo] = useState({
+		address: "화장실 이름",
+		detail_address: "서울시 어쩌구 빌딩 2층",
+	});
 
 	const onValid = (position) => {
 		setUserLat(position.coords.latitude);
@@ -139,6 +146,16 @@ const Map = () => {
 		geocoder.addressSearch(address, callback);
 	}
 
+	const filterToiletInfo = (title) => {
+		// console.log(toiletList);
+		// console.log(title);
+		toiletList.forEach((v, i) => {
+			if (v.address === title) {
+				setToiletInfo(v);
+			}
+		})
+	}
+
 	useEffect(() => {
 		const initialToilet = async () => {
 			// 사용자 위치 주변 화장실 불러오기
@@ -154,6 +171,8 @@ const Map = () => {
 				} = await AROUND_TOILET(form);
 				
 				if (success) {
+					setToiletList(data);
+
 					for (let i=0; i<data.length; i++) {
 						let marker = new kakao.maps.Marker({
 							map: map,
@@ -164,14 +183,20 @@ const Map = () => {
 			
 						// 화장실 마커 클릭 이벤트
 						kakao.maps.event.addListener(marker, "click", function() {
-							if (marker.getImage().Yj.indexOf("pinDefaultNoBg") !== -1) {
-								marker.setImage(markerSelected);
-								setShowInfo(true);
-							}
-							else {
+							if (selectedMarker === marker && marker.getImage().Yj.indexOf("pinDefaultNoBg") === -1) {
 								marker.setImage(markerDefault);
 								setShowInfo(false);
 							}
+
+							else if (!selectedMarker || selectedMarker !== marker) {
+								!!selectedMarker && selectedMarker.setImage(markerDefault);
+								marker.setImage(markerSelected);
+							}
+							selectedMarker = marker;
+							filterToiletInfo(marker.getTitle());
+							marker.setImage(markerSelected);
+							map.setCenter(marker.getPosition());
+							setShowInfo(true);
 						})
 					}			
 				}
@@ -269,14 +294,23 @@ const Map = () => {
 
 			// 화장실 마커 클릭 이벤트
 			kakao.maps.event.addListener(marker, "click", function() {
-				if (marker.getImage().Yj.indexOf("pinDefaultNoBg") !== -1) {
-					marker.setImage(markerSelected);
-					setShowInfo(true);
-				}
-				else {
+				if (selectedMarker === marker && marker.getImage().Yj.indexOf("pinDefaultNoBg") === -1) {
 					marker.setImage(markerDefault);
 					setShowInfo(false);
+					console.log("A");
 				}
+
+				else if (!selectedMarker || selectedMarker !== marker) {
+					!!selectedMarker && selectedMarker.setImage(markerDefault);
+					marker.setImage(markerSelected);
+					console.log("B");
+				}
+				console.log("C");
+				selectedMarker = marker;
+				filterToiletInfo(marker.getTitle());
+				marker.setImage(markerSelected);
+				map.setCenter(marker.getPosition());
+				setShowInfo(true);
 			})
 		}
 
@@ -342,7 +376,7 @@ const Map = () => {
 			<section className={styles.map} id="map">
 				<SearchBox keyword={keyword} setKeyword={setKeyword} searchMode={searchMode} setSearchMode={setSearchMode} doSearch={doSearch}/>
 				{showInfo && 
-				<ToiletInfo type="onMap"/>
+				<ToiletInfo type="onMap" address={toiletInfo.address} detail_address={toiletInfo.detail_address}/>
 				}
 				<NavBar num={[0, 1, 1, 1]} />
 				{showBtn &&
