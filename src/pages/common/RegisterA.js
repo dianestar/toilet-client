@@ -10,7 +10,7 @@ import EmailInput from '../../components/common/EmailInput';
 import PasswordInput from '../../components/common/PasswordInput';
 import Snackbar from '../../components/common/Snackbar';
 import styles from '../../styles/pages/common.module.scss';
-import { POST_USERS_VALIDATION } from '../../core/_axios/register';
+import { CHECK_EMAIL } from '../../core/_axios/register';
 
 const RegisterA = () => {
 	const methods = useForm();
@@ -29,7 +29,7 @@ const RegisterA = () => {
 		try {
 			const {
 				data: { success },
-			} = await POST_USERS_VALIDATION(form);
+			} = await CHECK_EMAIL({email: methods.watch("email")});
 			if (success) {
 				dispatch(saveUser(form));
 				navigate('/register_profile');

@@ -16,10 +16,10 @@ export const POST_USERS_UPLOAD = (form) => {
     });
 };
 
-export const POST_USERS_VALIDATION = (form) => {
+export const CHECK_EMAIL = (form) => {
     return Api({
         method: METHOD.POST,
-        url: "users/validation",
+        url: "users/check_email",
         data: form,
     });
 };

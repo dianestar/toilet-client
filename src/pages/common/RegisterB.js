@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import { useSelector } from "react-redux";
 import Layout from "../../components/common/Layout";
@@ -12,6 +13,7 @@ import { ReactComponent as OpenPhoto } from '../../assets/icons/openPhoto.svg';
 import { POST_USERS_REGISTER, POST_USERS_UPLOAD } from "../../core/_axios/register";
 
 const RegisterB = () => {
+    const navigate = useNavigate();
     const methods = useForm();
     const userInfo = useSelector((state) => state.register);
 
@@ -41,6 +43,9 @@ const RegisterB = () => {
                 setRegistered(true);
                 setTimeout(() => {
                     setRegistered(false);
+                }, 3000);
+                setTimeout(() => {
+                    navigate("/login");
                 }, 3000);
             }
         } catch (error) {
