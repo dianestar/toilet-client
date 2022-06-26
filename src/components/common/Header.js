@@ -1,20 +1,27 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import { ReactComponent as Back } from '../../assets/icons/back.svg';
-import { ReactComponent as Hamburger } from "../../assets/icons/hamburger.svg";
+import { ReactComponent as Hamburger } from '../../assets/icons/hamburger.svg';
 import styles from '../../styles/components/header.module.scss';
+import NavBar from './NavBar';
 
-const Header = ({ text }) => {
-	const navigate = useNavigate();
+const Header = ({ type, text }) => {
+	const [showing, setShowing] = useState(false);
 	return (
-		<section className={styles.header}>
-			<Back
-				onClick={() => {
-					navigate(-1);
-				}}
-			/>
-			<span className={styles[`header-title`]}>{text}</span>
-		</section>
+		<>
+			<section className={styles.header}>
+				{type === 'back' ? (
+					<Back />
+				) : (
+					<Hamburger
+						onClick={() => {
+							setShowing(!showing);
+						}}
+					/>
+				)}
+				<span className={styles[`header-title`]}>{text}</span>
+			</section>
+			{showing && <NavBar setShowing={setShowing} showing={showing} />}
+		</>
 	);
 };
 

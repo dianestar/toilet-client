@@ -53,8 +53,8 @@ const NavBar = ({ setShowing, showing }) => {
 								{location.pathname === '/list' ? <ListFill /> : <List />}
 							</BottomTabIcon>
 
-							<BottomTabIcon url={'addToilet'} text={'화장실 추가'}>
-								{location.pathname === '/addtoilet' ? (
+							<BottomTabIcon url={'add_Toilet'} text={'화장실 추가'}>
+								{location.pathname === '/add_Toilet' ? (
 									<AddToiletFill />
 								) : (
 									<AddToilet />
