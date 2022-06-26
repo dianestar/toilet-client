@@ -4,23 +4,17 @@ import { ReactComponent as Hamburger } from '../assets/icons/hamburger.svg';
 import { ReactComponent as Search } from '../assets/icons/search.svg';
 import NavBar from './common/NavBar';
 
-const SearchBox = ({keyword, setKeyword, searchMode, setSearchMode, doSearch}) => {
+const SearchBox = ({keyword, searchMode, noResult, candidates, setSearchMode, doSearch, confirmSearch}) => {
 	const inputRef = useRef();
-
 	const [showing, setShowing] = useState(false);
-	
-	
-	const onSubmit = () => {
-		console.log(inputRef.current.value);
-		// setKeyword(inputRef.current.value);
-		doSearch(inputRef.current.value);
-		// setSearchMode(false);
-	}
 
-	const onKeyPress = (e) => {
-		if (e.key === "Enter") {
-			onSubmit();
-		}
+	const [timer, setTimer] = useState(null);
+	const debouncedChange = (e) => {
+		if (timer) { clearTimeout(timer); }
+		setTimer(setTimeout(() => {
+			if (e.target.value === "") { setSearchMode(false); }
+			else { doSearch(e.target.value); }
+		}, 500));
 	}
 
 	return (
@@ -34,12 +28,26 @@ const SearchBox = ({keyword, setKeyword, searchMode, setSearchMode, doSearch}) =
 				/>
 				{searchMode
 				?
-				<input placeholder="검색할 주소를 입력하세요" autoFocus ref={inputRef} onKeyPress={onKeyPress}/>
+				<input placeholder="검색할 주소를 입력하세요" autoFocus ref={inputRef} onChange={debouncedChange} />
 				:
 				<span className={styles.position} onClick={() => setSearchMode(true)}>{keyword}</span>
 				}
-				<Search className={styles.icon} onClick={onSubmit}/>
+				<Search className={styles.icon}/>
 			</div>
+			{searchMode &&
+			<section id="dropdown" className={styles.dropdown}>
+				{noResult && <p className={styles[`no-result`]}>검색 결과가 존재하지 않습니다</p>}
+				{candidates.map((v, i) => (
+					<article key={i} className={styles.candidates} onClick={() => confirmSearch(v.address_name)}>
+						<p className={styles.place}>{v.place_name}</p>
+						<p className={styles.address}>{v.road_address_name}</p>
+						<hr />
+					</article>
+				))}
+				<article id="pages" className={styles.pages}>
+				</article>
+			</section>
+			}
 			{showing && <NavBar setShowing={setShowing} showing={showing} />}
 		</>
 	);

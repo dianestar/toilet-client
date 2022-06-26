@@ -37,3 +37,63 @@
 		}
 	}
 }
+
+
+.dropdown {
+	@include animation (fadeIn, 0.5s);
+
+	z-index: 99;
+	position: absolute;
+	top: 110px;
+	left: 16px;
+
+	width: 343px;
+	height: 600px;
+
+	background-color: $white;
+	border-radius: 8px;
+	padding: 8px;
+
+	overflow: auto;
+
+	.no-result {
+		@include font-style-18();
+		text-align: center;
+	}
+
+	.candidates {
+		padding: 0 8px;
+
+		.place {
+			@include font-style-18();
+		}
+
+		.address {
+			@include font-style-14();
+		}
+
+		&:hover {
+			cursor: pointer;
+			text-decoration: underline;
+		}
+	}
+
+	.pages {
+		display: flex;
+		justify-content: center;
+
+		a {
+			@include font-style-16-medium();
+			&.on {
+				color: red !important;
+			}
+
+			&:hover {
+				color: $main;
+			}
+
+			margin: 0 4px;
+
+		}
+	}
+}

@@ -105,19 +105,21 @@ const Map = () => {
 
 	/* 검색창 관련 함수 */
 	const doSearch = (newKeyword) => {
+		setNoResult(false);
+		setCandidates([]);
+		let $pages = document.getElementById("pages");
+		while ($pages.hasChildNodes()) { $pages.removeChild($pages.lastChild); }
+
 		let places = new kakao.maps.services.Places();
 		let setNewKeyword = function(result, status, pagination) {
 			if (status === kakao.maps.services.Status.OK) {
 				setCandidates(result);
 
-				let $pages = document.getElementById("pages");
 				while ($pages.hasChildNodes()) { $pages.removeChild($pages.lastChild); }
-
 				for (let i=1; i<=pagination.last; i++) {
 					let $a = document.createElement("a");
 					$a.href = "#";
 					$a.innerHTML = i;
-
 					if (i === pagination.current) {
 						$a.style.fontWeight = "bold"
 					}
@@ -285,7 +287,15 @@ const Map = () => {
 	return (
 		<Layout>
 			<section className={styles.map} id="map">
-				<SearchBox keyword={keyword} setKeyword={setKeyword} searchMode={searchMode} setSearchMode={setSearchMode} doSearch={doSearch}/>
+				<SearchBox
+					keyword={keyword}
+					searchMode={searchMode}
+					noResult={noResult}
+					candidates={candidates}
+					setSearchMode={setSearchMode}
+					doSearch={doSearch}
+					confirmSearch={confirmSearch}
+				/>
 				{showInfo && 
 				<ToiletInfo type="onMap" address={toiletInfo.address} detail_address={toiletInfo.detail_address}/>
 				}
@@ -305,20 +315,6 @@ const Map = () => {
 				null
 				}
 			</section>
-			{searchMode &&
-			<section id="dropdown" className={styles.dropdown}>
-				{noResult && <p className={styles[`no-result`]}>검색 결과가 존재하지 않습니다</p>}
-				{candidates.map((v, i) => (
-					<article key={i} className={styles.candidates} onClick={() => confirmSearch(v.address_name)}>
-						<p className={styles.place}>{v.place_name}</p>
-						<p className={styles.address}>{v.road_address_name}</p>
-						<hr />
-					</article>
-				))}
-				<article id="pages" className={styles.pages}>
-				</article>
-			</section>
-			}
 		</Layout>
 	);
 };
