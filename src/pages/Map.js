@@ -19,6 +19,7 @@ const Map = () => {
 	const user = useSelector((state) => state.profileInfo);
 
 	// 현재 사용자 위치의 위도 경도
+	const [isValid, setIsValid] = useState(false);
 	const [userLat, setUserLat] = useState(null);
 	const [userLng, setUserLng] = useState(null);
 
@@ -51,12 +52,15 @@ const Map = () => {
 	});
 
 	const onValid = (position) => {
+		setIsValid(true);
 		setUserLat(position.coords.latitude);
 		setUserLng(position.coords.longitude);
 	};
 
 	const onInvalid = () => {
-		console.log('unable to get your location');
+		setIsValid(false);
+		setUserLat(37.56646);
+		setUserLng(126.98121);
 	};
 
 	const getToilet = async () => {
@@ -230,42 +234,45 @@ const Map = () => {
 		// 현재 위치로 지도 범위를 재설정
 		let userPosition = new kakao.maps.LatLng(userLat, userLng);
 
-		// 현재 위치 커스텀 오버레이
-		let $outerDiv = document.createElement("div");
-		$outerDiv.style.width = "100px";
-		$outerDiv.style.height = "100px";
-		$outerDiv.style.borderRadius = "50%";
-		$outerDiv.style.backgroundColor = "#589FD21A";
-		$outerDiv.style.display = "flex";
-		$outerDiv.style.justifyContent = "center";
-		$outerDiv.style.alignItems = "center";
+		// 현재 위치 허용한 경우만
+		if (isValid) {
+			// 현재 위치 커스텀 오버레이
+			let $outerDiv = document.createElement("div");
+			$outerDiv.style.width = "100px";
+			$outerDiv.style.height = "100px";
+			$outerDiv.style.borderRadius = "50%";
+			$outerDiv.style.backgroundColor = "#589FD21A";
+			$outerDiv.style.display = "flex";
+			$outerDiv.style.justifyContent = "center";
+			$outerDiv.style.alignItems = "center";
 
-		let $innerDiv = document.createElement("div");
-		$innerDiv.style.width = "66px";
-		$innerDiv.style.height = "66px";
-		$innerDiv.style.borderRadius = "50%";
-		$innerDiv.style.backgroundColor = "#589FD233";
-		$innerDiv.style.display = "flex";
-		$innerDiv.style.justifyContent = "center";
-		$innerDiv.style.alignItems = "center";
-		$outerDiv.appendChild($innerDiv);
+			let $innerDiv = document.createElement("div");
+			$innerDiv.style.width = "66px";
+			$innerDiv.style.height = "66px";
+			$innerDiv.style.borderRadius = "50%";
+			$innerDiv.style.backgroundColor = "#589FD233";
+			$innerDiv.style.display = "flex";
+			$innerDiv.style.justifyContent = "center";
+			$innerDiv.style.alignItems = "center";
+			$outerDiv.appendChild($innerDiv);
 
-		let $img = document.createElement("img");
-		$img.src = user.imgUrl;
-		$img.alt = "user";
-		$img.style.width = "42px";
-		$img.style.height = "42px";
-		$img.style.borderRadius = "50%";
-		$img.style.objectFit = "cover";
-		$innerDiv.appendChild($img);
+			let $img = document.createElement("img");
+			$img.src = user.imgUrl;
+			$img.alt = "user";
+			$img.style.width = "42px";
+			$img.style.height = "42px";
+			$img.style.borderRadius = "50%";
+			$img.style.objectFit = "cover";
+			$innerDiv.appendChild($img);
 
-		// 커스텀 오버레이를 생성
-		let customOverlay = new kakao.maps.CustomOverlay({
-			map: map,
-			position: userPosition,
-			content: $outerDiv,
-			yAnchor: 1 
-		});
+			// 커스텀 오버레이를 생성
+			let customOverlay = new kakao.maps.CustomOverlay({
+				map: map,
+				position: userPosition,
+				content: $outerDiv,
+				yAnchor: 1 
+			});
+		}
 
 		console.log(centerLat, centerLng);
 
