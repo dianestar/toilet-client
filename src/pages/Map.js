@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from "react-redux";
 import Layout from '../components/common/Layout';
@@ -140,6 +141,7 @@ const Map = () => {
 				setKeyword(address);
 				setSearchMode(false);
 				setCandidates([]);
+				setShowInfo(false);
 			}
 		};
 		
@@ -187,7 +189,7 @@ const Map = () => {
 								marker.setImage(markerDefault);
 								setShowInfo(false);
 							}
-
+			
 							else if (!selectedMarker || selectedMarker !== marker) {
 								!!selectedMarker && selectedMarker.setImage(markerDefault);
 								marker.setImage(markerSelected);
@@ -297,15 +299,12 @@ const Map = () => {
 				if (selectedMarker === marker && marker.getImage().Yj.indexOf("pinDefaultNoBg") === -1) {
 					marker.setImage(markerDefault);
 					setShowInfo(false);
-					console.log("A");
 				}
 
 				else if (!selectedMarker || selectedMarker !== marker) {
 					!!selectedMarker && selectedMarker.setImage(markerDefault);
 					marker.setImage(markerSelected);
-					console.log("B");
 				}
-				console.log("C");
 				selectedMarker = marker;
 				filterToiletInfo(marker.getTitle());
 				marker.setImage(markerSelected);
