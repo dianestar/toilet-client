@@ -10,7 +10,7 @@ const FindPwB = () => {
 
     return (
         <Layout>
-            <Header type="back" text="비밀번호 찾기" />
+            <Header text="비밀번호 찾기" />
             <section className={styles.wrapper}>
                 <p className={styles.title}>이메일 전송 완료</p>
                 <p className={styles.desc}>

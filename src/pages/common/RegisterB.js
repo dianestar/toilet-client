@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import { useSelector } from "react-redux";
 import Layout from "../../components/common/Layout";
@@ -12,6 +13,7 @@ import { ReactComponent as OpenPhoto } from '../../assets/icons/openPhoto.svg';
 import { POST_USERS_REGISTER, POST_USERS_UPLOAD } from "../../core/_axios/register";
 
 const RegisterB = () => {
+    const navigate = useNavigate();
     const methods = useForm();
     const userInfo = useSelector((state) => state.register);
 
@@ -42,6 +44,9 @@ const RegisterB = () => {
                 setTimeout(() => {
                     setRegistered(false);
                 }, 3000);
+                setTimeout(() => {
+                    navigate("/login");
+                }, 3000);
             }
         } catch (error) {
             console.log(error);
@@ -69,7 +74,7 @@ const RegisterB = () => {
     }
     return (
         <Layout>
-            <Header type="back" text="회원가입"/>
+            <Header text="회원가입"/>
             <section className={styles.wrapper}>
                 <p className={styles.title}>프로필 정보</p>
                 <article className={styles[`photo-div`]}>

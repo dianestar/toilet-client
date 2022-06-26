@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+
 import styles from '../../styles/components/navBar.module.scss';
 
 const BottomTabIcon = ({ url, children, text }) => {

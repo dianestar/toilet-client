@@ -1,36 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../components/common/Layout";
 import Header from "../../components/common/Header";
 import BlueBtn from "../../components/common/BlueBtn";
 import EmailInput from "../../components/common/EmailInput";
+import Snackbar from "../../components/common/Snackbar";
 import styles from "../../styles/pages/common.module.scss";
+import { CHECK_EMAIL } from "../../core/_axios/register";
 import { POST_REDIRECT } from "../../core/_axios/findpw";
 
 const FindPwA = () => {
     const methods = useForm();
     const navigate = useNavigate();
 
-    const onSubmit = async () => {
-        try {
-            const res = await POST_REDIRECT({email: methods.watch("email"),});
-            console.log(res);
+    const [emailError, setEmailError] = useState(false);
 
-            if (res.data.success) {
-                navigate("/findpwB", {
-                    state: {
-                        email: methods.watch("email"),
-                    },
-                });
+    const onSubmit = async () => {
+        const form = {
+            email: methods.watch("email"),
+        };
+
+        try {
+            const {
+                data: { success },
+            } = await CHECK_EMAIL(form);
+
+            if (success) {
+                setEmailError(true);
+                setTimeout(() => {
+                    setEmailError(false);
+                }, 3000);
             }
         } catch (error) {
-            console.log(error);
+            if (error.response.status === 409) {
+                try {
+                    const res = await POST_REDIRECT(form);
+                    if (res.data.success) {
+                        navigate("/findpwB", { state: form });
+                    }
+                } catch (e) {
+                    console.log(e);
+                }
+            }
         }
     }
+    
+
     return (
         <Layout>
-            <Header type="back" text="비밀번호 찾기" />
+            <Header text="비밀번호 찾기" />
             <section className={styles.wrapper}>
                 <p className={styles.title}>비밀번호 찾기</p>
                 <p className={styles.desc}>
@@ -45,6 +64,9 @@ const FindPwA = () => {
                     </form>
                 </FormProvider>
             </section>
+            {emailError && (
+                <Snackbar key={Date.now()} text="회원가입 되지 않은 이메일 입니다." />
+            )}
         </Layout>
     );
 }
