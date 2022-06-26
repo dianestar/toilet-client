@@ -27,6 +27,20 @@
 		.btn {
 			@include flexBox(center, center);
 			flex-direction: column;
+
+			.address {
+				@include flexBox(center, center);
+				p {
+					@include font-style-16-bold();
+				}
+				@include inputShadow();
+				width: 343px;
+				height: 50px;
+				background: $white;
+				border: 1px solid transparent;
+				border-radius: 8px;
+				margin-bottom: 16px;
+			}
 		}
 	}
 }
