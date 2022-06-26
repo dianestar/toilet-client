@@ -7,11 +7,8 @@ import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 import rootReducer from './core/_reducers';
-<<<<<<< HEAD
-=======
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
->>>>>>> 027be5dbf86c7db4a4e6feb787bf1cd76afc114e
 
 const store = createStore(rootReducer, composeWithDevTools());
 const persistor = persistStore(store);

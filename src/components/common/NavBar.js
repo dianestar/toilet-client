@@ -8,17 +8,7 @@ import { ReactComponent as AddToiletFill } from '../../assets/icons/addToiletFil
 import { ReactComponent as Close } from '../../assets/icons/close.svg';
 import BottomTabIcon from './BottomTabIcon';
 import { useNavigate, useLocation } from 'react-router-dom';
-<<<<<<< HEAD
-import { GET_USERS } from '../../core/_axios/user';
-import { useEffect, useState } from 'react';
-
-const NavBar = ({ setShowing, showing }) => {
-	const [nickname, setNickname] = useState('');
-	const [imageUrl, setImageUrl] = useState('');
-	const [email, setEmail] = useState('');
-=======
 import ProfileInfo from './ProfileInfo';
->>>>>>> 027be5dbf86c7db4a4e6feb787bf1cd76afc114e
 
 const NavBar = ({ setShowing, showing }) => {
 	const token = localStorage.getItem('token');
