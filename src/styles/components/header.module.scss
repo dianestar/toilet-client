@@ -1,15 +1,19 @@
-@use "../mixin.module";
-@use "../text-style.module";
+@use '../mixin.module';
+@use '../text-style.module';
 @import '../main.module.scss';
 
+.pointer {
+	cursor: pointer;
+}
+
 .header {
-    height: 44px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;  
+	height: 44px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
 }
 
 .header-title {
-    @include font-style-16-bold();
-    text-align: center;
-    margin: 13px 0 10px 0;
+	@include font-style-16-bold();
+	text-align: center;
+	margin: 13px 0 10px 0;
 }

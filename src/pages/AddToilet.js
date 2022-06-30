@@ -45,6 +45,7 @@ const AddToilet = () => {
 
 					let locPosition = new kakao.maps.LatLng(lat, lon);
 
+					map.setCenter(locPosition);
 					// 마커와 인포윈도우를 표시합니다
 					displayMarker(locPosition);
 				},
@@ -56,7 +57,6 @@ const AddToilet = () => {
 			);
 		} else {
 			// HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-
 			const locPosition = new kakao.maps.LatLng(37.56646, 126.98121);
 			displayMarker(locPosition);
 		}
