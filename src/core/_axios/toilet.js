@@ -7,3 +7,11 @@ export const AROUND_TOILET = (form) => {
         data: form,
 	});
 };
+
+export const DELETE_REQUEST = (form) => {
+	return Api({
+		method: METHOD.POST,
+		url: "toilets/report",
+		data: form,
+	})
+}

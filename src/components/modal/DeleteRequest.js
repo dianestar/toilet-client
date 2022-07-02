@@ -2,12 +2,28 @@ import React, { useState } from "react";
 import styles from "../../styles/components/toiletModal.module.scss";
 import { ReactComponent as Close } from '../../assets/icons/close.svg';
 import { ReactComponent as CircleCheck } from "../../assets/icons/circleCheck.svg";
+import { DELETE_REQUEST } from "../../core/_axios/toilet";
 
-const DeleteRequest = ({ open, setOpen }) => {
+const DeleteRequest = ({ open, setOpen, address = "서울시 강남구 역삼동 2-16" }) => {
     const [selected, setSelected] = useState(false);
     const [confirmed, setConfirmed] = useState(false);
     const onChange = () => {
         setSelected(true);    
+    }
+
+    const onClick = async () => {
+        try {
+            const {
+                data: { success, data }
+            } = await DELETE_REQUEST({address});
+
+            if (success) {
+                setConfirmed(true);
+                console.log(data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -69,7 +85,7 @@ const DeleteRequest = ({ open, setOpen }) => {
                     </article>
                     <button
                         className={`${styles.confirm} ${selected ? styles.enabled : styles.disabled}`}
-                        onClick={() => setConfirmed(true) }
+                        onClick={onClick}
                     >
                         삭제 요청하기
                     </button>

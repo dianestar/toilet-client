@@ -59,7 +59,7 @@ const ToiletInfo = ({ type, address, detail_address }) => {
 					</article>
 				</section>
 			</div>
-			<DeleteRequest open={open} setOpen={setOpen} />
+			<DeleteRequest open={open} setOpen={setOpen} address={address} />
 		</>
 	);
 };
