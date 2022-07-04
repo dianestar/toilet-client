@@ -15,4 +15,13 @@
     &::-webkit-scrollbar {
         width: 0px;
     }
+
+    &.search {
+        overflow: hidden !important;
+    }
+    
+    .no-result {
+		@include font-style-18();
+		text-align: center;
+	}
 }
