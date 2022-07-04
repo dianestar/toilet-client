@@ -1,20 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
 import Review from "../components/Review";
 import styles from "../styles/pages/myReview.module.scss";
-
-const arr = [0, 1, 0, 1, 0];
+import { GET_USER_REVIEWS } from "../core/_axios/review";
 
 const MyReview = () => {
+    const [reviews, setReviews] = useState([]);
+    const [toggle, setToggle] = useState(false);
+
+    useEffect(() => {
+        const getReviews = async() => {
+            try {
+                const {
+                    data: { success, data }
+                } = await GET_USER_REVIEWS();
+    
+                if (success) {
+                    console.log(data);
+                    setReviews(data);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        getReviews();
+    }, [toggle])
+
     return (
         <Layout>
             <section className={styles[`my-review`]}>
                 <Header text="리뷰 관리" />
                 <article className={styles.wrapper}>
-                    {arr.map((value, index) => {
+                    {reviews.map((value) => {
                         return (
-                            <Review key={index} yesImg={value}/>
+                            <Review key={value.id} reviewInfo={value} toggle={toggle} setToggle={setToggle}/>
                         )
                     })}
                 </article>

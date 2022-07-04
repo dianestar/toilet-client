@@ -108,11 +108,11 @@ const ToiletDetails = () => {
                             </span>
                         </div>
                         <div>
-                            {arr.map(() => {
+                            {/*arr.map(() => {
                                 return (
                                     <Review />
                                 );
-                            })}
+                            })*/}
                         </div>
                     </article>
                 </section>

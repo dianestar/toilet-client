@@ -3,9 +3,20 @@ import styles from "../../styles/components/reviewModal.module.scss";
 import { ReactComponent as Close } from '../../assets/icons/close.svg';
 import { ReactComponent as CircleQuestion } from "../../assets/icons/circleQuestion.svg";
 import { ReactComponent as CircleCheck } from "../../assets/icons/circleCheck.svg";
+import { DELETE_REVIEW } from "../../core/_axios/review";
 
-const DeleteConfirm = ({ open, setOpen }) => {
+const DeleteConfirm = ({ open, setOpen, id, toggle, setToggle }) => {
     const [confirmed, setConfirmed] = useState(false);
+
+    const onDelete = async () => {
+        try {
+            const response = await DELETE_REVIEW(id);
+            console.log(response);
+            setConfirmed(true)
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <>
@@ -32,7 +43,7 @@ const DeleteConfirm = ({ open, setOpen }) => {
                         </button>
                         <button
                             className={`${styles.ok} ${styles.btn}`}
-                            onClick={() => setConfirmed(true)}
+                            onClick={onDelete}
                         >
                             확인
                         </button>
@@ -49,6 +60,7 @@ const DeleteConfirm = ({ open, setOpen }) => {
                         onClick={() => {
                             setConfirmed(false);
                             setOpen(false);
+                            setToggle(!toggle);
                         }}
                     />
                     <article className={styles.confirmed}>

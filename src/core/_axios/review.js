@@ -14,5 +14,19 @@ export const POST_IMAGE = (form) => {
         url: "reviews/upload",
         data: form,
         headers: {"Content-Type": "multipart/form-data"},
+    });
+};
+
+export const GET_USER_REVIEWS = () => {
+    return Api({
+        method: METHOD.GET,
+        url: "reviews",
+    });
+};
+
+export const DELETE_REVIEW = (id) => {
+    return Api({
+        method: METHOD.DELETE,
+        url: `reviews/delete/${id}`
     })
 }
