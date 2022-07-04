@@ -86,8 +86,6 @@ const ToiletDetails = () => {
                             </div>
                         </div>
                         <div className={styles.options}>
-                            <span>청결</span>
-							<span className={styles.content}>3</span>
                             <span>종류</span>
 							<span className={styles.content}>남녀 공용</span>
                             <span>비밀번호</span>
@@ -96,7 +94,7 @@ const ToiletDetails = () => {
 							<span className={styles.content}>양변기,좌변기,비데</span>
 							<span>휴지</span>
 							<span className={styles.content}>있음</span>
-                            <span>자판기</span>
+                            <span>장애인화장실</span>
 							<span className={styles.content}>없음</span>
                         </div>
                     </article>

@@ -7,7 +7,8 @@ import { ReactComponent as KebabMenu } from '../assets/icons/kebabMenu.svg';
 import { ReactComponent as StarFill } from '../assets/icons/starFill.svg';
 import { ReactComponent as More } from '../assets/icons/more.svg';
 
-const ToiletInfo = ({ type, address, detail_address }) => {
+const ToiletInfo = ({ type, toiletInfo }) => {
+	const { address, detail_address, category, lat, lng, distance, common, lock, types, paper, disabled } = toiletInfo;
 	const [open, setOpen] = useState(false);
 	const [showing, setShowing] = useState(false);
 
@@ -23,18 +24,18 @@ const ToiletInfo = ({ type, address, detail_address }) => {
 							<PinSelected />
 							<span>{detail_address}</span>
 							<StarFill width="12" height="12"/>
-							<span>4.2</span>
+							<span>undefined</span>
 						</section>
-						<section className={styles.category}>#카테고리</section>
+						<section className={styles.category}>{category === 0 ? "#공용" : category === 1 ? "#지하철" : "기타"}</section>
 						<section className={styles.details}>
-							<span>청결</span>
-							<span className={styles.content}>3</span>
-							<span>휴지</span>
-							<span className={styles.content}>있음</span>
-							<span>변기</span>
-							<span className={styles.content}>양변기</span>
+							<span>종류</span>
+							<span className={styles.content}>{common ? "남녀 공용" : "남녀 분리"}</span>
 							<span>비밀번호</span>
-							<span className={styles.content}>있음</span>
+							<span className={styles.content}>{lock ? "있음" : "없음"}</span>
+							<span>휴지</span>
+							<span className={styles.content}>{paper ? "있음" : "없음"}</span>
+							<span>장애인화장실</span>
+							<span className={styles.content}>{disabled ? "있음" : "없음"}</span>
 						</section>
 					</article>
 					<article className={styles.icon}>
@@ -44,7 +45,12 @@ const ToiletInfo = ({ type, address, detail_address }) => {
 								setShowing(!showing);
 							}}
 						/>
-						<span className={styles.more}>
+						<span
+							className={styles.more}
+							onClick={() => navigate(`/toilet_details/${address}`, {
+								
+							})}
+						>
 							더보기 <More />
 						</span>
 						{showing && (

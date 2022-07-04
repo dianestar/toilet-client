@@ -79,6 +79,10 @@
 			@include font-style-12();
 			color: $main;
 			margin: 12px 21px;
+
+			&:hover {
+				cursor: pointer;
+			}
 		}
 
 		.popUpList {

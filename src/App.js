@@ -35,7 +35,7 @@ function App() {
 			<Route path="/my_review" element={<MyReview />} />
 			<Route path="/account/profile" element={<Profile />} />
 			<Route path="/account/account_info" element={<AccountInfo />} />
-			<Route path="/toilet_details" element={<ToiletDetails />} />
+			<Route path="/toilet_details/:id" element={<ToiletDetails />} />
 			<Route path="/add_toilet" element={<AddToilet /> } />
 			<Route path="/write_review/:id" element={<WriteReview />} />
 			<Route path="/account/edit_nickname" element={<EditNickname />} />
