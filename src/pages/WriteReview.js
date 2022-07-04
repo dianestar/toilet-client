@@ -6,6 +6,7 @@ import Header from "../components/common/Header";
 import styles from "../styles/pages/writeReview.module.scss";
 import BlueBtn from "../components/common/BlueBtn";
 import FormErrorMessage from "../components/common/FormErrorMessage";
+import ConfirmReview from "../components/modal/ConfirmReview";
 import { ReactComponent as RadioTrue } from "../assets/icons/radioTrue.svg";
 import { ReactComponent as RadioFalse } from "../assets/icons/radioFalse.svg";
 import { ReactComponent as CheckboxTrue } from "../assets/icons/checkboxTrue.svg";
@@ -29,6 +30,8 @@ const WriteReview = () => {
     const [imgFile, setImgFile] = useState(null);
     const [imgUrl, setImgUrl] = useState("");
     const imgInput = useRef();
+
+    const [open, setOpen] = useState(false);
 
     const handleCheckbox = (e) => {
         if (toilet.find((v) => v === e.target.id)) {
@@ -85,6 +88,8 @@ const WriteReview = () => {
                         console.log(error);
                     }
                 }
+
+                setOpen(true);
             }
         } catch (error) {
             console.log(error);
@@ -258,6 +263,7 @@ const WriteReview = () => {
                     <BlueBtn text="리뷰 추가" />
                 </section>
             </form>
+            {open && <ConfirmReview open={open} setOpen={setOpen}/>}
         </Layout>
     );
 }
