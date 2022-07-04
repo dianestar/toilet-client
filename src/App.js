@@ -8,8 +8,16 @@ import FindPwA from './pages/common/FindPwA';
 import FindPwB from './pages/common/FindPwB';
 import FindPwC from './pages/common/FindPwC';
 import LoginB from './pages/common/LoginB';
-import Map from "./pages/Map";
-import List from "./pages/List";
+import MyReview from './pages/MyReview';
+import Map from './pages/Map';
+import List from './pages/List';
+import AccountInfo from './pages/account/AccountInfo';
+import Profile from './pages/account/Profile';
+import ToiletDetails from './pages/ToiletDetails';
+import AddToilet from './pages/AddToilet';
+import WriteReview from './pages/WriteReview';
+import EditNickname from './pages/account/EditNickname';
+import EditPassword from './pages/account/EditPassword';
 
 function App() {
 	return (
@@ -24,6 +32,14 @@ function App() {
 			<Route path="/find_password" element={<FindPwC />} />
 			<Route path="/map" element={<Map />} />
 			<Route path="/list" element={<List />} />
+			<Route path="/my_review" element={<MyReview />} />
+			<Route path="/account/profile" element={<Profile />} />
+			<Route path="/account/account_info" element={<AccountInfo />} />
+			<Route path="/toilet_details/:id" element={<ToiletDetails />} />
+			<Route path="/add_toilet" element={<AddToilet /> } />
+			<Route path="/write_review/:id" element={<WriteReview />} />
+			<Route path="/account/edit_nickname" element={<EditNickname />} />
+			<Route path="/account/edit_password" element={<EditPassword />} />
 		</Routes>
 	);
 }

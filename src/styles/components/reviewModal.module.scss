@@ -1,0 +1,40 @@
+@import "../main.module.scss";
+@import "./modal.module.scss";
+
+.bg {
+    position: absolute !important;
+    top: 0px;
+}
+
+.wrapper {
+    top: 207px !important;
+    height: 310px !important;
+    margin: 0 16px;
+
+    .text-div {
+        .title {
+            @include font-style-20();
+        }
+
+        .desc {
+            @include font-style-14();
+            margin: 24px 0 14px 0;
+            text-align: center;
+        }
+    
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 48px;
+        margin-bottom: 40px;
+    
+        .question {
+            margin-bottom: 24px;
+        }
+    }
+
+    .confirmed {
+        margin-top: 54px !important;
+    }
+}
+

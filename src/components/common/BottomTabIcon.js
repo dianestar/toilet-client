@@ -1,12 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+
 import styles from '../../styles/components/navBar.module.scss';
 
-const BottomTabIcon = ({ url, children, text, className }) => {
+const BottomTabIcon = ({ url, children, text }) => {
+	const location = useLocation();
+
 	return (
 		<li>
 			<Link to={`/${url}`} className={styles.icon}>
 				{children}
-				<span className={className}>{text}</span>
+				<span
+					className={location.pathname === `/${url}` ? styles.active : null}
+				>
+					{text}
+				</span>
 			</Link>
 		</li>
 	);

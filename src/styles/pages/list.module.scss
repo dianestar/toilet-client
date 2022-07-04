@@ -4,19 +4,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+    position: relative;
+    overflow: auto;
+    overflow-x: hidden;
 
-    .toiletInfoList {
-        height: 565px;
-    
-        overflow-x: hidden;
-        overflow-y: auto;
-    
-        &::-webkit-scrollbar {
-            width: 0px;
-        }
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 0px;
     }
-}
-
-.onList {
-    margin-bottom: 8px;
 }

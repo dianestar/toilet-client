@@ -12,16 +12,12 @@ const List = () => {
         <Layout>
             <section className={styles.list}>
                 <SearchBox />
-                <article className={styles.toiletInfoList}>
-                {arr.map(() => {
+                {arr.map((value, index) => {
                     return (
-                        <div className={styles.onList}>
-                            <ToiletInfo />
-                        </div>
+                        <ToiletInfo type="onList"/>
                     );
                 })}
-                </article>
-                <NavBar />
+                <NavBar num={[1, 0, 1, 1]} />
             </section>
         </Layout>
     );

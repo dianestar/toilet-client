@@ -1,6 +1,10 @@
 @use '../text-style.module';
 @import '../main.module.scss';
 
+.color {
+	color: $main !important;
+}
+
 .btn {
 	@include font-style-16-bold();
 	@include inputShadow();
@@ -9,6 +13,5 @@
 	background: $white;
 	border: 1px solid transparent;
 	border-radius: 8px;
-	color: $main;
 	margin-bottom: 16px;
 }

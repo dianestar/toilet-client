@@ -4,24 +4,96 @@
 	color: $main !important;
 }
 
-.nav {
-	@include flexBox(around, center);
+.navOutSide {
 	position: absolute;
-	z-index: 2;
-	bottom: 0;
-	width: 100%;
-	height: 80px;
-	background: $white;
-	overflow: hidden;
-	box-shadow: 0px 3px 6px #00000029;
+	z-index: 99999;
+	top: 0;
+	left: 0;
+	width: 375px;
+	height: 100%;
+	background: $dim-black-60;
 
-	.icon {
-		@include flexBox(center, center);
-		flex-direction: column;
-		cursor: pointer;
-		span {
-			color: $dim-Black-80;
-			font-size: 10px;
+	.nav {
+		z-index: 10;
+		width: 271px;
+		height: 100%;
+		background: $lightgray;
+		border-radius: 0px 8px 8px 0px;
+		animation: motion 0.5s ease-in;
+		@keyframes motion {
+			0% {
+				margin-left: -280px;
+			}
+			100% {
+				margin-left: 0;
+			}
+		}
+
+		.profile {
+			position: relative;
+			width: 271px;
+			height: 256px;
+			@include flexBox(center, center);
+			flex-direction: column;
+			background: $white;
+
+			.close {
+				position: absolute;
+				top: 20px;
+				right: 10px;
+				z-index: 2;
+				cursor: pointer;
+			}
+			img {
+				width: 96px;
+				height: 96px;
+				border-radius: 100%;
+				margin-bottom: 8px;
+				cursor: pointer;
+			}
+			h2 {
+				font-size: 20px;
+				color: $sub;
+				font-weight: bold;
+				margin-bottom: 6px;
+			}
+			p {
+				font-size: 10px;
+				color: $dim-black-60;
+			}
+		}
+
+		.iconList {
+			@include flexBox(around, center);
+			flex-direction: column;
+
+			li {
+				margin-top: 6px;
+				width: 100%;
+				background: $white;
+				.icon {
+					display: flex;
+					align-items: center;
+					cursor: pointer;
+					span {
+						color: $dim-black-80;
+						font-size: 14px;
+					}
+				}
+			}
+		}
+		.logout {
+			@include flexBox(center, center);
+			position: absolute;
+			width: 271px;
+			height: 50px;
+			bottom: 33px;
+			background: $white;
+			cursor: pointer;
+			p {
+				font-size: 14px;
+				color: $red;
+			}
 		}
 	}
 }

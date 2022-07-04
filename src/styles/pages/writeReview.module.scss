@@ -1,0 +1,171 @@
+@import "../main.module.scss";
+
+.wrapper {
+    width: 343px;
+    height: 722px;
+    padding: 15px 0;
+    margin: 0 auto;
+    overflow: auto;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+        width: 0px;
+    }
+
+    section {
+        margin-bottom: 16px;
+
+        .title {
+            @include font-style-16-medium();
+            padding: 8px 0;
+        }
+    }
+
+    .location {
+        article {
+            width: 100%;
+            height: 50px;
+            padding: 7px 16px;
+            margin-bottom: 16px;
+            background-color: $snow;
+            border-radius: 8px;
+
+            .subtitle {
+                @include font-style-12();
+                color: $dim-black-60 !important;
+            }
+
+            .content {
+                @include font-style-14();
+                color: $sub !important;
+            }
+        }
+    }
+
+    .options {
+        .subtitle {
+            @include font-style-12();
+            color: $dim-black-80 !important;
+            line-height: $line-height-24 !important;
+        }
+
+        article {
+            padding-bottom: 8px;
+            display: flex;
+
+            input[type=radio] {
+                display: none;
+            }
+
+            input[type=checkbox] {
+                display: none;
+            }
+
+            label {
+                @include font-style-12();
+                color: $dim-black-80 !important;
+                margin-right: 8px;
+                display: flex;
+                align-items: center;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+        
+    }
+
+    .stars {
+        input {
+            display: none;
+        }
+        
+        .star{
+            margin-right: 8px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .review {
+        textarea {
+            height: 150px;
+            resize: none;
+        }
+    }
+
+    .image {
+        padding-bottom: 8px;
+        
+        input {
+            display: none;
+        }
+
+        .inputarea {
+            height: 50px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            div {
+                width: 62px;
+                height: 34px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                @include font-style-14();
+                color: $main !important;
+                line-height: $line-height-18 !important;
+                background-color: $white;
+                border: solid 1px $dim-black-20;
+                border-radius: 8px;
+
+                label:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .imgarea {
+            position: relative;
+            width: 96px;
+            height: 96px;
+            margin: 8px 0;
+
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 8px;
+            }
+
+            .cancel {
+                position: absolute;
+                top: -4px;
+                right: -4px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .button {
+    }
+
+    .inputarea {
+        @include font-style-14();
+        line-height: $line-height-18 !important;
+        box-sizing: border-box;
+        width: 100%;
+        
+        padding: 16px;
+        background-color: $white;
+        border: solid 1px $dim-black-20;
+        border-radius: 8px;
+    }
+}

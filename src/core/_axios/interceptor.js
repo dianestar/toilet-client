@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 const instance = axios.create({
-	baseURL: "http://3.35.184.107:5000/api/",
+	baseURL: 'http://3.35.184.107:5000/api/',
 });
 
 instance.interceptors.request.use(
 	(config) => {
-		const token = localStorage.getItem('access_token');
+		const token = localStorage.getItem('token');
 		if (token) {
 			config.headers = {
 				Authorization: `Bearer ${token}`,
@@ -24,13 +24,14 @@ instance.interceptors.response.use(
 	},
 	(err) => {
 		if (err.response.status === 401) {
-			const token = localStorage.getItem('access_token');
+			const token = localStorage.getItem('token');
 			if (token) {
-				localStorage.removeItem('access_token');
+				localStorage.removeItem('token');
 				return;
 			}
 			return;
 		}
+		return Promise.reject(err);
 	},
 );
 

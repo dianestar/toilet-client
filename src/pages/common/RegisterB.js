@@ -1,21 +1,24 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import { useSelector } from "react-redux";
 import Layout from "../../components/common/Layout";
 import Header from "../../components/common/Header";
 import BlueBtn from "../../components/common/BlueBtn";
 import NicknameInput from "../../components/common/NicknameInput";
-import FormErrorMessage from "../../components/common/FormErrorMessage";
+import Snackbar from "../../components/common/Snackbar";
 import styles from "../../styles/pages/common.module.scss";
 import { ReactComponent as ProfileImage } from '../../assets/icons/profileImage.svg';
 import { ReactComponent as OpenPhoto } from '../../assets/icons/openPhoto.svg';
 import { POST_USERS_REGISTER, POST_USERS_UPLOAD } from "../../core/_axios/register";
 
 const RegisterB = () => {
+    const navigate = useNavigate();
     const methods = useForm();
     const userInfo = useSelector((state) => state.register);
 
-    const [alreadyExists, setAlreadyExists] = useState(false);
+    const [duplicated, setDuplicated] = useState(false);
+    const [registered, setRegistered] = useState(false);
 
     const [imageFile, setImageFile] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
@@ -33,12 +36,26 @@ const RegisterB = () => {
         };
 
         try {
-            const response = await POST_USERS_REGISTER(form);
-            if (response) {
-                console.log(response);
+            const {
+                data: { success }
+            } = await POST_USERS_REGISTER(form);
+            if (success) {
+                setRegistered(true);
+                setTimeout(() => {
+                    setRegistered(false);
+                }, 3000);
+                setTimeout(() => {
+                    navigate("/login");
+                }, 3000);
             }
         } catch (error) {
             console.log(error);
+            if (error.response.status === 409) {
+                setDuplicated(true);
+                setTimeout(() => {
+                    setDuplicated(false);
+                }, 3000);
+            }
         }
 
         if (imageUrl) {
@@ -79,12 +96,13 @@ const RegisterB = () => {
                 </article>
                 <FormProvider {...methods}>
                     <form className={styles.form} onSubmit={methods.handleSubmit(onSubmit)}>
-                        <NicknameInput />
-                        {alreadyExists && <FormErrorMessage message="이미 사용중인 닉네임 입니다"/>}
+                        <NicknameInput duplicated={duplicated} setDuplicated={setDuplicated}/>
                         <BlueBtn text="회원가입"/>
                     </form>
                 </FormProvider>
             </section>
+            {duplicated && <Snackbar key={Date.now()} type="error" text="이미 사용중인 닉네임 입니다."/>}
+            {registered && <Snackbar key={Date.now()} type="success" text="회원가입이 완료되었습니다."/>}
         </Layout>
     );
 }
