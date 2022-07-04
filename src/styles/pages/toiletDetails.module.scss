@@ -78,7 +78,7 @@
             .options {
                 @include font-style-12();
                 display: grid;
-			    grid-template-columns: 1fr 2fr;
+			    grid-template-columns: 1fr 1fr;
                 place-content: center;
                 padding-left: 16px;
 
@@ -130,6 +130,10 @@
                 .add-review {
                     @include font-style-14();
                     color: $main !important;
+
+                    &:hover{
+                        cursor: pointer;
+                    }
                 }
             }
         }

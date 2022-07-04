@@ -26,7 +26,7 @@ const ToiletInfo = ({ type, toiletInfo }) => {
 							<StarFill width="12" height="12"/>
 							<span>undefined</span>
 						</section>
-						<section className={styles.category}>{category === 0 ? "#공용" : category === 1 ? "#지하철" : "기타"}</section>
+						<section className={styles.category}>{category === "0" ? "#공용" : category === "1" ? "#지하철" : "#기타"}</section>
 						<section className={styles.details}>
 							<span>종류</span>
 							<span className={styles.content}>{common ? "남녀 공용" : "남녀 분리"}</span>
@@ -48,7 +48,9 @@ const ToiletInfo = ({ type, toiletInfo }) => {
 						<span
 							className={styles.more}
 							onClick={() => navigate(`/toilet_details/${address}`, {
-								
+								state: {
+									toiletInfo
+								}
 							})}
 						>
 							더보기 <More />
