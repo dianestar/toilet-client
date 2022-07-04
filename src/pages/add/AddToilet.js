@@ -7,7 +7,6 @@ import styles from '../../styles/pages/addToilet.module.scss';
 import BlueBtn from '../../components/common/BlueBtn';
 import pinSelectedNoBg from '../../assets/icons/pinSelectedNoBg.svg';
 import { useNavigate } from 'react-router-dom';
-import WriteToiletInfo from './WriteToiletInfo';
 
 const AddToilet = () => {
 	const [open, setOpen] = useState(true);
@@ -85,6 +84,7 @@ const AddToilet = () => {
 					infoText.innerHTML = result[0].address.address_name;
 					marker.setPosition(mouseEvent.latLng);
 					marker.setMap(map);
+					setUserAddress(result[0].address.address_name);
 				}
 			});
 		});
@@ -104,9 +104,7 @@ const AddToilet = () => {
 				setUserAddress(result[0].address.address_name);
 			}
 		}
-	}, [userAddress]);
-
-	console.log(userAddress, 'test');
+	}, []);
 
 	return (
 		<>
@@ -125,8 +123,9 @@ const AddToilet = () => {
 								text="이 위치로 주소 설정"
 								onClick={() => {
 									if (userAddress !== undefined)
-										navi('/add_toilet/write_toilet_info');
-									<WriteToiletInfo userAddress={userAddress} />;
+										navi('/add_toilet/write_toilet_info', {
+											state: { userAddress },
+										});
 								}}
 							/>
 						</div>
