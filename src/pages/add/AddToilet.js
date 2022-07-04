@@ -1,14 +1,18 @@
 /*global kakao*/
 import React, { useState, useEffect } from 'react';
-import Layout from '../components/common/Layout';
-import Header from '../components/common/Header';
-import AskReview from '../components/modal/AskReview';
-import styles from '../styles/pages/addToilet.module.scss';
-import BlueBtn from '../components/common/BlueBtn';
-import pinSelectedNoBg from '../assets/icons/pinSelectedNoBg.svg';
+import Layout from '../../components/common/Layout';
+import Header from '../../components/common/Header';
+import AskReview from '../../components/modal/AskReview';
+import styles from '../../styles/pages/addToilet.module.scss';
+import BlueBtn from '../../components/common/BlueBtn';
+import pinSelectedNoBg from '../../assets/icons/pinSelectedNoBg.svg';
+import { useNavigate } from 'react-router-dom';
+import WriteToiletInfo from './WriteToiletInfo';
 
 const AddToilet = () => {
 	const [open, setOpen] = useState(true);
+	const [userAddress, setUserAddress] = useState('');
+	const navi = useNavigate();
 
 	useEffect(() => {
 		const mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -79,7 +83,6 @@ const AddToilet = () => {
 				if (status === kakao.maps.services.Status.OK) {
 					let infoText = document.querySelector('.infoText');
 					infoText.innerHTML = result[0].address.address_name;
-
 					marker.setPosition(mouseEvent.latLng);
 					marker.setMap(map);
 				}
@@ -100,7 +103,19 @@ const AddToilet = () => {
 				infoText.innerHTML = result[0].address.address_name;
 			}
 		}
-	}, []);
+
+		let handleUserAddress = function (result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+				setUserAddress(result[0].address.address_name);
+			}
+		};
+
+		geocoder.coord2Address(
+			map.getCenter().getLng(),
+			map.getCenter().getLat(),
+			handleUserAddress,
+		);
+	}, [userAddress]);
 
 	return (
 		<>
@@ -115,7 +130,16 @@ const AddToilet = () => {
 							<div className={styles.address}>
 								<p className="infoText"></p>
 							</div>
-							<BlueBtn text="이 위치로 주소 설정" />
+							<BlueBtn
+								text="이 위치로 주소 설정"
+								onClick={() => {
+									if (userAddress !== '') navi('/add_toilet/write_toilet_info');
+									<WriteToiletInfo
+										userAddress={userAddress}
+										setUserAddress={setUserAddress}
+									/>;
+								}}
+							/>
 						</div>
 					</div>
 				</section>

@@ -11,9 +11,10 @@ const Header = ({ type, text }) => {
 	return (
 		<>
 			<section className={styles.header}>
-				{type === 'back' ? (
+				{type === 'back' && (
 					<Back onClick={() => navigate(-1)} className={styles.pointer} />
-				) : (
+				)}
+				{type === 'hamburger' && (
 					<Hamburger
 						className={styles.pointer}
 						onClick={() => {
@@ -21,6 +22,7 @@ const Header = ({ type, text }) => {
 						}}
 					/>
 				)}
+				{type === null && null}
 				<span className={styles[`header-title`]}>{text}</span>
 			</section>
 			{showing && <NavBar setShowing={setShowing} showing={showing} />}
