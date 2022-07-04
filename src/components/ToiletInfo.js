@@ -29,13 +29,13 @@ const ToiletInfo = ({ type, toiletInfo }) => {
 						<section className={styles.category}>{category === "0" ? "#공용" : category === "1" ? "#지하철" : "#기타"}</section>
 						<section className={styles.details}>
 							<span>종류</span>
-							<span className={styles.content}>{common ? "남녀 공용" : "남녀 분리"}</span>
+							<span className={styles.content}>{common === null ? "-" : (common ? "남녀 공용" : "남녀 분리")}</span>
 							<span>비밀번호</span>
-							<span className={styles.content}>{lock ? "있음" : "없음"}</span>
+							<span className={styles.content}>{lock === null ? "-" : (lock ? "있음" : "없음")}</span>
 							<span>휴지</span>
-							<span className={styles.content}>{paper ? "있음" : "없음"}</span>
+							<span className={styles.content}>{paper === null ? "-" : (paper ? "있음" : "없음")}</span>
 							<span>장애인화장실</span>
-							<span className={styles.content}>{disabled ? "있음" : "없음"}</span>
+							<span className={styles.content}>{disabled === null ? "-" : (disabled ? "있음" : "없음")}</span>
 						</section>
 					</article>
 					<article className={styles.icon}>

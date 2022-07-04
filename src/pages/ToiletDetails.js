@@ -72,15 +72,15 @@ const ToiletDetails = () => {
                         </div>
                         <div className={styles.options}>
                             <span>종류</span>
-							<span className={styles.content}>{common ? "남녀 공용" : "남녀 분리"}</span>
+							<span className={styles.content}>{common === null ? "-" : (common ? "남녀 공용" : "남녀 분리")}</span>
                             <span>비밀번호</span>
-							<span className={styles.content}>{lock ? "있음" : "없음"}</span>
+							<span className={styles.content}>{lock === null ? "-" : (lock ? "있음" : "없음")}</span>
                             <span>변기</span>
-							<span className={styles.content}>{types === "0" ? "양변기" : (types === "1" ? "좌변기" : "비데")}</span>
+							<span className={styles.content}>{types === null ? "-" : (types === "0" ? "양변기" : (types === "1" ? "좌변기" : "비데"))}</span>
 							<span>휴지</span>
-							<span className={styles.content}>{paper ? "있음" : "없음"}</span>
+							<span className={styles.content}>{paper === null ? "-" : (paper ? "있음" : "없음")}</span>
                             <span>장애인화장실</span>
-							<span className={styles.content}>{disabled ? "있음" : "없음"}</span>
+							<span className={styles.content}>{disabled === null ? "-" : (disabled ? "있음" : "없음")}</span>
                         </div>
                     </article>
                     <article className={styles[`image-div`]}>
