@@ -191,7 +191,6 @@ const Map = () => {
 				map: map,
 				position: userPosition,
 				content: $outerDiv,
-				yAnchor: 1 
 			});
 		}
 
