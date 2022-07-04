@@ -101,21 +101,12 @@ const AddToilet = () => {
 			if (status === kakao.maps.services.Status.OK) {
 				let infoText = document.querySelector('.infoText');
 				infoText.innerHTML = result[0].address.address_name;
-			}
-		}
-
-		let handleUserAddress = function (result, status) {
-			if (status === kakao.maps.services.Status.OK) {
 				setUserAddress(result[0].address.address_name);
 			}
-		};
-
-		geocoder.coord2Address(
-			map.getCenter().getLng(),
-			map.getCenter().getLat(),
-			handleUserAddress,
-		);
+		}
 	}, [userAddress]);
+
+	console.log(userAddress, 'test');
 
 	return (
 		<>
@@ -133,11 +124,9 @@ const AddToilet = () => {
 							<BlueBtn
 								text="이 위치로 주소 설정"
 								onClick={() => {
-									if (userAddress !== '') navi('/add_toilet/write_toilet_info');
-									<WriteToiletInfo
-										userAddress={userAddress}
-										setUserAddress={setUserAddress}
-									/>;
+									if (userAddress !== undefined)
+										navi('/add_toilet/write_toilet_info');
+									<WriteToiletInfo userAddress={userAddress} />;
 								}}
 							/>
 						</div>
