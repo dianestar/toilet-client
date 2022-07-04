@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import DeleteRequest from './modal/DeleteRequest';
 import styles from '../styles/components/toiletInfo.module.scss';
 import { ReactComponent as PinSelected } from '../assets/icons/pinSelected.svg';
@@ -9,6 +10,8 @@ import { ReactComponent as More } from '../assets/icons/more.svg';
 const ToiletInfo = ({ type, address, detail_address }) => {
 	const [open, setOpen] = useState(false);
 	const [showing, setShowing] = useState(false);
+
+	const navigate = useNavigate();
 
 	return (
 		<>
@@ -46,7 +49,16 @@ const ToiletInfo = ({ type, address, detail_address }) => {
 						</span>
 						{showing && (
 							<ul className={styles.popUpList}>
-								<li>리뷰 추가</li>
+								<li
+									onClick={() => navigate(`/write_review/${address}`, {
+										state: {
+											address,
+											detail_address
+										}
+									})}
+								>
+									리뷰 추가
+								</li>
 								<div className={styles.line} />
 								<li
 									className={styles.deleteBtn}

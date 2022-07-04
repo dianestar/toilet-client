@@ -1,5 +1,6 @@
 import React, { useState, Fragment, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { useLocation } from "react-router-dom";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
 import styles from "../styles/pages/writeReview.module.scss";
@@ -13,7 +14,9 @@ import { ReactComponent as StarCustom } from "../assets/icons/starCustom.svg";
 import { ReactComponent as Close } from "../assets/icons/close.svg";
 import { POST_REVIEW, POST_IMAGE } from "../core/_axios/review";
 
-const WriteReview = ({ address = "서울시 강남구 역삼동 2-16", desc = "뫄뫄빌딩 2층 복도 끝" }) => {
+const WriteReview = () => {
+    const location = useLocation();
+
     const {register, handleSubmit, watch, formState: {errors, isSubmitted}, control } = useForm();
 
     const [type, setType] = useState(null);
@@ -56,7 +59,7 @@ const WriteReview = ({ address = "서울시 강남구 역삼동 2-16", desc = "�
                 types: 0, // needs to be fixed
                 paper: watch("tissue") === "yes" ? true : false,
                 disabled: watch("disabled") === "provided" ? true : false,
-                address,
+                address: location.state.address,
                 content: watch("textarea"),
                 rate: parseInt(watch("rate")),
             };
@@ -96,11 +99,11 @@ const WriteReview = ({ address = "서울시 강남구 역삼동 2-16", desc = "�
                     <p className={styles.title}>화장실 위치</p>
                     <article>
                         <p className={styles.subtitle}>주소</p>
-                        <p className={styles.content}>{address}</p>
+                        <p className={styles.content}>{location.state.address}</p>
                     </article>
                     <article>
                         <p className={styles.subtitle}>정확한 위치</p>
-                        <p className={styles.content}>{desc}</p>
+                        <p className={styles.content}>{location.state.detail_address}</p>
                     </article>
                 </section>
                 
