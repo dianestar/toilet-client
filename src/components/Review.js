@@ -7,14 +7,14 @@ import styles from "../styles/components/review.module.scss";
 import TempImg from "../assets/images/KakaoTalk_Photo_2022-04-18-22-19-10 003.jpeg"
 
 const Review = ({ reviewInfo, toggle, setToggle }) => {
-    const { id, rate, content, toilet_img, time } = reviewInfo;
+    const { id, address, rate, content, toilet_img, time } = reviewInfo;
     const [showing, setShowing] = useState(false);
     const [open, setOpen] = useState(false);
 
     return (
         <>
             <section className={styles.review}>
-                <p className={styles.title}>화장실 주소</p>
+                <p className={styles.title}>{address}</p>
                 {Array(rate).fill(0).map(() => <StarFill className={styles.star} width="10" height="10"/>)}
                 {Array(5-rate).fill(0).map(() => <StarGray className={styles.star} width="10" height="10"/>)}
                 <span className={styles.date}>{time}</span>

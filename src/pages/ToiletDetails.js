@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
@@ -76,7 +76,14 @@ const ToiletDetails = () => {
                             <span>비밀번호</span>
 							<span className={styles.content}>{lock === null ? "-" : (lock ? "있음" : "없음")}</span>
                             <span>변기</span>
-							<span className={styles.content}>{types === null ? "-" : (types === "0" ? "양변기" : (types === "1" ? "좌변기" : "비데"))}</span>
+							<span className={styles.content}>{types.split(",").map((v, i) => {
+                                let str = "";
+                                if (i !== 0) { str += ","; }
+                                if (v === "0") { str += "양변기"; }
+                                else if (v === "1") { str += "좌변기"; }
+                                else { str += "비데"; }
+                                return str;
+                            })}</span>
 							<span>휴지</span>
 							<span className={styles.content}>{paper === null ? "-" : (paper ? "있음" : "없음")}</span>
                             <span>장애인화장실</span>

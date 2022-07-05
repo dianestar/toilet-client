@@ -55,18 +55,26 @@ const WriteReview = () => {
     }
 
     const onSubmit = async () => {
-        try {
-            const form = {
-                common: watch("type") === "unseparated" ? true : false,
-                lock: watch("password") === "locked" ? true : false,
-                types: 0, // needs to be fixed
-                paper: watch("tissue") === "yes" ? true : false,
-                disabled: watch("disabled") === "provided" ? true : false,
-                address: location.state.address,
-                content: watch("textarea"),
-                rate: parseInt(watch("rate")),
-            };
+        const toiletArr = [];
+        toilet.forEach((v) => {
+            if (v === "seat") { toiletArr.push("0"); }
+            else if (v === "squat") { toiletArr.push("1"); }
+            else if (v === "bidet") { toiletArr.push("2"); }
+        });
+        toiletArr.sort();
 
+        const form = {
+            common: watch("type") === "unseparated" ? true : false,
+            lock: watch("password") === "locked" ? true : false,
+            types: toiletArr,
+            paper: watch("tissue") === "yes" ? true : false,
+            disabled: watch("disabled") === "provided" ? true : false,
+            address: location.state.address,
+            content: watch("textarea"),
+            rate: parseInt(watch("rate")),
+        };
+
+        try {
             const {
                 data: { success, data }
             } = await POST_REVIEW(form);
