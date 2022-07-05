@@ -106,7 +106,7 @@ const AddToilet = () => {
 				setUserAddress(result[0].address.address_name);
 			}
 		}
-	}, []);
+	}, [userLat, userLng]);
 
 	return (
 		<>
