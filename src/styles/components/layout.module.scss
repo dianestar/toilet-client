@@ -5,6 +5,10 @@
 	width: 375px;
 	height: 768px;
 
+	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: hidden;
+
 	// temporary code for PC view
 	border: 1px solid gray;
 }

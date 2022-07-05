@@ -46,7 +46,7 @@ const RegisterA = () => {
 
 	return (
 		<Layout>
-			<Header text="회원가입" />
+			<Header type="back" text="회원가입" />
 			<section className={styles.wrapper}>
 				<p className={styles.title}>계정 정보</p>
 				<p className={styles.desc}>

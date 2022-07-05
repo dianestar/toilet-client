@@ -46,7 +46,7 @@ const EditNickname = () => {
 	};
 	return (
 		<Layout>
-			<Header text="계정 정보 관리" />
+			<Header type="back" text="계정 정보 관리" />
 			<section className={styles.wrapper}>
 				<h2 className={classNames(styles.title, styles.mb20)}>닉네임 수정</h2>
 				<article>

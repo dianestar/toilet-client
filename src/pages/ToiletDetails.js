@@ -39,7 +39,7 @@ const ToiletDetails = () => {
 
     return (
         <Layout>
-            <Header text="화장실 정보"/>
+            <Header type="back" text="화장실 정보"/>
             <div className={styles[`toilet-details`]}>
                 <section className={styles.map} id="map">
                 </section>

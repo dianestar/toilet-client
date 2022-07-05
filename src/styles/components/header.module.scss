@@ -5,7 +5,20 @@
 .header {
     height: 44px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;  
+
+    &.hasNone {
+        grid-template-columns: 1fr;
+    }
+
+    &.hasIcon {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .icon {
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
 
 .header-title {

@@ -1,8 +1,9 @@
 @import "../main.module.scss";
 
 .toilet-details {
-    height: 100%;
+    height: calc(100% - 44px);
     overflow: auto;
+
     &::-webkit-scrollbar {
         width: 0px;
     }
@@ -13,7 +14,6 @@
     }
     
     .details {
-
         .title-div {
             display: flex;
             flex-direction: column;

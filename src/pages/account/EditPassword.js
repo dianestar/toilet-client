@@ -46,7 +46,7 @@ const EditPassword = () => {
 
 	return (
 		<Layout>
-			<Header text="개인 정보 관리" />
+			<Header type="back" text="개인 정보 관리" />
 			<section className={styles.wrapper}>
 				<h2 className={classNames(styles.title, styles.mb20)}>
 					비밀번호 재설정

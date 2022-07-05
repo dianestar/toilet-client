@@ -98,7 +98,7 @@ const WriteReview = () => {
 
     return (
         <Layout>
-            <Header text="리뷰 추가" />
+            <Header type="back" text="리뷰 추가" />
             <form className={styles.wrapper} onSubmit={handleSubmit(onSubmit)}>
                 <section className={styles.location}>
                     <p className={styles.title}>화장실 위치</p>

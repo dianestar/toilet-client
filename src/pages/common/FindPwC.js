@@ -48,7 +48,7 @@ const FindPwC = () => {
 
 	return (
 		<Layout>
-			<Header text="비밀번호 재설정" />
+			<Header type="back" text="비밀번호 재설정" />
 			<section className={styles.wrapper}>
 				<p className={styles.title}>비밀번호 재설정</p>
 				<FormProvider {...methods}>
