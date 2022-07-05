@@ -7,18 +7,40 @@ import styles from "../styles/pages/toiletDetails.module.scss";
 import { ReactComponent as Direction } from "../assets/icons/direction.svg";
 import { ReactComponent as StarFill } from "../assets/icons/starFill.svg";
 import { ReactComponent as StarHalfGray } from "../assets/icons/starHalfGray.svg";
-import TempImg from "../assets/images/KakaoTalk_Photo_2022-04-18-22-19-10 003.jpeg"
+import { GET_TOILET_REVIEWS } from "../core/_axios/review";
 
 const { kakao } = window;
-const arr = Array(5).fill(0);
 
 const ToiletDetails = () => {
     const navigate = useNavigate();
 
     const location = useLocation();
     const { address, detail_address, category, lat, lng, distance, common, lock, types, paper, disabled } = location.state.toiletInfo;
-    
+    const [reviews, setReviews] = useState([]);
+    const [images, setImages] = useState([]);
+
     useEffect(() => {
+        const getToiletReviews = async () => {
+            try {
+                const {
+                    data: { success, data }
+                } = await GET_TOILET_REVIEWS({ address });
+    
+                if (success) {
+                    console.log(data);
+                    setReviews(data);
+
+                    let temp = [...images];
+                    data.forEach((v) => {
+                        if (v.img_url && !temp.includes(v.img_url)) { temp.push(v.img_url); }
+                    })
+                    setImages(temp);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
         let coords = new kakao.maps.LatLng(lat, lng);
 
         let mapContainer = document.getElementById('map'),
@@ -35,7 +57,10 @@ const ToiletDetails = () => {
             map: map,
             position: coords
         });
-    }, [lat, lng]);
+
+        getToiletReviews();
+        
+    }, [lat, lng, address]);
 
     return (
         <Layout>
@@ -76,7 +101,7 @@ const ToiletDetails = () => {
                             <span>비밀번호</span>
 							<span className={styles.content}>{lock === null ? "-" : (lock ? "있음" : "없음")}</span>
                             <span>변기</span>
-							<span className={styles.content}>{types.split(",").map((v, i) => {
+							<span className={styles.content}>{types?.split(",").map((v, i) => {
                                 let str = "";
                                 if (i !== 0) { str += ","; }
                                 if (v === "0") { str += "양변기"; }
@@ -93,11 +118,7 @@ const ToiletDetails = () => {
                     <article className={styles[`image-div`]}>
                         <p>사진</p>
                         <div>
-                            {arr.map(() => {
-                                return (
-                                    <img src={TempImg} alt="temp"/>
-                                );
-                            })}
+                            {images.map((v) => <img key={v} src={v} alt="temp"/>)}
                         </div>
                     </article>
                     <article className={styles[`review-div`]}>
@@ -115,11 +136,11 @@ const ToiletDetails = () => {
                             </span>
                         </div>
                         <div>
-                            {/*arr.map(() => {
+                            {reviews.map((v) => {
                                 return (
-                                    <Review />
+                                    <Review key={v.id} reviewInfo={v}/>
                                 );
-                            })*/}
+                            })}
                         </div>
                     </article>
                 </section>

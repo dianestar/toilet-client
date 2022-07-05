@@ -15,8 +15,8 @@ const Review = ({ reviewInfo, toggle, setToggle }) => {
         <>
             <section className={styles.review}>
                 <p className={styles.title}>{address}</p>
-                {Array(rate).fill(0).map(() => <StarFill className={styles.star} width="10" height="10"/>)}
-                {Array(5-rate).fill(0).map(() => <StarGray className={styles.star} width="10" height="10"/>)}
+                {Array(rate).fill(0).map((v, i) => <StarFill key={i} className={styles.star} width="10" height="10"/>)}
+                {Array(5-rate).fill(0).map((v, i) => <StarGray key={i} className={styles.star} width="10" height="10"/>)}
                 <span className={styles.date}>{time}</span>
                 {toilet_img ?
                     <article className={styles[`img-list`]}>
