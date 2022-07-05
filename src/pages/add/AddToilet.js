@@ -11,6 +11,8 @@ import { useNavigate } from 'react-router-dom';
 const AddToilet = () => {
 	const [open, setOpen] = useState(true);
 	const [userAddress, setUserAddress] = useState('');
+	const [userLat, setUserLat] = useState(null);
+	const [userLng, setUserLng] = useState(null);
 	const navi = useNavigate();
 
 	useEffect(() => {
@@ -38,10 +40,10 @@ const AddToilet = () => {
 			// GeoLocation을 이용해서 접속 위치를 얻어옵니다
 			navigator.geolocation.getCurrentPosition(
 				function (position) {
-					let lat = position.coords.latitude, // 위도
-						lon = position.coords.longitude; // 경도
+					setUserLat(position.coords.latitude);
+					setUserLng(position.coords.longitude);
 
-					let locPosition = new kakao.maps.LatLng(lat, lon);
+					let locPosition = new kakao.maps.LatLng(userLat, userLng);
 
 					map.setCenter(locPosition);
 					// 마커와 인포윈도우를 표시합니다
@@ -124,7 +126,7 @@ const AddToilet = () => {
 								onClick={() => {
 									if (userAddress !== undefined)
 										navi('/add_toilet/write_toilet_info', {
-											state: { userAddress },
+											state: { userAddress, userLat, userLng },
 										});
 								}}
 							/>
