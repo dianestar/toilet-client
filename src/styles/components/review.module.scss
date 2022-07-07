@@ -11,6 +11,11 @@
     .title {
         @include font-style-12();
         margin-bottom: 2px;
+
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
     }
 
     .star {
@@ -60,7 +65,6 @@
         color: $sub;
 
         width: 110px;
-        height: 64px;
 
         position: absolute;
         top: 22px;
@@ -79,8 +83,17 @@
             border-top: 1px solid $snow;
         }
 
-        .deleteBtn {
+        .red {
             color: $red;
+        }
+
+        li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 100%;
+            height: 32px;
         }
     }
 }

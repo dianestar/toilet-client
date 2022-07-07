@@ -1,15 +1,9 @@
 @import "../main.module.scss";
 @import "./modal.module.scss";
 
-.bg {
-    position: absolute !important;
-    top: 0px;
-}
-
 .wrapper {
     top: 207px !important;
     height: 310px !important;
-    margin: 0 16px;
 
     .text-div {
         .title {

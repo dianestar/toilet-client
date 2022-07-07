@@ -38,3 +38,11 @@ export const DELETE_REVIEW = (id) => {
         url: `reviews/delete/${id}`
     });
 };
+
+export const REVIEW_DELETE_REQUEST = (form) => {
+    return Api({
+        method: METHOD.POST,
+        url: `reviews/report`,
+        data: form,
+    });
+};

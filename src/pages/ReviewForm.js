@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
-import styles from "../styles/pages/writeReview.module.scss";
+import styles from "../styles/pages/reviewForm.module.scss";
 import BlueBtn from "../components/common/BlueBtn";
 import FormErrorMessage from "../components/common/FormErrorMessage";
 import ConfirmReview from "../components/modal/ConfirmReview";
@@ -15,7 +15,7 @@ import { ReactComponent as StarCustom } from "../assets/icons/starCustom.svg";
 import { ReactComponent as Close } from "../assets/icons/close.svg";
 import { POST_REVIEW, POST_IMAGE } from "../core/_axios/review";
 
-const WriteReview = () => {
+const ReviewForm= () => {
     const location = useLocation();
 
     const {register, handleSubmit, watch, formState: {errors, isSubmitted}, control } = useForm();
@@ -91,7 +91,9 @@ const WriteReview = () => {
                             data: { success }
                         } = await POST_IMAGE(imgForm);
 
-                        if (success) { console.log(success); }
+                        if (success) {
+                            console.log(success);
+                        }
                     } catch (error) {
                         console.log(error);
                     }
@@ -276,4 +278,4 @@ const WriteReview = () => {
     );
 }
 
-export default WriteReview;
+export default ReviewForm;

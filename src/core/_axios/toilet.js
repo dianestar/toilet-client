@@ -8,7 +8,7 @@ export const AROUND_TOILET = (form) => {
 	});
 };
 
-export const DELETE_REQUEST = (form) => {
+export const TOILET_DELETE_REQUEST = (form) => {
 	return Api({
 		method: METHOD.POST,
 		url: "toilets/report",

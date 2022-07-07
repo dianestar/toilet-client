@@ -79,7 +79,7 @@ const ToiletInfo = ({ type, toiletInfo }) => {
 					</article>
 				</section>
 			</div>
-			<DeleteRequest open={open} setOpen={setOpen} address={address} />
+			<DeleteRequest open={open} setOpen={setOpen} id={address} type={"toilet"}/>
 		</>
 	);
 };

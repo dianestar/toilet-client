@@ -35,7 +35,7 @@ const MyReview = () => {
                 <article className={styles.wrapper}>
                     {reviews.map((value) => {
                         return (
-                            <Review key={value.id} reviewInfo={value} toggle={toggle} setToggle={setToggle}/>
+                            <Review key={value.id} address={value.address} reviewInfo={value} toggle={toggle} setToggle={setToggle} type="myreview"/>
                         )
                     })}
                 </article>

@@ -18,6 +18,7 @@ const ToiletDetails = () => {
     const { address, detail_address, category, lat, lng, distance, common, lock, types, paper, disabled } = location.state.toiletInfo;
     const [reviews, setReviews] = useState([]);
     const [images, setImages] = useState([]);
+    const [toggle, setToggle] = useState(false);
 
     useEffect(() => {
         const getToiletReviews = async () => {
@@ -32,7 +33,7 @@ const ToiletDetails = () => {
 
                     let temp = [...images];
                     data.forEach((v) => {
-                        if (v.img_url && !temp.includes(v.img_url)) { temp.push(v.img_url); }
+                        if (v.toilet_img && !temp.includes(v.toilet_img)) { temp.push(v.toilet_img); }
                     })
                     setImages(temp);
                 }
@@ -60,7 +61,7 @@ const ToiletDetails = () => {
 
         getToiletReviews();
         
-    }, [lat, lng, address]);
+    }, [lat, lng, address, toggle]);
 
     return (
         <Layout>
@@ -138,7 +139,7 @@ const ToiletDetails = () => {
                         <div>
                             {reviews.map((v) => {
                                 return (
-                                    <Review key={v.id} reviewInfo={v}/>
+                                    <Review key={v.id} address={address} reviewInfo={v} toggle={toggle} setToggle={setToggle} type="toiletreview"/>
                                 );
                             })}
                         </div>
