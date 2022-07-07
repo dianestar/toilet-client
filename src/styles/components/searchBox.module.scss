@@ -22,9 +22,7 @@
 
 	.position {
 		@include font-style-16-medium();
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
+		@include text-ellipsis;
 
 		&:hover {
 			cursor: pointer;

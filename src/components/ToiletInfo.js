@@ -8,7 +8,7 @@ import { ReactComponent as StarFill } from '../assets/icons/starFill.svg';
 import { ReactComponent as More } from '../assets/icons/more.svg';
 
 const ToiletInfo = ({ type, toiletInfo }) => {
-	const { address, detail_address, category, lat, lng, distance, common, lock, types, paper, disabled } = toiletInfo;
+	const { address, detail_address, category, subway, lat, lng, distance, common, lock, types, paper, disabled } = toiletInfo;
 	const [open, setOpen] = useState(false);
 	const [showing, setShowing] = useState(false);
 
@@ -26,7 +26,10 @@ const ToiletInfo = ({ type, toiletInfo }) => {
 							<StarFill width="12" height="12"/>
 							<span>undefined</span>
 						</section>
-						<section className={styles.category}>{category === "0" ? "#공용" : category === "1" ? "#지하철" : "#기타"}</section>
+						<section className={styles.category}>
+							<article>{category === "0" ? "#공용" : category === "1" ? "#지하철" : "#기타"}</article>
+							{category === "1" && <article className={styles.category}>{subway === "1" ? "#개찰구 안" : "#개찰구 밖"}</article>}
+						</section>
 						<section className={styles.details}>
 							<span>종류</span>
 							<span className={styles.content}>{common === null ? "-" : (common ? "남녀 공용" : "남녀 분리")}</span>

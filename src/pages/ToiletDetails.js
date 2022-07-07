@@ -15,9 +15,10 @@ const ToiletDetails = () => {
     const navigate = useNavigate();
 
     const location = useLocation();
-    const { address, detail_address, category, lat, lng, distance, common, lock, types, paper, disabled } = location.state.toiletInfo;
+    const { address, detail_address, category, subway, lat, lng, distance, common, lock, types, paper, disabled } = location.state.toiletInfo;
     const [reviews, setReviews] = useState([]);
     const [images, setImages] = useState([]);
+    const [hashtags, setHashtags] = useState([]);
 
     useEffect(() => {
         const getToiletReviews = async () => {
@@ -59,7 +60,18 @@ const ToiletDetails = () => {
         });
 
         getToiletReviews();
-        
+
+        let temp = [];
+        if (category === "0") { temp.push("공용"); }
+        else if (category === "1") {
+            temp.push("지하철");
+
+            if (subway === "0") { temp.push("개찰구 안"); }
+            else { temp.push("개찰구 밖"); }
+        }
+        else { temp.push("기타"); }
+        temp.push(detail_address);
+        setHashtags(temp);
     }, [lat, lng, address]);
 
     return (
@@ -76,12 +88,11 @@ const ToiletDetails = () => {
                             <span>약 {Math.round(distance * 1000)}m</span>
                         </section>
                         <section className={styles.hashtag}>
-                            <article>
-                                {category === "0" ? "#공용" : (category === "1" ? "#지하철" : "#기타")}
-                            </article>
-                            <article>
-                                #{detail_address}
-                            </article>
+                            {hashtags.map((v, i) => (
+                                <article key={i}>
+                                    #{v}
+                                </article>
+                            ))}
                         </section>
                     </article>
                     <article className={styles[`option-div`]}>
