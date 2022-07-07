@@ -54,13 +54,13 @@
         }
 
         .option-div {
+            @include shadow;
             width: 343px;
             height: 148px;
             margin: 0 auto 24px auto;
             padding: 16px;
             border: none;
             border-radius: 8px;
-            box-shadow: 0px 3px 6px $shadow;
 
             display: grid;
             grid-template-columns: 2fr 3fr;

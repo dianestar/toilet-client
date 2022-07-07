@@ -18,11 +18,11 @@
 	overflow: auto;
 
 	.research {
+		@include shadow;
 		@include font-style-14();
 		background-color: $snow;
 		border: none;
 		border-radius: 8px;
-		box-shadow: 0px 3px 6px $shadow;
 
 		position: absolute;
 		top: 120px;
@@ -44,5 +44,24 @@
 		position: absolute;
 		top: 120px;
 		z-index: 99;
+	}
+
+	.circle {
+		position: absolute;
+		bottom: 16px;
+		right: 16px;
+
+		z-index: 99;
+
+		width: 44px;
+		height: 44px;
+
+		@include shadow;
+		border-radius: 50%;
+		background-color: $white;
+		
+		&:hover {
+			cursor: pointer;
+		}
 	}
 }

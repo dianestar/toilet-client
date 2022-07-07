@@ -7,7 +7,7 @@
 
 .btn {
 	@include font-style-16-bold();
-	@include inputShadow();
+	@include shadow();
 	width: 343px;
 	height: 50px;
 	background: $white;

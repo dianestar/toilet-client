@@ -9,9 +9,11 @@ import styles from '../styles/pages/map.module.scss';
 import { AROUND_TOILET } from '../core/_axios/toilet';
 import pinDefaultNoBg from "../assets/icons/pinDefaultNoBg.svg";
 import pinSelectedNoBg from "../assets/icons/pinSelectedNoBg.svg";
+import { ReactComponent as FindLocation } from "../assets/icons/findLocation.svg";
 
 const { kakao } = window;
 let map;
+let geocoder = new kakao.maps.services.Geocoder();
 let selectedMarker = null;
 let markerDefault = new kakao.maps.MarkerImage(pinDefaultNoBg, new kakao.maps.Size(20, 28));
 let markerSelected = new kakao.maps.MarkerImage(pinSelectedNoBg, new kakao.maps.Size(22, 32));
@@ -156,6 +158,13 @@ const Map = () => {
 		};
 		geocoder.addressSearch(address, callback);
 	}
+
+	let setDefaultKeyword = function(result, status) {
+		if (status === kakao.maps.services.Status.OK) {
+			console.log(result);
+			setKeyword(result[0].road_address !== null ? result[0].road_address.address_name : result[0].address.address_name);
+		}
+	}
 	/*******************************/
 
 	useEffect(() => {
@@ -237,13 +246,6 @@ const Map = () => {
 		}
 
 		// 검색창 기본 주소값 설정
-		let geocoder = new kakao.maps.services.Geocoder();
-		let setDefaultKeyword = function(result, status) {
-			if (status === kakao.maps.services.Status.OK) {
-				console.log(result);
-				setKeyword(result[0].road_address !== null ? result[0].road_address.address_name : result[0].address.address_name);
-			}
-		}
 		geocoder.coord2Address(map.getCenter().getLng(), map.getCenter().getLat(), setDefaultKeyword);
 
 		// 이동 이벤트 등록
@@ -318,6 +320,12 @@ const Map = () => {
 				:
 				null
 				}
+				<article className={styles.circle} onClick={() => {
+					map.setCenter(new kakao.maps.LatLng(userLat, userLng));
+					geocoder.coord2Address(map.getCenter().getLng(), map.getCenter().getLat(), setDefaultKeyword);
+				}}>
+					<FindLocation />
+				</article>
 			</section>
 		</Layout>
 	);

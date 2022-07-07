@@ -36,13 +36,13 @@ $flex-map: (
 	height: 50px;
 	box-sizing: border-box;
 	padding: 15px 0 14px 16px;
-	@include inputShadow();
+	@include shadow();
 	border: none;
 	border-radius: 8px;
 	margin: $margin-top $margin-right $margin-bottom $margin-left;
 }
 
-@mixin inputShadow {
+@mixin shadow {
 	box-shadow: 0px 3px 6px $shadow;
 }
 

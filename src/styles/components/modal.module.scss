@@ -23,6 +23,8 @@
 }
 
 .wrapper {
+    @include shadow;
+
     position: absolute;
     top: 182px;
     z-index: 4;
@@ -32,7 +34,6 @@
     padding: 24px 16px;
 
     background-color: $white;
-    box-shadow: 0px 3px 6px $shadow;
     border-radius: 8px;
 
     &.open-wrapper {
@@ -56,9 +57,9 @@
         
         .btn {
             @include font-style-16-medium();
+            @include shadow;
             width: 146px;
             height: 44px;
-            box-shadow: 0px 3px 6px $shadow;
             border: none;
             border-radius: 8px;
 
