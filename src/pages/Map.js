@@ -144,12 +144,13 @@ const Map = () => {
 		let geocoder = new kakao.maps.services.Geocoder();
 		let callback = function(result, status) {
 			if (status === kakao.maps.services.Status.OK) {
+				console.log(result);
 				map.setCenter(new kakao.maps.LatLng(result[0].y, result[0].x));
 				setCandidates([]);
 				setNoResult(false);
 				setShowInfo(false);
 				setSearchMode(false);
-				setKeyword(address);
+				setKeyword(result[0].road_address !== null ? result[0].road_address.address_name : result[0].address.address_name);
 				setShowBtn(true);
 			}
 		};
@@ -239,7 +240,8 @@ const Map = () => {
 		let geocoder = new kakao.maps.services.Geocoder();
 		let setDefaultKeyword = function(result, status) {
 			if (status === kakao.maps.services.Status.OK) {
-				setKeyword(result[0].address.address_name);
+				console.log(result);
+				setKeyword(result[0].road_address !== null ? result[0].road_address.address_name : result[0].address.address_name);
 			}
 		}
 		geocoder.coord2Address(map.getCenter().getLng(), map.getCenter().getLat(), setDefaultKeyword);
@@ -252,6 +254,8 @@ const Map = () => {
 			let currentBounds = map.getBounds();
 			console.log("이전 지도 중심좌표 ", centerLat, centerLng);
 			console.log("변경된 영역 ", currentBounds);
+
+			geocoder.coord2Address(map.getCenter().getLng(), map.getCenter().getLat(), setDefaultKeyword);
 
 			if (centerLat > currentBounds.getNorthEast().getLat() || centerLat < currentBounds.getSouthWest().getLat()
 			|| centerLng > currentBounds.getNorthEast().getLng() || centerLng < currentBounds.getSouthWest().getLng()) {
@@ -292,6 +296,7 @@ const Map = () => {
 					noResult={noResult}
 					candidates={candidates}
 					setSearchMode={setSearchMode}
+					setNoResult={setNoResult}
 					doSearch={doSearch}
 					confirmSearch={confirmSearch}
 				/>

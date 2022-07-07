@@ -55,6 +55,16 @@
 
 	overflow: auto;
 
+	.close {
+		position: absolute;
+		top: 0px;
+		right: 0px;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
 	.no-result {
 		@include font-style-18();
 		text-align: center;

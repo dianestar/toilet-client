@@ -103,7 +103,7 @@ const List = () => {
 				setCandidates([]);
 				setNoResult(false);
 				setSearchMode(false);
-				setKeyword(address);
+				setKeyword(result[0].road_address !== null ? result[0].road_address.address_name : result[0].address.address_name);
 
                 getToilet(result[0].y, result[0].x);
 			}
@@ -120,7 +120,7 @@ const List = () => {
 		let geocoder = new kakao.maps.services.Geocoder();
 		let setDefaultKeyword = function(result, status) {
 			if (status === kakao.maps.services.Status.OK) {
-				setKeyword(result[0].address.address_name);
+				setKeyword(result[0].road_address !== null ? result[0].road_address.address_name : result[0].address.address_name);
 			}
 		}
 		geocoder.coord2Address(userLng, userLat, setDefaultKeyword); 
@@ -138,6 +138,7 @@ const List = () => {
 					noResult={noResult}
 					candidates={candidates}
 					setSearchMode={setSearchMode}
+					setNoResult={setNoResult}
 					doSearch={doSearch}
 					confirmSearch={confirmSearch}
                 />

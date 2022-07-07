@@ -2,9 +2,10 @@ import React, { useState, useRef } from 'react';
 import styles from '../styles/components/searchBox.module.scss';
 import { ReactComponent as Hamburger } from '../assets/icons/hamburger.svg';
 import { ReactComponent as Search } from '../assets/icons/search.svg';
+import { ReactComponent as Close } from "../assets/icons/close.svg";
 import NavBar from './common/NavBar';
 
-const SearchBox = ({keyword, searchMode, noResult, candidates, setSearchMode, doSearch, confirmSearch}) => {
+const SearchBox = ({keyword, searchMode, noResult, candidates, setSearchMode, setNoResult, doSearch, confirmSearch}) => {
 	const inputRef = useRef();
 	const [showing, setShowing] = useState(false);
 
@@ -12,7 +13,10 @@ const SearchBox = ({keyword, searchMode, noResult, candidates, setSearchMode, do
 	const debouncedChange = (e) => {
 		if (timer) { clearTimeout(timer); }
 		setTimer(setTimeout(() => {
-			if (e.target.value === "") { setSearchMode(false); }
+			if (e.target.value === "") {
+				setSearchMode(false);
+				setNoResult(false);
+			}
 			else { doSearch(e.target.value); }
 		}, 500));
 	}
@@ -36,6 +40,7 @@ const SearchBox = ({keyword, searchMode, noResult, candidates, setSearchMode, do
 			</div>
 			{searchMode &&
 			<section id="dropdown" className={styles.dropdown}>
+				{!noResult && candidates.length === 0 && <Close className={styles.close} onClick={() => setSearchMode(false)}/>}
 				{noResult && <p className={styles[`no-result`]}>검색 결과가 존재하지 않습니다</p>}
 				{candidates.map((v, i) => (
 					<article key={i} className={styles.candidates} onClick={() => confirmSearch(v.address_name)}>
