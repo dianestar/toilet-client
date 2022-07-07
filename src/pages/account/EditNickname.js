@@ -38,9 +38,6 @@ const EditNickname = () => {
 			
 			if (e.response.status === 409) {
 				setDuplicated(true);
-                setTimeout(() => {
-                    setDuplicated(false);
-                }, 3000);
             }
 		}
 	};
@@ -52,7 +49,7 @@ const EditNickname = () => {
 				<article>
 					<FormProvider {...methods}>
 						<form onSubmit={methods.handleSubmit(onSubmit)}>
-							<NicknameInput name={user.nickname} />
+							<NicknameInput name={user.nickname} setError={setDuplicated} />
 							<BlueBtn text="저장" />
 						</form>
 					</FormProvider>

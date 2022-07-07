@@ -42,9 +42,6 @@ const RegisterB = () => {
             if (success) {
                 setRegistered(true);
                 setTimeout(() => {
-                    setRegistered(false);
-                }, 3000);
-                setTimeout(() => {
                     navigate("/login");
                 }, 3000);
             }
@@ -52,9 +49,6 @@ const RegisterB = () => {
             console.log(error);
             if (error.response.status === 409) {
                 setDuplicated(true);
-                setTimeout(() => {
-                    setDuplicated(false);
-                }, 3000);
             }
         }
 
@@ -96,7 +90,7 @@ const RegisterB = () => {
                 </article>
                 <FormProvider {...methods}>
                     <form className={styles.form} onSubmit={methods.handleSubmit(onSubmit)}>
-                        <NicknameInput duplicated={duplicated} setDuplicated={setDuplicated}/>
+                        <NicknameInput setDuplicated={setDuplicated} />
                         <BlueBtn text="회원가입"/>
                     </form>
                 </FormProvider>

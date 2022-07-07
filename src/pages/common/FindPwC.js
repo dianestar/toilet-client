@@ -29,17 +29,11 @@ const FindPwC = () => {
 			if (id) {
 				setSuccess(true);
 				setTimeout(() => {
-					setSuccess(false);
-				}, 3000);
-				setTimeout(() => {
 					navigate("/login");
 				}, 3000);
 			}
 			else {
 				setError(true);
-				setTimeout(() => {
-					setError(false);
-				}, 3000);
 			}
 		} catch (error) { 
 			console.log(error);
@@ -60,12 +54,13 @@ const FindPwC = () => {
 							withCheck={true}
 							text="비밀번호"
 							text2="비밀번호 확인"
+							setError={setError}
 						/>
 						<BlueBtn text={'비밀번호 재설정'} />
 					</form>
 				</FormProvider>
 			</section>
-			{error && <Snackbar key={Date.now()} type="error" text="기존 비밀번호와 같습니다." />}
+			{error && <Snackbar key={Date.now()} type="error" text="기존 비밀번호와 같습니다."/>}
 			{success && <Snackbar key={Date.now()} type="success" text="비밀번호 재설정이 완료되었습니다." />}
 		</Layout>
 	);

@@ -38,9 +38,6 @@ const RegisterA = () => {
 			if (error.response.status === 409) {
 				setDuplicated(true);
 			}
-			setTimeout(() => {
-				setDuplicated(false);
-			}, 3000);
 		}
 	};
 
@@ -57,7 +54,7 @@ const RegisterA = () => {
 						className={styles.form}
 						onSubmit={methods.handleSubmit(onSubmit)}
 					>
-						<EmailInput />
+						<EmailInput setError={setDuplicated} />
 						<PasswordInput
 							withCheck={true}
 							text="비밀번호"

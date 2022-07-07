@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import FormErrorMessage from './FormErrorMessage';
 import styles from '../../styles/components/input.module.scss';
 
-const EmailInput = () => {
+const EmailInput = ({ setError }) => {
 	const {
 		register,
 		formState: { errors },
@@ -11,6 +11,8 @@ const EmailInput = () => {
 	const [writing, setWriting] = useState(false);
 
 	const onChange = (e) => {
+		if (setError) { setError(false); }
+
 		if (e.target.value !== '') {
 			setWriting(true);
 		} else {

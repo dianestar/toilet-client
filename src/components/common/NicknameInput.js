@@ -3,14 +3,16 @@ import { useFormContext } from 'react-hook-form';
 import FormErrorMessage from './FormErrorMessage';
 import styles from '../../styles/components/input.module.scss';
 
-const NicknameInput = ({ name }) => {
+const NicknameInput = ({ name, setError }) => {
 	const {
 		register,
 		formState: { errors },
 	} = useFormContext();
 
-	const [writing, setWriting] = useState(name !== '' ? true : false);
+	const [writing, setWriting] = useState(name !== undefined ? true : false);
 	const onChange = (e) => {
+		if (setError) { setError(false); }
+		
 		if (e.target.value !== '') {
 			setWriting(true);
 		} else {

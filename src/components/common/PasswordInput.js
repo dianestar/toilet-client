@@ -5,7 +5,7 @@ import { ReactComponent as Eye } from '../../assets/icons/eye.svg';
 import { ReactComponent as EyeUnprotected } from '../../assets/icons/eyeUnprotected.svg';
 import styles from '../../styles/components/input.module.scss';
 
-const PasswordInput = ({ withCheck = false, text, text2, exist }) => {
+const PasswordInput = ({ withCheck = false, text, text2, exist, setError }) => {
 	const {
 		register,
 		watch,
@@ -19,6 +19,8 @@ const PasswordInput = ({ withCheck = false, text, text2, exist }) => {
 	const [writingPwcheck, setWritingPwcheck] = useState(false);
 	const [writingExist, setWritingExist] = useState(false);
 	const onChangePw = (e) => {
+		if (setError) { setError(false); }
+		
 		if (e.target.value !== '') {
 			setWritingPw(true);
 		} else {
@@ -26,6 +28,8 @@ const PasswordInput = ({ withCheck = false, text, text2, exist }) => {
 		}
 	};
 	const onChangePwcheck = (e) => {
+		if (setError) { setError(false); }
+
 		if (e.target.value !== '') {
 			setWritingPwcheck(true);
 		} else {
@@ -34,6 +38,8 @@ const PasswordInput = ({ withCheck = false, text, text2, exist }) => {
 	};
 
 	const onChangeExist = (e) => {
+		if (setError) { setError(false); }
+		
 		if (e.target.value !== '') {
 			setWritingExist(true);
 		} else {

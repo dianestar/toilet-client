@@ -30,16 +30,13 @@ const EditPassword = () => {
 			if (success) {
 				setRegistered(true);
 				setTimeout(() => {
-					setRegistered(false);
-				}, 3000);
+                    setRegistered(false);
+                }, 3000);
 			}
 		} catch (e) {
 			console.log(e);
 			if (e.response.status === 409) {
 				setDuplicated(true);
-				setTimeout(() => {
-					setDuplicated(false);
-				}, 3000);
 			}
 		}
 	};
@@ -62,6 +59,7 @@ const EditPassword = () => {
 							text="새 비밀번호"
 							text2="새 비밀번호 확인"
 							exist
+							setError={setDuplicated}
 						/>
 						<BlueBtn text="확인" />
 					</form>

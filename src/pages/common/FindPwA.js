@@ -28,9 +28,6 @@ const FindPwA = () => {
 
             if (success) {
                 setEmailError(true);
-                setTimeout(() => {
-                    setEmailError(false);
-                }, 3000);
             }
         } catch (error) {
             if (error.response.status === 409) {
@@ -59,7 +56,7 @@ const FindPwA = () => {
                 </p>
                 <FormProvider {...methods}>
                     <form className={styles.form} onSubmit={methods.handleSubmit(onSubmit)}>
-                        <EmailInput />
+                        <EmailInput setError={setEmailError} />
                         <BlueBtn text="비밀번호 찾기" />
                     </form>
                 </FormProvider>
