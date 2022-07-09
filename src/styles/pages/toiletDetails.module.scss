@@ -22,12 +22,13 @@
 
             p {
                 @include font-style-20();
+                margin: 0 0 4px 0;
             }
 
             .distance {
                 display: flex;
                 align-items: center;
-                margin: 8px 0;
+                margin: 4px 0;
 
                 span {
                     @include font-style-12();
@@ -37,6 +38,7 @@
 
             .hashtag {
                 display: flex;
+                margin: 4px 0 0 0;
                 
                 article {
                     @include font-style-12();

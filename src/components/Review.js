@@ -8,6 +8,7 @@ import { ReactComponent as StarGray } from "../assets/icons/starGray.svg";
 import { ReactComponent as KebabMenu } from '../assets/icons/kebabMenu.svg';
 import styles from "../styles/components/review.module.scss";
 import TempImg from "../assets/images/KakaoTalk_Photo_2022-04-18-22-19-10 003.jpeg"
+import { GET_ONE_TOILET } from "../core/_axios/toilet";
 
 const Review = ({ address, reviewInfo, toggle, setToggle, type }) => {
     const { review_id, nickname, rate, content, toilet_img, time } = reviewInfo;
@@ -15,6 +16,8 @@ const Review = ({ address, reviewInfo, toggle, setToggle, type }) => {
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [requestOpen, setRequestOpen] = useState(false);
     const [isWriter, setIsWriter] = useState(false);
+
+    const [toiletInfo, setToiletInfo] = useState({});
     
     const navigate = useNavigate();
 
@@ -23,12 +26,25 @@ const Review = ({ address, reviewInfo, toggle, setToggle, type }) => {
     useEffect(() => {
         if (profileInfo.nickname === nickname) { setIsWriter(true); }
         else { setIsWriter(false); }
+
+        const getToiletInfo = async () => {
+            const {
+                data: { success, data }
+            } = await GET_ONE_TOILET({address});
+            
+            if (success) {
+                console.log(data);
+                setToiletInfo(data);
+            }
+        }
+
+        getToiletInfo();
     }, [nickname, profileInfo.nickname])
 
     return (
         <>
             <section className={styles.review}>
-                {type === "myreview" && <p className={styles.title} onClick={() => navigate(`/toilet_details/${address}`)}>{address}</p>}
+                {type === "myreview" && <p className={styles.title} onClick={() => navigate(`/toilet_details/${address}`, { state: { toiletInfo } })}>{address}</p>}
                 {Array(rate).fill(0).map((v, i) => <StarFill key={i} className={styles.star} width="10" height="10"/>)}
                 {Array(5-rate).fill(0).map((v, i) => <StarGray key={i} className={styles.star} width="10" height="10"/>)}
                 <span className={styles.date}>{time}</span>

@@ -15,6 +15,7 @@ const ToiletDetails = () => {
     const navigate = useNavigate();
 
     const location = useLocation();
+    console.log(location.state);
     const { address, detail_address, category, lat, lng, distance, common, lock, types, paper, disabled } = location.state.toiletInfo;
     const [reviews, setReviews] = useState([]);
     const [images, setImages] = useState([]);
@@ -72,10 +73,12 @@ const ToiletDetails = () => {
                 <section className={styles.details}>
                     <article className={styles[`title-div`]}>
                         <p>{address}</p>
+                        {distance &&
                         <section className={styles.distance}>
                             <Direction />
                             <span>약 {Math.round(distance * 1000)}m</span>
                         </section>
+                        }
                         <section className={styles.hashtag}>
                             <article>
                                 {category === "0" ? "#공용" : (category === "1" ? "#지하철" : "#기타")}
