@@ -29,8 +29,8 @@ const ReviewForm= () => {
 
     const [type, setType] = useState(!location.state ? null : (reviewInfo.common ? "unseparated" : "separated"));
     const [password, setPassword] = useState(!location.state ? null : (reviewInfo.lock ? "locked" : "unlocked"));
-    const [tissue, setTissue] = useState(!location.state === null ? null : (reviewInfo.paper ? "yes" : "no"));
-    const [disabled, setDisabled] = useState(!location.state === null ? null : (reviewInfo.disabled ? "provided" : "unprovided"));
+    const [tissue, setTissue] = useState(!location.state ? null : (reviewInfo.paper ? "yes" : "no"));
+    const [disabled, setDisabled] = useState(!location.state ? null : (reviewInfo.disabled ? "provided" : "unprovided"));
     const [toilet, setToilet] = useState([]);
     const [starStatus, setStarStatus] = useState([]);
 

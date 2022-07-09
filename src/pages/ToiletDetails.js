@@ -7,6 +7,7 @@ import styles from "../styles/pages/toiletDetails.module.scss";
 import { ReactComponent as Direction } from "../assets/icons/direction.svg";
 import { ReactComponent as StarFill } from "../assets/icons/starFill.svg";
 import { ReactComponent as StarHalfGray } from "../assets/icons/starHalfGray.svg";
+import { ReactComponent as StarGray } from "../assets/icons/starGray.svg";
 import { GET_TOILET_REVIEWS } from "../core/_axios/review";
 
 const { kakao } = window;
@@ -16,7 +17,7 @@ const ToiletDetails = () => {
 
     const location = useLocation();
     console.log(location.state);
-    const { address, detail_address, category, lat, lng, distance, common, lock, types, paper, disabled } = location.state.toiletInfo;
+    const { address, detail_address, category, lat, lng, distance, common, lock, types, paper, disabled, clean } = location.state.toiletInfo;
     const [reviews, setReviews] = useState([]);
     const [images, setImages] = useState([]);
     const [toggle, setToggle] = useState(false);
@@ -90,13 +91,19 @@ const ToiletDetails = () => {
                     </article>
                     <article className={styles[`option-div`]}>
                         <div className={styles.stars}>
-                            <p>4.2</p>
+                            <p>{clean.toFixed(2)}</p>
                             <div>
-                                <StarFill className={styles.star} width="16" height="16" />
-                                <StarFill className={styles.star} width="16" height="16" />
-                                <StarFill className={styles.star} width="16" height="16" />
-                                <StarFill className={styles.star} width="16" height="16" />
-                                <StarHalfGray className={styles.star} width="16" height="16" />
+                                {Array(Number(Math.floor(clean))).fill(0).map((v, i) => <StarFill key={i} className={styles.star} width="16" height="16" />)}
+                                {Math.round(clean) > clean ?
+                                <>
+                                    <StarHalfGray className={styles.star} width="16" height="16" />
+                                    {Array(4-Number(Math.floor(clean))).fill(0).map((v, i) => <StarGray key={i} className={styles.star} width="16" height="16" />)}
+                                </>
+                                :
+                                <>
+                                    {Array(5-Number(Math.floor(clean))).fill(0).map((v, i) => <StarGray key={i} className={styles.star} width="16" height="16" />)}
+                                </>
+                                }
                             </div>
                         </div>
                         <div className={styles.options}>

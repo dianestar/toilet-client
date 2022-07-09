@@ -11,11 +11,13 @@ import TempImg from "../assets/images/KakaoTalk_Photo_2022-04-18-22-19-10 003.jp
 import { GET_ONE_TOILET } from "../core/_axios/toilet";
 
 const Review = ({ address, reviewInfo, toggle, setToggle, type }) => {
-    const { review_id, nickname, rate, content, toilet_img, time } = reviewInfo;
+    const { review_id, nickname, rate, content, toilet_img, review_time, time, common, lock, paper, disabled, types } = reviewInfo;
     const [showing, setShowing] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [requestOpen, setRequestOpen] = useState(false);
     const [isWriter, setIsWriter] = useState(false);
+
+    const [options, setOptions] = useState("");
 
     const [toiletInfo, setToiletInfo] = useState({});
     
@@ -39,7 +41,22 @@ const Review = ({ address, reviewInfo, toggle, setToggle, type }) => {
         }
 
         getToiletInfo();
-    }, [nickname, profileInfo.nickname])
+
+        let optionsStr = "";
+        common ? optionsStr += "남녀공용" : optionsStr += "남녀분리";
+        lock ? optionsStr += " | 비밀번호 O" : optionsStr += " | 비밀번호 X";
+        optionsStr += " | ";
+        types.split(",").forEach((v, i) => {
+            if (i !== 0) optionsStr += ",";
+            if (v === "0") optionsStr += "양변기";
+            else if (v === "1") optionsStr += "좌변기";
+            else optionsStr += "비데"
+        });
+        paper ? optionsStr += " | 휴지 O" : optionsStr += " | 휴지 X";
+        disabled ? optionsStr += " | 장애인화장실 O " : optionsStr += " | 장애인화장실 X";
+        setOptions(optionsStr);
+
+    }, [nickname, profileInfo.nickname, address, common, lock, types, paper, disabled])
 
     return (
         <>
@@ -47,7 +64,8 @@ const Review = ({ address, reviewInfo, toggle, setToggle, type }) => {
                 {type === "myreview" && <p className={styles.title} onClick={() => navigate(`/toilet_details/${address}`, { state: { toiletInfo } })}>{address}</p>}
                 {Array(rate).fill(0).map((v, i) => <StarFill key={i} className={styles.star} width="10" height="10"/>)}
                 {Array(5-rate).fill(0).map((v, i) => <StarGray key={i} className={styles.star} width="10" height="10"/>)}
-                <span className={styles.date}>{time}</span>
+                <span className={styles.date}>{review_time || time}</span>
+                <p className={styles.desc}>{options}</p>
                 {type === "myreview" && toilet_img ?
                     <article className={styles[`img-list`]}>
                         <img className={styles.img} src={toilet_img} alt="temp"/>

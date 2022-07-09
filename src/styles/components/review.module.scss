@@ -27,6 +27,11 @@
         margin-left: 6px;
     }
 
+    .desc {
+        @include font-style-10();
+        margin-top: 4px;
+    }
+
     .img-list {
         .img {
             width: 64px;
