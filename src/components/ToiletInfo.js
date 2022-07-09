@@ -58,12 +58,7 @@ const ToiletInfo = ({ type, toiletInfo }) => {
 						{showing && (
 							<ul className={styles.popUpList}>
 								<li
-									onClick={() => navigate(`/write_review/${address}`, {
-										state: {
-											address,
-											detail_address
-										}
-									})}
+									onClick={() => navigate(`/write_review/${address}`)}
 								>
 									리뷰 추가
 								</li>

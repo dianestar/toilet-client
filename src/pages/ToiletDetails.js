@@ -126,12 +126,7 @@ const ToiletDetails = () => {
                         <div className={styles[`review-header`]}>
                             <span className={styles[`review-title`]}>리뷰</span>
                             <span className={styles[`add-review`]}
-                                onClick={() => navigate(`/write_review/${address}`, {
-                                    state: {
-                                        address,
-                                        detail_address
-                                    }
-                                })}
+                                onClick={() => navigate(`/write_review/${address}`)}
                             >
                                 리뷰 추가
                             </span>
@@ -139,7 +134,7 @@ const ToiletDetails = () => {
                         <div>
                             {reviews.map((v) => {
                                 return (
-                                    <Review key={v.id} address={address} reviewInfo={v} toggle={toggle} setToggle={setToggle} type="toiletreview"/>
+                                    <Review key={v.review_id} address={address} reviewInfo={v} toggle={toggle} setToggle={setToggle} type="toiletreview"/>
                                 );
                             })}
                         </div>

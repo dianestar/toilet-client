@@ -10,7 +10,7 @@ import styles from "../styles/components/review.module.scss";
 import TempImg from "../assets/images/KakaoTalk_Photo_2022-04-18-22-19-10 003.jpeg"
 
 const Review = ({ address, reviewInfo, toggle, setToggle, type }) => {
-    const { id, nickname, rate, content, toilet_img, time } = reviewInfo;
+    const { review_id, nickname, rate, content, toilet_img, time } = reviewInfo;
     const [showing, setShowing] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [requestOpen, setRequestOpen] = useState(false);
@@ -48,9 +48,9 @@ const Review = ({ address, reviewInfo, toggle, setToggle, type }) => {
                 />
                 {((showing && type === "myreview") || (showing && isWriter)) && (
                     <ul className={styles.popUpList}>
-                        <li onClick={() => navigate(`/edit_review/${id}`, {
+                        <li onClick={() => navigate(`/edit_review/${address}/${review_id}`, {
                             state: {
-                                address
+                                reviewInfo
                             }
                         })}>리뷰 수정</li>
                         <div className={styles.line} />
@@ -63,8 +63,8 @@ const Review = ({ address, reviewInfo, toggle, setToggle, type }) => {
                     </ul>
                 )}
             </section>
-            <DeleteConfirm open={deleteOpen} setOpen={setDeleteOpen} id={id} toggle={toggle} setToggle={setToggle}/>
-            <DeleteRequest open={requestOpen} setOpen={setRequestOpen} id={id} toggle={toggle} setToggle={setToggle} type="review"/>
+            <DeleteConfirm open={deleteOpen} setOpen={setDeleteOpen} id={review_id} toggle={toggle} setToggle={setToggle}/>
+            <DeleteRequest open={requestOpen} setOpen={setRequestOpen} id={review_id} toggle={toggle} setToggle={setToggle} type="review"/>
         </>
     );
 }

@@ -42,7 +42,15 @@ export const DELETE_REVIEW = (id) => {
 export const REVIEW_DELETE_REQUEST = (form) => {
     return Api({
         method: METHOD.POST,
-        url: `reviews/report`,
+        url: "reviews/report",
+        data: form,
+    });
+};
+
+export const PATCH_REVIEW = (form) => {
+    return Api({
+        method: METHOD.PATCH,
+        url: "reviews/modify",
         data: form,
     });
 };
