@@ -18,9 +18,11 @@ const ToiletDetails = () => {
     const location = useLocation();
     console.log(location.state);
     const { address, detail_address, category, lat, lng, distance, common, lock, types, paper, disabled, clean } = location.state.toiletInfo;
+
     const [reviews, setReviews] = useState([]);
     const [images, setImages] = useState([]);
     const [toggle, setToggle] = useState(false);
+    const [options, setOptions] = useState({});
 
     useEffect(() => {
         const getToiletReviews = async () => {
@@ -61,8 +63,7 @@ const ToiletDetails = () => {
             position: coords
         });
 
-        getToiletReviews();
-        
+        getToiletReviews();        
     }, [lat, lng, address, toggle]);
 
     return (

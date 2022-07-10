@@ -36,7 +36,20 @@ const Review = ({ address, reviewInfo, toggle, setToggle, type }) => {
             
             if (success) {
                 console.log(data);
-                setToiletInfo(data);
+                setToiletInfo({
+                    address: data.address,
+                    detail_address: data.detailAddress,
+                    category: data.category,
+                    lat: data.lat,
+                    lng: data.lng,
+                    common: data.option.common,
+                    lock: data.option.lock,
+                    types: data.option.types.toString(),
+                    paper: data.option.paper,
+                    disabled: data.option.disabled,
+                    subway: data.subway,
+                    clean: data.clean,
+                });
             }
         }
 
