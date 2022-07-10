@@ -112,6 +112,7 @@
 
             span {
                 @include text-ellipsis;
+                width: 300px;
             }
 
             div {

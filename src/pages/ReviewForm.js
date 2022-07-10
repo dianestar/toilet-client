@@ -1,6 +1,7 @@
 import React, { useState, Fragment, useRef, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useLocation, useParams } from "react-router-dom";
+import axios from "axios";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
 import styles from "../styles/pages/reviewForm.module.scss";
@@ -15,7 +16,7 @@ import { ReactComponent as StarCustom } from "../assets/icons/starCustom.svg";
 import { ReactComponent as Close } from "../assets/icons/close.svg";
 import { POST_REVIEW, POST_IMAGE, PATCH_REVIEW } from "../core/_axios/review";
 import { GET_ONE_TOILET } from "../core/_axios/toilet";
-import axios from "../../node_modules/axios/index";
+import { DELETE_IMAGE } from "../core/_axios/review";
 
 const ReviewForm= () => {
     const {register, handleSubmit, watch, formState: {errors, isSubmitted}, control, setValue} = useForm();
@@ -54,11 +55,27 @@ const ReviewForm= () => {
         setImgUrl(URL.createObjectURL(e.target.files[0]));
     }
 
-    const onCancelImg = () => {
-        setImgFile(null);
-        setImgUrl("");
-        URL.revokeObjectURL(imgUrl);
-        imgInput.current.value = "";
+    const onCancelImg = async () => {
+        if (imgUrl && !imgFile) {
+            try {
+                const {
+                    data: { success, data }
+                } = await DELETE_IMAGE({id: reviewInfo.review_id});
+                
+                if (success) {
+                    console.log(data);
+                    setImgUrl("");
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        else {
+            setImgFile(null);
+            setImgUrl("");
+            URL.revokeObjectURL(imgUrl);
+            imgInput.current.value = "";
+        }   
     }
 
     const onSubmit = async () => {
@@ -80,12 +97,14 @@ const ReviewForm= () => {
             rate: parseInt(watch("rate")),
         };
 
+        const imgForm = new FormData();
+        if (imgFile) {
+            imgForm.append("image", imgFile);
+        }
+
         try {
-            if (imgFile) {
-                const imgForm = new FormData();
-                imgForm.append("image", imgFile);
-                await POST_IMAGE(imgForm);
-            }
+            const res = await POST_IMAGE(imgForm);
+            console.log(res);
             
             // create mode
             if (location.state === null) {
@@ -169,16 +188,6 @@ const ReviewForm= () => {
             setValue("textarea", reviewInfo.content);
 
             setImgUrl(reviewInfo.toilet_img);
-            const getImgFile = async () => {
-                const res = await fetch(reviewInfo.toilet_img);
-                const blob = await res.blob();
-                console.log(blob);
-                const ext = reviewInfo.toilet_img.split(".").pop();
-                const fileName = reviewInfo.toilet_img.split("/").pop();
-                const newFile = new File([blob], fileName, {type: `image/${ext}`});
-                setImgFile(newFile);
-            }
-            getImgFile();
         }
     }, [address, location.state, setValue, reviewInfo]);
 
@@ -335,7 +344,7 @@ const ReviewForm= () => {
                 <section className={styles.image}>
                     <input ref={imgInput} id="image" type="file" multiple accept="image/*" onChange={onChangeImg}/>
                     <article className={styles.inputarea}>
-                        <span>{imgFile ? imgFile.name : "화장실 이미지 (선택)"}</span>
+                        <span>{imgFile ? imgFile.name : (imgUrl ? imgUrl.split("/").pop() : "화장실 이미지 (선택)")}</span>
                         <div><label htmlFor="image">업로드</label></div>
                     </article>
                     {imgUrl &&
