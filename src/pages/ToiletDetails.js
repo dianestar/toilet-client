@@ -7,6 +7,7 @@ import styles from "../styles/pages/toiletDetails.module.scss";
 import { ReactComponent as Direction } from "../assets/icons/direction.svg";
 import { ReactComponent as StarFill } from "../assets/icons/starFill.svg";
 import { ReactComponent as StarHalfGray } from "../assets/icons/starHalfGray.svg";
+import { ReactComponent as StarGray } from "../assets/icons/starGray.svg";
 import { GET_TOILET_REVIEWS } from "../core/_axios/review";
 
 const { kakao } = window;
@@ -15,10 +16,12 @@ const ToiletDetails = () => {
     const navigate = useNavigate();
 
     const location = useLocation();
-    const { address, detail_address, category, subway, lat, lng, distance, common, lock, types, paper, disabled } = location.state.toiletInfo;
+    const { address, detail_address, category, subway, lat, lng, distance, common, lock, types, paper, disabled, clean } = location.state.toiletInfo;
     const [reviews, setReviews] = useState([]);
     const [images, setImages] = useState([]);
     const [hashtags, setHashtags] = useState([]);
+    const [toggle, setToggle] = useState(false);
+    const [options, setOptions] = useState({});
 
     useEffect(() => {
         const getToiletReviews = async () => {
@@ -33,7 +36,7 @@ const ToiletDetails = () => {
 
                     let temp = [...images];
                     data.forEach((v) => {
-                        if (v.img_url && !temp.includes(v.img_url)) { temp.push(v.img_url); }
+                        if (v.toilet_img && !temp.includes(v.toilet_img)) { temp.push(v.toilet_img); }
                     })
                     setImages(temp);
                 }
@@ -72,7 +75,7 @@ const ToiletDetails = () => {
         else { temp.push("기타"); }
         temp.push(detail_address);
         setHashtags(temp);
-    }, [lat, lng, address]);
+    }, [lat, lng, address, toggle]);
 
     return (
         <Layout>
@@ -83,10 +86,12 @@ const ToiletDetails = () => {
                 <section className={styles.details}>
                     <article className={styles[`title-div`]}>
                         <p>{address}</p>
+                        {distance &&
                         <section className={styles.distance}>
                             <Direction />
                             <span>약 {Math.round(distance * 1000)}m</span>
                         </section>
+                        }
                         <section className={styles.hashtag}>
                             {hashtags.map((v, i) => (
                                 <article key={i}>
@@ -97,13 +102,19 @@ const ToiletDetails = () => {
                     </article>
                     <article className={styles[`option-div`]}>
                         <div className={styles.stars}>
-                            <p>4.2</p>
+                            <p>{clean.toFixed(2)}</p>
                             <div>
-                                <StarFill className={styles.star} width="16" height="16" />
-                                <StarFill className={styles.star} width="16" height="16" />
-                                <StarFill className={styles.star} width="16" height="16" />
-                                <StarFill className={styles.star} width="16" height="16" />
-                                <StarHalfGray className={styles.star} width="16" height="16" />
+                                {Array(Number(Math.floor(clean))).fill(0).map((v, i) => <StarFill key={i} className={styles.star} width="16" height="16" />)}
+                                {Math.round(clean) > clean ?
+                                <>
+                                    <StarHalfGray className={styles.star} width="16" height="16" />
+                                    {Array(4-Number(Math.floor(clean))).fill(0).map((v, i) => <StarGray key={i} className={styles.star} width="16" height="16" />)}
+                                </>
+                                :
+                                <>
+                                    {Array(5-Number(Math.floor(clean))).fill(0).map((v, i) => <StarGray key={i} className={styles.star} width="16" height="16" />)}
+                                </>
+                                }
                             </div>
                         </div>
                         <div className={styles.options}>
@@ -136,12 +147,7 @@ const ToiletDetails = () => {
                         <div className={styles[`review-header`]}>
                             <span className={styles[`review-title`]}>리뷰</span>
                             <span className={styles[`add-review`]}
-                                onClick={() => navigate(`/write_review/${address}`, {
-                                    state: {
-                                        address,
-                                        detail_address
-                                    }
-                                })}
+                                onClick={() => navigate(`/write_review/${address}`)}
                             >
                                 리뷰 추가
                             </span>
@@ -149,7 +155,7 @@ const ToiletDetails = () => {
                         <div>
                             {reviews.map((v) => {
                                 return (
-                                    <Review key={v.id} reviewInfo={v}/>
+                                    <Review key={v.review_id} address={address} reviewInfo={v} toggle={toggle} setToggle={setToggle} type="toiletreview"/>
                                 );
                             })}
                         </div>

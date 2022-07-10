@@ -8,7 +8,7 @@ import { ReactComponent as StarFill } from '../assets/icons/starFill.svg';
 import { ReactComponent as More } from '../assets/icons/more.svg';
 
 const ToiletInfo = ({ type, toiletInfo }) => {
-	const { address, detail_address, category, subway, lat, lng, distance, common, lock, types, paper, disabled } = toiletInfo;
+	const { address, detail_address, category, subway, lat, lng, distance, common, lock, types, paper, disabled, clean } = toiletInfo;
 	const [open, setOpen] = useState(false);
 	const [showing, setShowing] = useState(false);
 
@@ -24,7 +24,7 @@ const ToiletInfo = ({ type, toiletInfo }) => {
 							<PinSelected />
 							<span>{detail_address}</span>
 							<StarFill width="12" height="12"/>
-							<span>undefined</span>
+							<span>{clean.toFixed(2)}</span>
 						</section>
 						<section className={styles.category}>
 							<article>{category === "0" ? "#공용" : category === "1" ? "#지하철" : "#기타"}</article>
@@ -61,12 +61,7 @@ const ToiletInfo = ({ type, toiletInfo }) => {
 						{showing && (
 							<ul className={styles.popUpList}>
 								<li
-									onClick={() => navigate(`/write_review/${address}`, {
-										state: {
-											address,
-											detail_address
-										}
-									})}
+									onClick={() => navigate(`/write_review/${address}`)}
 								>
 									리뷰 추가
 								</li>
@@ -82,7 +77,7 @@ const ToiletInfo = ({ type, toiletInfo }) => {
 					</article>
 				</section>
 			</div>
-			<DeleteRequest open={open} setOpen={setOpen} address={address} />
+			<DeleteRequest open={open} setOpen={setOpen} id={address} type={"toilet"}/>
 		</>
 	);
 };

@@ -107,13 +107,15 @@
 			cursor: pointer;
 
 			.line {
-				width: 100%;
 				border-top: 1px solid #f3f3f3;
 			}
 
 			.deleteBtn {
-				width: 100%;
 				color: $red;
+			}
+
+			li {
+				width: 100%;
 				text-align: center;
 			}
 		}

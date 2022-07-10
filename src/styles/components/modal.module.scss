@@ -10,7 +10,8 @@
 }
 
 .bg {
-    position: fixed;
+    position: absolute;
+    top: 0px;
     
     width: 375px;
     height: 768px;
@@ -32,6 +33,7 @@
     width: 343px;
     height: 361px;
     padding: 24px 16px;
+    margin: 0 16px;
 
     background-color: $white;
     border-radius: 8px;

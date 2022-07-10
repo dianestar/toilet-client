@@ -8,10 +8,18 @@ export const AROUND_TOILET = (form) => {
 	});
 };
 
-export const DELETE_REQUEST = (form) => {
+export const TOILET_DELETE_REQUEST = (form) => {
 	return Api({
 		method: METHOD.POST,
 		url: "toilets/report",
 		data: form,
-	})
-}
+	});
+};
+
+export const GET_ONE_TOILET =(form) => {
+	return Api({
+		method: METHOD.POST,
+		url: "toilets",
+		data: form
+	});
+};
