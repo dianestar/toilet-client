@@ -9,6 +9,7 @@ import { ReactComponent as More } from '../assets/icons/more.svg';
 
 const ToiletInfo = ({ type, toiletInfo }) => {
 	const { address, detail_address, category, subway, lat, lng, distance, common, lock, types, paper, disabled, clean } = toiletInfo;
+	
 	const [open, setOpen] = useState(false);
 	const [showing, setShowing] = useState(false);
 
@@ -28,7 +29,7 @@ const ToiletInfo = ({ type, toiletInfo }) => {
 						</section>
 						<section className={styles.category}>
 							<article>{category === "0" ? "#공용" : category === "1" ? "#지하철" : "#기타"}</article>
-							{category === "1" && <article className={styles.category}>{subway === "1" ? "#개찰구 안" : "#개찰구 밖"}</article>}
+							{category === "1" && <article className={styles.category}>{subway === "0" ? "#개찰구 안" : "#개찰구 밖"}</article>}
 						</section>
 						<section className={styles.details}>
 							<span>종류</span>

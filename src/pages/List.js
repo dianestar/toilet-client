@@ -10,7 +10,7 @@ const { kakao } = window;
 
 const List = () => {
     // 주변에 있는 화장실 리스트
-	const [toiletList, setToiletList] = useState([0, 0, 0, 0, 0]);
+	const [toiletList, setToiletList] = useState([]);
 
     // 검색창 관련
 	const [keyword, setKeyword] = useState("");
@@ -128,7 +128,7 @@ const List = () => {
         // 주변 화장실 가져오기
         getToilet(userLat, userLng);
     }, [userLat, userLng])
-
+	
     return (
         <Layout>
             <section className={`${styles.list} ${searchMode && styles.search}`}>

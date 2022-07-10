@@ -303,7 +303,7 @@ const Map = () => {
 					confirmSearch={confirmSearch}
 				/>
 				{showInfo && 
-				<ToiletInfo type="onMap" toiletInfo={toiletInfo} address={toiletInfo.address} detail_address={toiletInfo.detail_address} distance={toiletInfo.distance} common={toiletInfo.common} lock={toiletInfo.lock} paper={toiletInfo.paper} disabled={toiletInfo.disabled}/>
+				<ToiletInfo type="onMap" toiletInfo={toiletInfo} />
 				}
 				<NavBar num={[0, 1, 1, 1]} />
 				{showBtn &&

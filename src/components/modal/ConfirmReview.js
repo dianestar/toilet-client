@@ -17,7 +17,7 @@ const ConfirmReview = ({ open, setOpen }) => {
                         className={styles.close}
                         onClick={() => {
                             setOpen(false);
-                            navigate("/my_review");
+                            navigate(-1);
                         }}
                     />
                     <article className={styles.confirmed}>
