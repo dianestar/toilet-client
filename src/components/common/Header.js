@@ -4,7 +4,6 @@ import { ReactComponent as Back } from '../../assets/icons/back.svg';
 import { ReactComponent as Hamburger } from '../../assets/icons/hamburger.svg';
 import styles from '../../styles/components/header.module.scss';
 import NavBar from './NavBar';
-import { useNavigate } from 'react-router-dom';
 
 const Header = ({ type, text }) => {
 	const navigate = useNavigate();

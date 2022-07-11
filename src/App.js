@@ -14,7 +14,7 @@ import List from './pages/List';
 import AccountInfo from './pages/account/AccountInfo';
 import Profile from './pages/account/Profile';
 import ToiletDetails from './pages/ToiletDetails';
-import AddToilet from './pages/AddToilet';
+import AddToilet from './pages/add/AddToilet';
 import ReviewForm from './pages/ReviewForm';
 import EditNickname from './pages/account/EditNickname';
 import EditPassword from './pages/account/EditPassword';
