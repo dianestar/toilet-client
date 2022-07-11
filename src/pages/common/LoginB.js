@@ -36,11 +36,9 @@ const LoginB = () => {
 						email: data.email,
 					}),
 				);
-			} else {
-				alert(message);
 			}
 		} catch (e) {
-			console.log(e);
+			console.log(e.response.status);
 		}
 	};
 
