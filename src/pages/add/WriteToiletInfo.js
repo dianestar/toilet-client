@@ -7,6 +7,7 @@ import styles from '../../styles/pages/writeToiletInfo.module.scss';
 import { ADDITIONAL } from '../../core/_axios/toilet';
 import { useForm } from 'react-hook-form';
 import AskReview from '../../components/modal/AskReview';
+import Snackbar from '../../components/common/Snackbar';
 
 const WriteToiletInfo = () => {
 	const navigate = useNavigate();
@@ -15,9 +16,12 @@ const WriteToiletInfo = () => {
 	const [categoryList, setCategoryList] = useState(-1);
 
 	const turnstile = ['개찰구 안', '개찰구 밖'];
-	const [turnstileList, setTurnstileList] = useState(-1);
+	const [turnstileList, setTurnstileList] = useState(null);
 
-	const [popup, setPopup] = useState(false);
+	const [open, setOpen] = useState(false);
+	const [duplicated, setDuplicated] = useState(false);
+
+	const [errorText, setErrorText] = useState('');
 
 	const handlecategoryList = (idx) => {
 		setCategoryList(idx);
@@ -27,7 +31,10 @@ const WriteToiletInfo = () => {
 		setTurnstileList(idx);
 	};
 
-	const { register, watch, handleSubmit } = useForm({ mode: 'onChange' });
+	const { register, watch, handleSubmit } = useForm({
+		mode: 'onChange',
+		defaultValues: null,
+	});
 
 	const onSubmit = async () => {
 		const form = {
@@ -45,10 +52,17 @@ const WriteToiletInfo = () => {
 			} = await ADDITIONAL(form);
 
 			if (success) {
-				console.log('test');
+				setOpen(true);
 			}
 		} catch (e) {
 			console.log(e);
+			if (e.response.status === 409 || e.response.status === 500) {
+				setDuplicated(true);
+				setTimeout(() => {
+					setDuplicated(false);
+				}, 3000);
+			}
+			setErrorText(e.message);
 		}
 	};
 
@@ -115,18 +129,24 @@ const WriteToiletInfo = () => {
 						</div>
 					) : null}
 				</article>
-				<BlueBtn
-					active={
-						categoryList === -1 || (categoryList === 1 && turnstileList === -1)
-							? false
-							: true
-					}
-					text="화장실 추가"
-					onClick={() => {
-						handleSubmit(onSubmit);
-					}}
-				/>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<BlueBtn
+						active={
+							categoryList === -1 ||
+							(categoryList === 1 && turnstileList === null)
+								? false
+								: true
+						}
+						text="화장실 추가"
+					/>
+				</form>
 			</section>
+
+			{duplicated && (
+				<Snackbar key={Date.now()} type="error" text={errorText} />
+			)}
+
+			{open && <AskReview open={open} setOpen={setOpen} />}
 		</Layout>
 	);
 };

@@ -9,6 +9,18 @@
 	height: 100%;
 	overflow: auto;
 
+	.warning {
+		@include font-style-14();
+		color: white !important;
+		text-align: center;
+		background-color: $sub;
+		padding: 2px 8px;
+		border-radius: 8px;
+		position: absolute;
+		top: 20px;
+		z-index: 99;
+	}
+
 	.checkAddress {
 		position: absolute;
 		bottom: 0;

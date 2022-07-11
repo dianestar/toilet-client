@@ -2,17 +2,17 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../../components/common/Layout';
 import Header from '../../components/common/Header';
-import AskReview from '../../components/modal/AskReview';
 import styles from '../../styles/pages/addToilet.module.scss';
 import BlueBtn from '../../components/common/BlueBtn';
 import pinSelectedNoBg from '../../assets/icons/pinSelectedNoBg.svg';
 import { useNavigate } from 'react-router-dom';
 
 const AddToilet = () => {
-	const [open, setOpen] = useState(true);
 	const [userAddress, setUserAddress] = useState('');
 	const [userLat, setUserLat] = useState(null);
 	const [userLng, setUserLng] = useState(null);
+	const [showInfo, setShowInfo] = useState(false);
+
 	const navi = useNavigate();
 
 	useEffect(() => {
@@ -106,6 +106,19 @@ const AddToilet = () => {
 				setUserAddress(result[0].address.address_name);
 			}
 		}
+
+		// map.setMaxLevel(4);
+		// kakao.maps.event.addListener(map, 'zoom_changed', function () {
+		// 	// 지도의 현재 레벨을 얻어옵니다
+		// 	const level = map.getLevel();
+
+		// 	if (level === 4) {
+		// 		setShowInfo(true);
+		// 		setTimeout(() => {
+		// 			setShowInfo(false);
+		// 		}, 3000);
+		// 	}
+		// });
 	}, [userLat, userLng]);
 
 	return (
@@ -113,8 +126,10 @@ const AddToilet = () => {
 			<Layout>
 				<Header type="hamburger" text="화장실 추가" />
 
-				{/* <AskReview open={open} setOpen={setOpen} /> */}
 				<section className={styles.map} id="map">
+					{showInfo && (
+						<div className={styles.warning}>더 이상 확대할 수 없습니다.</div>
+					)}
 					<div className={styles.checkAddress}>
 						<p>이 주소가 맞나요?</p>
 						<div className={styles.btn}>
