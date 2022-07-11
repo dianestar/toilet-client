@@ -9,11 +9,15 @@ import { POST_LOGIN } from '../../core/_axios/login';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { profile } from '../../core/_reducers/profileInfo';
+import { useState } from 'react';
+import Snackbar from '../../components/common/Snackbar';
 
 const LoginB = () => {
 	const methods = useForm();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+
+	const [duplicated, setDuplicated] = useState(false);
 
 	const onSubmit = async () => {
 		const form = {
@@ -22,7 +26,7 @@ const LoginB = () => {
 		};
 		try {
 			const {
-				data: { success, data, message },
+				data: { success, data },
 			} = await POST_LOGIN(form);
 
 			if (success) {
@@ -38,7 +42,9 @@ const LoginB = () => {
 				);
 			}
 		} catch (e) {
-			console.log(e.response.status);
+			if (e.response.status === 401) {
+				setDuplicated(true);
+			}
 		}
 	};
 
@@ -53,8 +59,12 @@ const LoginB = () => {
 							className={styles.form}
 							onSubmit={methods.handleSubmit(onSubmit)}
 						>
-							<EmailInput />
-							<PasswordInput withCheck={false} text="비밀번호" />
+							<EmailInput setError={setDuplicated} />
+							<PasswordInput
+								withCheck={false}
+								text="비밀번호"
+								setError={setDuplicated}
+							/>
 							<BlueBtn text="로그인" />
 							<p className={styles.loginBtn}>
 								비밀번호를 잊어버렸나요?{' '}
@@ -64,6 +74,10 @@ const LoginB = () => {
 					</FormProvider>
 				</article>
 			</section>
+
+			{duplicated && (
+				<Snackbar key={Date.now()} text="이메일과 비밀번호를 확인해주세요." />
+			)}
 		</Layout>
 	);
 };

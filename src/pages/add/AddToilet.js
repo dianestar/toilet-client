@@ -107,18 +107,7 @@ const AddToilet = () => {
 			}
 		}
 
-		// map.setMaxLevel(4);
-		// kakao.maps.event.addListener(map, 'zoom_changed', function () {
-		// 	// 지도의 현재 레벨을 얻어옵니다
-		// 	const level = map.getLevel();
-
-		// 	if (level === 4) {
-		// 		setShowInfo(true);
-		// 		setTimeout(() => {
-		// 			setShowInfo(false);
-		// 		}, 3000);
-		// 	}
-		// });
+		map.setMaxLevel(4);
 	}, [userLat, userLng]);
 
 	return (
