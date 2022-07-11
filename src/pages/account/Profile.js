@@ -14,7 +14,7 @@ const Profile = () => {
 		<Layout>
 			<section>
 				<article>
-					<Header />
+					<Header type="hamburger" text="프로필" />
 					<ProfileInfo />
 					{menuList.map((menu) => {
 						return <MenuList key={menu.text} text={menu.text} url={menu.url} />;

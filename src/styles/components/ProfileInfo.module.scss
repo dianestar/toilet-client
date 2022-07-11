@@ -27,10 +27,13 @@
 		}
 	}
 
+	.hidden {
+		display: none;
+	}
+
 	h2 {
-		font-size: 20px;
+		@include font-style-20();
 		color: $sub;
-		font-weight: bold;
 		margin-bottom: 6px;
 	}
 	p {
