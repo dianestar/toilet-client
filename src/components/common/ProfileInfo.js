@@ -7,32 +7,61 @@ const ProfileInfo = ({
 	isPhoto,
 	editImg,
 	modify,
-	imgUrl,
 	imageInputRef,
+	onChangeImage,
+	onCancelImage,
+	editMode,
+	onConfirmImage,
 }) => {
 	const user = useSelector((state) => state.profileInfo);
 
 	return (
 		<div className={styles.profile}>
 			<div className={styles.img}>
-				<img src={imgUrl} alt="profile" onClick={onClick} />
-				{isPhoto ? (
-					<OpenPhoto className={styles.photo} onClick={editImg} />
-				) : null}
+				{modify ? (
+					<>
+						<label htmlFor="image-input">
+							<img src={user.imgUrl} alt="profile" />
+							<OpenPhoto className={styles.photo} />
+						</label>
+						<input
+							id="image-input"
+							type="file"
+							accept="image/*"
+							ref={imageInputRef}
+							onChange={onChangeImage}
+							className={styles.hidden}
+						/>
+					</>
+				) : (
+					<>
+						<label htmlFor="image-input">
+							<img src={user.imgUrl} alt="profile" onClick={onClick} />
+							{isPhoto ? (
+								<OpenPhoto className={styles.photo} onClick={editImg} />
+							) : null}
+						</label>
+					</>
+				)}
 			</div>
-			{modify ? (
-				<div className={styles.modify}>
-					<input
-						id="image-input"
-						type="file"
-						accept="image/*"
-						ref={imageInputRef}
-					/>
-				</div>
-			) : null}
 
-			<h2>{user.nickname}</h2>
-			<p>{user.email}</p>
+			{editMode ? (
+				<div>
+					<div className={styles.edit}>
+						<button className={styles.cancel} onClick={onCancelImage}>
+							취소
+						</button>
+						<button className={styles.confirm} onClick={onConfirmImage}>
+							완료
+						</button>
+					</div>
+				</div>
+			) : (
+				<>
+					<h2>{user.nickname}</h2>
+					<p>{user.email}</p>
+				</>
+			)}
 		</div>
 	);
 };

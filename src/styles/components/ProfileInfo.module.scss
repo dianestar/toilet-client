@@ -11,24 +11,49 @@
 	.img {
 		display: flex;
 		box-sizing: border-box;
+		position: relative;
+
 		img {
-			position: relative;
 			width: 112px;
 			height: 112px;
 			border-radius: 100%;
 			margin-bottom: 8px;
 			cursor: pointer;
 		}
-
 		.photo {
 			position: absolute;
-			margin-top: 70px;
-			margin-left: 77px;
+			margin-top: 65px;
+			margin-left: -29px;
+			cursor: pointer;
 		}
 	}
 
 	.hidden {
 		display: none;
+	}
+
+	.cancel,
+	.confirm {
+		font-weight: $font-weight-medium;
+		font-size: $font-size-14;
+		line-height: $line-height-24;
+		letter-spacing: $letter-spacing-001;
+		cursor: pointer;
+
+		@include shadow;
+		border-radius: 6px;
+		padding: 2px 9px;
+		background: $white;
+		border: 1px solid transparent;
+	}
+
+	.cancel {
+		margin-right: 7px;
+		color: $dim-black-60;
+	}
+
+	.confirm {
+		color: $main;
 	}
 
 	h2 {

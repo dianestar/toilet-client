@@ -2,17 +2,15 @@ import Header from '../../components/common/Header';
 import Layout from '../../components/common/Layout';
 import ProfileInfo from '../../components/common/ProfileInfo';
 import { useEffect, useState, useRef } from 'react';
-import { GET_USERS } from '../../core/_axios/user';
 import EditText from '../../components/common/EditText';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { POST_USERS_UPLOAD } from '../../core/_axios/register';
-import { imgChange, profile } from '../../core/_reducers/profileInfo';
+import { profile } from '../../core/_reducers/profileInfo';
+import { GET_USERS } from '../../core/_axios/user';
+import Snackbar from '../../components/common/Snackbar';
 
 const AccountInfo = () => {
-	const [nickname, setNickname] = useState('');
-	const [email, setEail] = useState('');
-	const [imgUrl, setImgUrl] = useState('');
 	const navigate = useNavigate();
 
 	const user = useSelector((state) => state.profileInfo);
@@ -21,25 +19,11 @@ const AccountInfo = () => {
 	const imageInputRef = useRef();
 	const [imageFile, setImageFile] = useState(null);
 	const [editMode, setEditMode] = useState(false);
-
-	const getUserInfo = async () => {
-		const res = await GET_USERS();
-		try {
-			if (res) {
-				const data = res.data.data;
-				setNickname(data.nickname);
-				setEail(data.email);
-				setImgUrl(data.imgUrl);
-			}
-		} catch (e) {
-			console.log(e);
-		}
-	};
+	const [success, setSuccess] = useState(false);
 
 	const onChangeImage = async (e) => {
 		setEditMode(true);
 		setImageFile(e.target.files[0]);
-		setImgUrl(URL.createObjectURL(e.target.files[0]));
 
 		dispatch(
 			profile({
@@ -48,29 +32,52 @@ const AccountInfo = () => {
 				email: user.email,
 			}),
 		);
-
-		if (imageFile) {
-			const form = new FormData();
-			form.append('image', imageFile);
-		}
 	};
 
-	console.log(user, '비동기?!');
+	const onCancelImage = async () => {
+		setEditMode(false);
+		setImageFile(null);
 
-	useEffect(() => {
-		getUserInfo();
-	}, [getUserInfo]);
+		const res = await GET_USERS();
+		const defaultImg = res.data.data.imgUrl;
+
+		dispatch(
+			profile({
+				nickname: user.nickname,
+				imgUrl: defaultImg,
+				email: user.email,
+			}),
+		);
+
+		imageInputRef.current.value = '';
+	};
+
+	const onConfirmImage = async () => {
+		const form = new FormData();
+		form.append('image', imageFile);
+
+		try {
+			await POST_USERS_UPLOAD(form);
+			setEditMode(false);
+			setSuccess(true);
+			setTimeout(() => {
+				setSuccess(false);
+			}, 3000);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	const userInfoList = [
 		{
 			title: '닉네임',
-			contents: nickname,
+			contents: user.nickname,
 			isIcon: true,
 			path: '/account/edit_nickname',
 		},
 		{
 			title: '이메일',
-			contents: email,
+			contents: user.email,
 			isIcon: false,
 		},
 		{
@@ -92,10 +99,13 @@ const AccountInfo = () => {
 							setModify(!modify);
 						}}
 						modify={modify}
-						imgUrl={imgUrl}
 						imageInputRef={imageInputRef}
 						onChangeImage={onChangeImage}
 						imageFile={imageFile}
+						onCancelImage={onCancelImage}
+						setEditMode={setEditMode}
+						editMode={editMode}
+						onConfirmImage={onConfirmImage}
 					/>
 					{userInfoList.map((user) => {
 						return (
@@ -111,6 +121,13 @@ const AccountInfo = () => {
 					})}
 				</article>
 			</section>
+			{success && (
+				<Snackbar
+					key={Date.now()}
+					type="success"
+					text="변경이 완료되었습니다."
+				/>
+			)}
 		</Layout>
 	);
 };
