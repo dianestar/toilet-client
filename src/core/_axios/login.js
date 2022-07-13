@@ -7,3 +7,10 @@ export const POST_LOGIN = (form) => {
 		data: form,
 	});
 };
+
+export const KAKAO_LOGIN = (code) => {
+	return Api({
+		method: METHOD.GET,
+		url: `auth/kakao/redirect${code}`,
+	});
+};

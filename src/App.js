@@ -7,7 +7,7 @@ import RegisterB from './pages/common/RegisterB';
 import FindPwA from './pages/common/FindPwA';
 import FindPwB from './pages/common/FindPwB';
 import FindPwC from './pages/common/FindPwC';
-import LoginB from './pages/common/LoginB';
+
 import MyReview from './pages/MyReview';
 import Map from './pages/Map';
 import List from './pages/List';
@@ -24,7 +24,7 @@ function App() {
 	return (
 		<Routes>
 			<Route path="/" element={<Login />} />
-			<Route path="/login" element={<LoginB />} />
+
 			<Route path="/testpage" element={<TestPage />} />
 			<Route path="/register_account" element={<RegisterA />} />
 			<Route path="/register_profile" element={<RegisterB />} />
