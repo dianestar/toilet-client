@@ -1,22 +1,58 @@
 @import '../main.module.scss';
 
+.line {
+	width: 100%;
+	border-top: 1px solid $dim-black-20;
+	margin: 40px 0;
+}
+
 .logo {
-	width: 343px;
-	height: 280px;
-	margin-top: 104px;
-	margin-bottom: 148px;
-	background: $sub;
+	text-align: center;
+	img {
+		width: 150px;
+		height: auto;
+	}
+	margin-top: 92px;
+	margin-bottom: 50px;
 }
 
 .loginSection {
 	@include flexBox(center, center);
 	flex-direction: column;
 
-	.loginBtn {
+	.signIn {
 		margin-top: 16px;
-		span {
-			text-decoration: underline;
-		}
+	}
+
+	.info {
+		text-align: center;
+		margin-top: 16px;
+		@include font-style-12();
 		cursor: pointer;
+	}
+
+	.signUp {
+		.kakao,
+		.email {
+			@include flexBox(center, center);
+			margin-top: 16px;
+			width: 343px;
+			height: 50px;
+			border-radius: 8px;
+			border: 1px solid $dim-black-60;
+			background: $white;
+			color: $sub;
+		}
+
+		.kakao {
+			p {
+				margin-top: 6px;
+			}
+
+			.kakaoLogo {
+				width: 50px;
+				height: auto;
+			}
+		}
 	}
 }

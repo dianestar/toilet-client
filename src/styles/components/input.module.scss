@@ -1,68 +1,67 @@
-@import "../main.module.scss";
+@import '../main.module.scss';
 
-@include keyframe (fadeIn) {
-    from {
-        @include font-style-16-medium();
-        top: 15px;
-    }
-    to {
-        @include font-style-12();
-        top: 7px;
-    }
+@include keyframe(fadeIn) {
+	from {
+		@include font-style-16-medium();
+		top: 15px;
+	}
+	to {
+		@include font-style-12();
+		top: 7px;
+	}
 }
 
-@include keyframe (moveCursor) {
-    from {
-        padding-top: 15px;
-    }
-    to {
-        padding-top: 31px;
-    }
+@include keyframe(moveCursor) {
+	from {
+		padding-top: 15px;
+	}
+	to {
+		padding-top: 31px;
+	}
 }
 
 .form-input-div {
-    position: relative;
-    width: 343px;
-    height: 50px;
-    margin-bottom: 16px;
+	position: relative;
+	width: 343px;
+	height: 50px;
+	margin-bottom: 16px;
 
-    .form-input {
-        @include inputBox();
-        @include font-style-16-medium();
-        
-    }
+	.form-input {
+		@include inputBox();
+		@include font-style-16-medium();
+	}
 
-    .writing {
-        @include animation (moveCursor, 0s);
-        padding-top: 31px;
-    }
+	.writing {
+		@include animation(moveCursor, 0s);
+		padding-top: 31px;
+	}
 
-    .error {
-        outline-color: $red;
-    }
+	.error {
+		outline-color: $red;
+	}
 
-    .form-eye {
-        position: relative;
-        left: 294px;
-        bottom: 47px;
+	.form-eye {
+		position: relative;
+		left: 294px;
+		bottom: 47px;
 
-        &:hover {
-            cursor: pointer;
-        }
-    }
+		&:hover {
+			cursor: pointer;
+		}
+	}
 
-    .placeholder {
-        @include font-style-16-medium();
-        position: absolute;
-        top: 15px;
-        left: 16px;
-        z-index: 2;
-        color: $dim-black-60 !important;
-    }
+	.placeholder {
+		@include font-style-14();
+		position: absolute;
+		top: 15px;
+		left: 16px;
+		z-index: 2;
+		color: $dim-black-40 !important;
+	}
 
-    .moved {
-        @include animation (fadeIn, 0.5s);
-        @include font-style-12();
-        top: 7px !important;
-    }
+	.moved {
+		@include animation(fadeIn, 0.5s);
+		@include font-style-12();
+		top: 7px !important;
+	}
 }
