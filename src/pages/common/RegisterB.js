@@ -35,7 +35,15 @@ const RegisterB = () => {
             checkPassword: userInfo.checkPassword,
         };
 
+        const imgForm = new FormData();
+        if (imageFile) {
+            imgForm.append("image", imageFile);
+        }
+
         try {
+            const res = await POST_USERS_UPLOAD(imgForm);
+            console.log(res);
+
             const {
                 data: { success }
             } = await POST_USERS_REGISTER(form);
@@ -50,22 +58,9 @@ const RegisterB = () => {
             if (error.response.status === 409) {
                 setDuplicated(true);
             }
-        }
-
-        if (imageUrl) {
-            const form = new FormData();
-            form.append("image", imageFile);
-
-            try {
-                const response = await POST_USERS_UPLOAD(form);
-                if (response) {
-                    console.log(response);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        }
+        } 
     }
+
     return (
         <Layout>
             <Header type="back" text="회원가입"/>
@@ -90,7 +85,7 @@ const RegisterB = () => {
                 </article>
                 <FormProvider {...methods}>
                     <form className={styles.form} onSubmit={methods.handleSubmit(onSubmit)}>
-                        <NicknameInput setDuplicated={setDuplicated} />
+                        <NicknameInput setError={setDuplicated} />
                         <BlueBtn text="회원가입"/>
                     </form>
                 </FormProvider>
