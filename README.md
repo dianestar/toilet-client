@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# 🚽 Toilet Project
+> Toilet Project는 **내 주변 화장실 찾기 및 화장실 리뷰 서비스** 입니다.
+>
+> 과민성 대장 증후군을 앓고 있어 어딜 가든 화장실 위치 및 상태부터 파악해 놓아야 마음이 편한 사람들, 포스트 코로나 시대 속 위생과 청결을 중요하게 생각하는 사람들로부터 문제 의식을 얻어 개발하게 되었습니다 🙌
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br/>
 
-## Available Scripts
+## 💻 개발 인원 및 기간
+🤗 **개발 인원**
+  - 기획 및 프론트엔드 2명 [@toilet-client](https://github.com/dianestar/toilet-client)
+  - 백엔드 1명 [@toilet-server](https://github.com/dianestar/toilet-server)
+  - 모바일 앱 1명 [@toilet-app](https://github.com/dianestar/toilet-app)
+  - 디자인 1명
+  
+⏰ **개발 기간**
+  - 2022.05.16 ~ 2022.07.16
 
-In the project directory, you can run:
+<br/>
 
-### `npm start`
+## 🛠 적용 기술
+![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![SCSS](https://img.shields.io/badge/SCSS-CC6699.svg?style=for-the-badge&logo=sass&logoColor=white)
+![JAVASCRIPT](https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=white)
+![REACT](https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=react&logoColor=white)
+![REDUX](https://img.shields.io/badge/Redux-764ABC.svg?style=for-the-badge&logo=redux&logoColor=white)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br/>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 💡 프론트엔드 구현 기능
+🤍 **다은** [@dianestar](https://github.com/dianestar)
+  - 회원가입 / 비밀번호 찾기
+  - 검색 기능 / 지도 뷰 및 목록 뷰로 화장실 조회
+  - 화장실 상세정보 페이지
+  - 화장실 리뷰 CRUD
+  - 화장실 신고 / 리뷰 신고
 
-### `npm test`
+🤍 **혜리** [@Jetom88](https://github.com/Jetom88)
+  - 일반 로그인 / 소셜 로그인 / 로그아웃
+  - 화장실 등록
+  - 프로필 이미지 / 닉네임 / 비밀번호 수정
+  - 네비게이션바
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br/>
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🎞 영상
+*빠른 시일 내에 업로드될 예정입니다 🙌*
