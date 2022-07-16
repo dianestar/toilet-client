@@ -8,9 +8,9 @@ export const POST_LOGIN = (form) => {
 	});
 };
 
-export const KAKAO_LOGIN = (code) => {
+export const REDIRECT_KAKAO = () => {
 	return Api({
-		method: METHOD.GET,
-		url: `auth/kakao/redirect${code}`,
+		method: METHOD.get,
+		url: `auth/kakao/redirect`,
 	});
 };
