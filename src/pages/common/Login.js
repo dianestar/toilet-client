@@ -5,10 +5,12 @@ import BlueBtn from '../../components/common/BlueBtn';
 import Header from '../../components/common/Header';
 import Layout from '../../components/common/Layout';
 import styles from '../../styles/pages/login.module.scss';
-import { POST_LOGIN } from '../../core/_axios/login';
+import { POST_LOGIN, REDIRECT_KAKAO } from '../../core/_axios/login';
 import { profile } from '../../core/_reducers/profileInfo';
 import EmailInput from '../../components/common/EmailInput';
 import PasswordInput from '../../components/common/PasswordInput';
+import { getCookie } from '../../untils/cookie';
+import { useEffect } from 'react';
 
 const Login = () => {
 	const methods = useForm();
@@ -49,6 +51,10 @@ const Login = () => {
 	const kakaoLogin = () => {
 		window.location.href = KAKAO_LOGIN;
 	};
+
+	useEffect(() => {
+		getCookie('user');
+	}, []);
 
 	return (
 		<Layout>

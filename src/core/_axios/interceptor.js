@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
+	withCredentials: true,
 	baseURL: 'http://3.35.184.107:5000/api/',
 });
 

@@ -9,21 +9,24 @@ import { Provider } from 'react-redux';
 import rootReducer from './core/_reducers';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
+import { CookiesProvider } from 'react-cookie';
 
 const store = createStore(rootReducer, composeWithDevTools());
 const persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-	<Provider store={store}>
-		<PersistGate persistor={persistor}>
-			<React.StrictMode>
-				<BrowserRouter>
-					<App />
-				</BrowserRouter>
-			</React.StrictMode>
-		</PersistGate>
-	</Provider>,
+	<CookiesProvider>
+		<Provider store={store}>
+			<PersistGate persistor={persistor}>
+				<React.StrictMode>
+					<BrowserRouter>
+						<App />
+					</BrowserRouter>
+				</React.StrictMode>
+			</PersistGate>
+		</Provider>
+	</CookiesProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function
