@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import BlueBtn from '../../components/common/BlueBtn';
 import Header from '../../components/common/Header';
@@ -9,11 +9,14 @@ import { POST_LOGIN } from '../../core/_axios/login';
 import { profile } from '../../core/_reducers/profileInfo';
 import EmailInput from '../../components/common/EmailInput';
 import PasswordInput from '../../components/common/PasswordInput';
+import { useState } from 'react';
+import Snackbar from '../../components/common/Snackbar';
 
 const Login = () => {
 	const methods = useForm();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const [duplicated, setDuplicated] = useState(false);
 
 	const onSubmit = async () => {
 		const form = {
@@ -41,7 +44,12 @@ const Login = () => {
 				alert(message);
 			}
 		} catch (e) {
-			console.log(e);
+			if (e.response.status === 409) {
+				setDuplicated(true);
+				setTimeout(() => {
+					setDuplicated(false);
+				}, 3000);
+			}
 		}
 	};
 
@@ -103,6 +111,9 @@ const Login = () => {
 					</div> */}
 				</div>
 			</section>
+			{duplicated && (
+				<Snackbar key={Date.now()} text="이메일 및 비밀번호를 확인해주세요." />
+			)}
 		</Layout>
 	);
 };
