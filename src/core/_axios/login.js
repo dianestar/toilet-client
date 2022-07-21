@@ -1,4 +1,3 @@
-import { getCookie } from '../../untils/cookie';
 import Api, { METHOD } from './interceptor';
 
 export const POST_LOGIN = (form) => {
@@ -12,7 +11,6 @@ export const POST_LOGIN = (form) => {
 export const REDIRECT_KAKAO = async () => {
 	return await Api({
 		method: METHOD.get,
-		url: `auth/kakao/redirect`,
-		withCredentials: true,
+		url: `auth/kakao/user`,
 	});
 };

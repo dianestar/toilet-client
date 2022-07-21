@@ -19,13 +19,13 @@ import ReviewForm from './pages/ReviewForm';
 import EditNickname from './pages/account/EditNickname';
 import EditPassword from './pages/account/EditPassword';
 import WriteToiletInfo from './pages/add/WriteToiletInfo';
-import Kakao from './pages/common/Kakao';
+// import Sns from './pages/common/Sns';
 
 function App() {
 	return (
 		<Routes>
 			<Route path="/" element={<Login />} />
-			<Route path="/auth/kakao/redirect" element={<Kakao />} />
+			{/* <Route path="/auth/sns" element={<Sns />} /> */}
 			<Route path="/testpage" element={<TestPage />} />
 			<Route path="/register_account" element={<RegisterA />} />
 			<Route path="/register_profile" element={<RegisterB />} />

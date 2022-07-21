@@ -5,19 +5,15 @@ import BlueBtn from '../../components/common/BlueBtn';
 import Header from '../../components/common/Header';
 import Layout from '../../components/common/Layout';
 import styles from '../../styles/pages/login.module.scss';
-import { POST_LOGIN, REDIRECT_KAKAO } from '../../core/_axios/login';
+import { POST_LOGIN } from '../../core/_axios/login';
 import { profile } from '../../core/_reducers/profileInfo';
 import EmailInput from '../../components/common/EmailInput';
 import PasswordInput from '../../components/common/PasswordInput';
-import { getCookie } from '../../untils/cookie';
-import { useEffect } from 'react';
 
 const Login = () => {
 	const methods = useForm();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-
-	const KAKAO_LOGIN = `${process.env.REACT_APP_API_URL}auth/kakao`;
 
 	const onSubmit = async () => {
 		const form = {
@@ -38,6 +34,7 @@ const Login = () => {
 						nickname: data.nickname,
 						imgUrl: data.imgUrl,
 						email: data.email,
+						sns: 'None',
 					}),
 				);
 			} else {
@@ -48,13 +45,9 @@ const Login = () => {
 		}
 	};
 
-	const kakaoLogin = () => {
-		window.location.href = KAKAO_LOGIN;
-	};
-
-	useEffect(() => {
-		getCookie('user');
-	}, []);
+	// const kakaoLogin = () => {
+	// 	window.location.href = KAKAO_LOGIN;
+	// };
 
 	return (
 		<Layout>
@@ -97,7 +90,7 @@ const Login = () => {
 						</span>
 					</p>
 
-					<div className={styles.line}>
+					{/* <div className={styles.line}>
 						<p>or</p>
 					</div>
 
@@ -107,7 +100,7 @@ const Login = () => {
 
 							<p>카카오톡으로 로그인</p>
 						</button>
-					</div>
+					</div> */}
 				</div>
 			</section>
 		</Layout>
